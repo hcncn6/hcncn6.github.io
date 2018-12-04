@@ -59,7 +59,7 @@
 
   
     
-    <h3 class="article-title"><a href="/2018/12/04/渗透测试/"><span>linux下的安装</span></a></h3>
+    <h3 class="article-title"><a href="/2018/12/04/渗透测试/"><span>centos7下源码编译方式安装httpd</span></a></h3>
     
   
 
@@ -79,7 +79,21 @@
   <div class="article-content">
     <div class="entry">
       
-        <h2 id="123"><a href="#123" class="headerlink" title="123"></a>123</h2><p>12</p>
+        <h1 id="centos7下源码编译方式安装httpd"><a href="#centos7下源码编译方式安装httpd" class="headerlink" title="centos7下源码编译方式安装httpd"></a>centos7下源码编译方式安装httpd</h1><h3 id="1-安装开发者套件"><a href="#1-安装开发者套件" class="headerlink" title="1.安装开发者套件"></a>1.安装开发者套件</h3><p>yum groupinstall “Development Tools” -y</p>
+<p>cd /usr/local/src/<br>下载源码包：<br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz</a><br>备注：三个源码包都放在/usr/local/src/</p>
+<h3 id="2-解压安装包"><a href="#2-解压安装包" class="headerlink" title="2.解压安装包"></a>2.解压安装包</h3><p># tar -xzvf apr-1.6.5.tar.gz<br># tar -xzvf apr-util-1.6.1.tar.gz<br># tar -xzvf httpd-2.4.37.tar.gz</p>
+<h3 id="3-安装apr-1-6-5"><a href="#3-安装apr-1-6-5" class="headerlink" title="3.安装apr-1.6.5"></a>3.安装apr-1.6.5</h3><p># cd /usr/local/src/<br># cp -r apr-1.6.5  /usr/local/src/httpd-2.4.37/srclib/apr<br># cd apr-1.6.5<br># ./configure –prefix=/usr/local/apr<br># make &amp;&amp; make install</p>
+<p>返回 cd /usr/local/src/</p>
+<h3 id="4-安装apr-util-1-6-1"><a href="#4-安装apr-util-1-6-1" class="headerlink" title="4.安装apr-util-1.6.1"></a>4.安装apr-util-1.6.1</h3><p># cp -r apr-util-1.6.1  /usr/local/src/httpd-2.4.37/srclib/apr-util<br># cd /usr/local/src/apr-util-1.6.1<br># ./configure –prefix=/usr/local/apr-util –with-apr=/usr/local/apr<br># make &amp;&amp; make install</p>
+<p>返回cd /usr/local/src/</p>
+<h3 id="5-安装httpd-2-4-37"><a href="#5-安装httpd-2-4-37" class="headerlink" title="5.安装httpd-2.4.37"></a>5.安装httpd-2.4.37</h3><p># cd /usr/local/src/httpd-2.4.37<br># ./configure –with-included-apr –prefix=/usr/local/apache2.4 –with-apr=/usr/local/apr –with-apr-util=/usr/local/apr-util –enable-so –enable-mods-shared=most<br># make &amp;&amp; make install </p>
+<h3 id="6-编写启动脚本：vim-httpd"><a href="#6-编写启动脚本：vim-httpd" class="headerlink" title="6.编写启动脚本：vim httpd"></a>6.编写启动脚本：vim httpd</h3><p>#!/bin/bash<br># chkconfig: 12345 80 90<br>function start_http()<br>{<br>/usr/local/apache2.4/bin/apachectl  start<br>}<br>function stop_http()<br>{<br> /usr/local/apache2.4/bin/apachectl  stop<br>}<br>case “$1” in<br>start)<br>    start_http<br>;;<br>stop)<br>    stop_http<br>;;<br>restart)<br>    stop_http<br>    start_http<br>;;<br>*)<br>    echo “Usage : start | stop | restart”<br>;;<br>esac</p>
+<h3 id="7-加入系统服务："><a href="#7-加入系统服务：" class="headerlink" title="7.加入系统服务："></a>7.加入系统服务：</h3><p>chmod  a+x  httpd<br>cp  -arf  httpd  /etc/init.d/</p>
+<h3 id="8-启动自己编写的服务："><a href="#8-启动自己编写的服务：" class="headerlink" title="8.启动自己编写的服务："></a>8.启动自己编写的服务：</h3><p>systemctl  daemon-reload<br>systemctl  start  httpd</p>
+<h3 id="9-设置开机自启动："><a href="#9-设置开机自启动：" class="headerlink" title="9.设置开机自启动："></a>9.设置开机自启动：</h3><p>chkconfig  –add  httpd</p>
+<h3 id="10-看运行情况"><a href="#10-看运行情况" class="headerlink" title="10.看运行情况"></a>10.看运行情况</h3><p># systemctl status httpd</p>
+<p>看到<br>● httpd.service - The Apache HTTP Server<br>   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)<br>   Active: active (running) since Tue 2018-12-04 23:21:27 CST; 14s ago<br>     Docs: man:httpd(8)<br>           man:apachectl(8)<br> Main PID: 1130 (httpd)<br>   Status: “Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec”<br>   CGroup: /system.slice/httpd.service<br>           ├─1130 /usr/sbin/httpd -DFOREGROUND<br>           ├─1131 /usr/sbin/httpd -DFOREGROUND<br>           ├─1132 /usr/sbin/httpd -DFOREGROUND<br>           ├─1133 /usr/sbin/httpd -DFOREGROUND<br>           ├─1134 /usr/sbin/httpd -DFOREGROUND<br>           ├─1135 /usr/sbin/httpd -DFOREGROUND<br>           └─1136 /usr/sbin/httpd -DFOREGROUND</p>
+<p>Dec 04 23:21:27 localhost.localdomain systemd[1]: Starting Th…<br>Dec 04 23:21:27 localhost.localdomain httpd[1130]: AH00558: h…<br>Dec 04 23:21:27 localhost.localdomain systemd[1]: Started The…<br>Hint: Some lines were ellipsized, use -l to show in full.</p>
 
       
     </div>
