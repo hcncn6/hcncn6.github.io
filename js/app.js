@@ -1,29 +1,94 @@
-var app = (function () {
-  var loadBanner = function () {
-    var bannerSmall = document.querySelector('.banner-small')
+var customSearch;
 
-    // can't just listen the bannerSmall's load event
-    // but why ?
-    var img = new Image()
-    img.src = bannerSmall.src
-    img.addEventListener('load', function (e) {
-      bannerSmall.classList.add('loaded')
-    }, false)
+(function($){
+  "use strict";
 
-    var bannerLarge = new Image()
-    bannerLarge.src = bannerSmall.dataset.src
-    bannerLarge.addEventListener('load', function (e) {
-      e.target.classList.add('loaded')
-    }, false)
+	var switchSidebarTab = function(e) {
+		var self = $(this),
+				target = self.attr('data-toggle'),
+				counter_target = target === 'toc' ? 'bio' : 'toc';
+		if (self.hasClass('active')) {
+			return;
+		}
+		toggleActive(self, e);
+		toggleActive(self.siblings('.dark-btn'), e);
+		$('.site-' + counter_target).toggleClass('show');
+		setTimeout(function() {
+			$('.site-' + counter_target).hide();
+			$('.site-' + target).show();
+			setTimeout(function() {
+				$('.site-' + target).toggleClass('show');
+			}, 50);
+		}, 240);
+	};
+  
+  var toggleActive = function(self, e) {
+    e.preventDefault();
+    if (self.hasClass("active") === true) {
+      self.removeClass("active");
+    }
+    else {
+      self.addClass("active");
+    }
+  };
 
-    bannerSmall.parentNode.appendChild(bannerLarge)
-  }
+  var scrolltoElement = function(e) {
+    e.preventDefault();
+    var self = $(this),
+        correction = e.data ? e.data.correction ? e.data.correction : 0 : 0;
+    $('html, body').animate({'scrollTop': $(self.attr('href')).offset().top - correction }, 400);
+  };
 
-  return {
-    loadBanner: loadBanner
-  }
-})()
+  var openBio = function(e) {
+    var self = $(this);
+    toggleActive(self, e);
+    $('body').addClass('bio-open');
+  };
 
-window.addEventListener('load', function (e) {
-  app.loadBanner()
-}, false)
+  var closeBio = function(e) {
+    $('body').removeClass('bio-open');
+    toggleActive($('.site-nav-switch'), e);
+  };
+  
+  $(function() {
+	  $(".post-list, #footer, #page-nav").addClass('show');
+	  $('.site-nav-switch').on('click', openBio);
+	  $('.site-wrapper .overlay').on('click', closeBio);
+	  $('.window-nav, .go-comment, .site-toc a').on('click', scrolltoElement);
+	  $('.sidebar-switch .dark-btn').on('click', switchSidebarTab);
+	  
+	  setTimeout(function() {
+	    $('#loading-bar-wrapper').fadeOut(500);
+	  }, 300);
+	  
+	  if (SEARCH_SERVICE === 'google') {
+  	  customSearch = new GoogleCustomSearch({
+    	  apiKey: GOOGLE_CUSTOM_SEARCH_API_KEY,
+    	  engineId: GOOGLE_CUSTOM_SEARCH_ENGINE_ID
+  	  });
+	  }
+	  else if (SEARCH_SERVICE === 'algolia') {
+  	  customSearch = new AlgoliaSearch({
+    	  apiKey: ALGOLIA_API_KEY,
+    	  appId: ALGOLIA_APP_ID,
+    	  indexName: ALGOLIA_INDEX_NAME
+  	  });
+	  }
+	  else if (SEARCH_SERVICE === 'hexo') {
+  	  customSearch = new HexoSearch();
+	  }
+	  else if (SEARCH_SERVICE === 'azure') {
+  	  customSearch = new AzureSearch({
+    	  serviceName: AZURE_SERVICE_NAME,
+        indexName: AZURE_INDEX_NAME,
+        queryKey: AZURE_QUERY_KEY
+  	  });
+	  }
+	  else if (SEARCH_SERVICE === 'baidu') {
+  	  customSearch = new BaiduSearch({
+				apiId: BAIDU_API_ID
+			});
+	  }
+	});
+
+})(jQuery);
