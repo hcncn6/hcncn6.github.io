@@ -1,51 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  <title>lyyourc</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/app.css">
-  <!-- <link rel='stylesheet' href='http://fonts.useso.com/css?family=Source+Code+Pro'> -->
-  
-</head>
-</html>
-<body>
-  <nav class="app-nav">
-  
-    
-      <a href="/.">home</a>
-    
-  
-    
-      <a href="/archives">archive</a>
-    
-  
-    
-      <a href="/atom.xml">rss</a>
-    
-  
-</nav>
+extends _partial/layout
 
-  <main class="archive">
-  
-    <article class="grid">
-  <h1 class="article-title grid-item">
-    <a href="/2018/12/04/渗透测试/">centos7下源码编译方式安装httpd</a>
-  </h1>
+block title
+  if page.category
+     title= page.category + " | " + config.title
+  if page.tag
+     title= page.tag + " | " + config.title
+  if page.archive
+     title= __('archive') + " | " + config.title
 
-  <div class="article-meta">
-    <span class="article-date">Dec 04 2018</span>
-  </div>
-</article>
-
-  
-
-  <nav class="page-nav">
-  <span class="page-number current">1</span>
-</nav>
-
-</main>
-
-</body>
-</html>
+block content
+  .post__achive
+    each posts, year in _.groupBy(page.posts.toArray(), p => - p.date.format('YYYY'))
+      h2= -year
+      ul.achive__list
+        for post in posts
+          li
+            span.achive__item__date= post.date.format('YYYY/MM/DD')
+            a(href=url_for(post.path), title=post.title)= post.title
+  include _partial/paginator
