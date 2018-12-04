@@ -1,90 +1,44 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
+  <title>centos7下源码编译方式安装httpd | lyyourc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/app.css">
+  <!-- <link rel='stylesheet' href='http://fonts.useso.com/css?family=Source+Code+Pro'> -->
   
-  <title>centos7下源码编译方式安装httpd | hcncn6 | 第一个博客</title>
-
-  
-  <meta name="author" content="hcncn6">
-  
-
-  
-  <meta name="description" content="centos7下源码编译方式安装httpd1.安装开发者套件yum groupinstall “Development Tools” -y
-cd /usr/local/src/下载源码包：wget https://mirrors.tuna.tsinghua.edu.cn/apache//apr/ap">
-  
-
-  
-  
-  <meta name="keywords" content="">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="centos7下源码编译方式安装httpd">
-
-  <meta property="og:site_name" content="hcncn6">
-
-  
-  <meta property="og:image" content="/favicon.ico">
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="hcncn6" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
-
-
+</html>
 <body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">hcncn6</a>
-    </h1>
-    <p class="site-description">第一个博客</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
+  <nav class="app-nav">
   
     
-    <h3 class="article-title"><span>centos7下源码编译方式安装httpd</span></h3>
+      <a href="/.">home</a>
     
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/12/04/渗透测试/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-12-04T03:14:00.000Z">
-          2018-12-04
-        </time>
-      </a>
-    </span>
-  </div>
-
-
+    
+      <a href="/archives">archive</a>
+    
   
+    
+      <a href="/atom.xml">rss</a>
+    
+  
+</nav>
 
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="centos7下源码编译方式安装httpd"><a href="#centos7下源码编译方式安装httpd" class="headerlink" title="centos7下源码编译方式安装httpd"></a>centos7下源码编译方式安装httpd</h1><h3 id="1-安装开发者套件"><a href="#1-安装开发者套件" class="headerlink" title="1.安装开发者套件"></a>1.安装开发者套件</h3><p>yum groupinstall “Development Tools” -y</p>
+  <main class="post">
+  <article>
+  <h1 class="article-title">
+    <a href="/2018/12/04/渗透测试/">centos7下源码编译方式安装httpd</a>
+  </h1>
+
+  <section class="article-meta">
+    <p class="article-date">December 04 2018</p>
+  </section>
+
+  <section class="article-entry">
+    <h1 id="centos7下源码编译方式安装httpd"><a href="#centos7下源码编译方式安装httpd" class="headerlink" title="centos7下源码编译方式安装httpd"></a>centos7下源码编译方式安装httpd</h1><h3 id="1-安装开发者套件"><a href="#1-安装开发者套件" class="headerlink" title="1.安装开发者套件"></a>1.安装开发者套件</h3><p>yum groupinstall “Development Tools” -y</p>
 <p>cd /usr/local/src/<br>下载源码包：<br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz</a><br>备注：三个源码包都放在/usr/local/src/</p>
 <h3 id="2-解压安装包"><a href="#2-解压安装包" class="headerlink" title="2.解压安装包"></a>2.解压安装包</h3><p># tar -xzvf apr-1.6.5.tar.gz<br># tar -xzvf apr-util-1.6.1.tar.gz<br># tar -xzvf httpd-2.4.37.tar.gz</p>
 <h3 id="3-安装apr-1-6-5"><a href="#3-安装apr-1-6-5" class="headerlink" title="3.安装apr-1.6.5"></a>3.安装apr-1.6.5</h3><p># cd /usr/local/src/<br># cp -r apr-1.6.5  /usr/local/src/httpd-2.4.37/srclib/apr<br># cd apr-1.6.5<br># ./configure –prefix=/usr/local/apr<br># make &amp;&amp; make install</p>
@@ -100,39 +54,73 @@ cd /usr/local/src/下载源码包：wget https://mirrors.tuna.tsinghua.edu.cn/ap
 <p>看到<br>● httpd.service - The Apache HTTP Server<br>   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)<br>   Active: active (running) since Tue 2018-12-04 23:21:27 CST; 14s ago<br>     Docs: man:httpd(8)<br>           man:apachectl(8)<br> Main PID: 1130 (httpd)<br>   Status: “Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec”<br>   CGroup: /system.slice/httpd.service<br>           ├─1130 /usr/sbin/httpd -DFOREGROUND<br>           ├─1131 /usr/sbin/httpd -DFOREGROUND<br>           ├─1132 /usr/sbin/httpd -DFOREGROUND<br>           ├─1133 /usr/sbin/httpd -DFOREGROUND<br>           ├─1134 /usr/sbin/httpd -DFOREGROUND<br>           ├─1135 /usr/sbin/httpd -DFOREGROUND<br>           └─1136 /usr/sbin/httpd -DFOREGROUND</p>
 <p>Dec 04 23:21:27 localhost.localdomain systemd[1]: Starting Th…<br>Dec 04 23:21:27 localhost.localdomain httpd[1130]: AH00558: h…<br>Dec 04 23:21:27 localhost.localdomain systemd[1]: Started The…<br>Hint: Some lines were ellipsized, use -l to show in full.</p>
 
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
+  </section>
 </article>
 
+  <div class="sharing grid">
+  <section class="profile grid-item grid">
+    <img class="avatar" src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" alt="avatar">
+    <div class="grid-item">
+      <p class="title"> lyyourc </p>
+      <p class="subtitle"> You Are The JavaScript In My HTML </p>
+    <div>
+  </div></div></section>
 
-    </main>
+  <section class="share-btns">
+    <!-- <p> share it if you like it~ </p> -->
+    <a class="twitter-share-button" data-size="large" data-via="DrakeLeung" href="https://twitter.com/intent/tweet?text= id=" centos7下源码编译方式安"="">
+  Tweet
+</a>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    <br>
-    
-    &copy; 2018 hcncn6
-    
-  </p>
-</footer>
-    
-  </div>
+<script>
+  window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  js.async = true;
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+</script>
+
+  </section>
 </div>
+
+
+  
+    
+<section class="article-comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+<script>
+  var disqus_shortname = 'drakeleung';
+  
+  var disqus_url = 'https://hcncn6.github.io/2018/12/04/渗透测试/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+  
+</main>
+
 </body>
 </html>
