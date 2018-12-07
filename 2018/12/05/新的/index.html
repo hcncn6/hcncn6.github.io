@@ -5,18 +5,19 @@
   
 
   
-  <title>新的 | hcncn6</title>
+  <title>Ubuntu LAMP下搭建wordpress | hcncn6</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="新的">
+  <meta name="description" content="准备 LAMP 环境LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写 1.安装 Apache2apt-get install apache2 -y 2.安装 PHP 组件apt-get install php7.0 -y安装 php 相关组件:apt-get install libapache2-mod-php7.0 3.安装 MySQL 服务apt-get install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu LAMP下搭建wordpress">
 <meta property="og:url" content="https://hcncn6.github.io/2018/12/05/新的/index.html">
 <meta property="og:site_name" content="hcncn6">
+<meta property="og:description" content="准备 LAMP 环境LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写 1.安装 Apache2apt-get install apache2 -y 2.安装 PHP 组件apt-get install php7.0 -y安装 php 相关组件:apt-get install libapache2-mod-php7.0 3.安装 MySQL 服务apt-get install">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hcncn6.github.io/2018/12/05/新的/d/wed/az/011..jpg">
-<meta property="og:updated_time" content="2018-12-05T12:05:53.403Z">
+<meta property="og:updated_time" content="2018-12-07T15:08:32.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新的">
-<meta name="twitter:image" content="https://hcncn6.github.io/2018/12/05/新的/d/wed/az/011..jpg">
+<meta name="twitter:title" content="Ubuntu LAMP下搭建wordpress">
+<meta name="twitter:description" content="准备 LAMP 环境LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写 1.安装 Apache2apt-get install apache2 -y 2.安装 PHP 组件apt-get install php7.0 -y安装 php 相关组件:apt-get install libapache2-mod-php7.0 3.安装 MySQL 服务apt-get install">
   
     <link rel="alternate" href="/atom.xml" title="hcncn6" type="application/atom+xml">
   
@@ -81,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      新的
+      Ubuntu LAMP下搭建wordpress
     </h1>
   
 
@@ -89,12 +90,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="d/wed/az/011..jpg"></p>
+        <h1 id="准备-LAMP-环境"><a href="#准备-LAMP-环境" class="headerlink" title="准备 LAMP 环境"></a>准备 LAMP 环境</h1><p>LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写</p>
+<h3 id="1-安装-Apache2"><a href="#1-安装-Apache2" class="headerlink" title="1.安装 Apache2"></a>1.安装 Apache2</h3><p>apt-get install apache2 -y</p>
+<h3 id="2-安装-PHP-组件"><a href="#2-安装-PHP-组件" class="headerlink" title="2.安装 PHP 组件"></a>2.安装 PHP 组件</h3><p>apt-get install php7.0 -y<br>安装 php 相关组件:<br>apt-get install libapache2-mod-php7.0</p>
+<h3 id="3-安装-MySQL-服务"><a href="#3-安装-MySQL-服务" class="headerlink" title="3.安装 MySQL 服务"></a>3.安装 MySQL 服务</h3><p>apt-get install mysql-client mysql-server </p>
+<h3 id="4-重启-MySQL-服务和-Apache-服务"><a href="#4-重启-MySQL-服务和-Apache-服务" class="headerlink" title="4.重启 MySQL 服务和 Apache 服务"></a>4.重启 MySQL 服务和 Apache 服务</h3><p>sudo service mysql restart</p>
+<h3 id="5-wordpress网站文件放置"><a href="#5-wordpress网站文件放置" class="headerlink" title="5.wordpress网站文件放置"></a>5.wordpress网站文件放置</h3><p>下载<br>wget <a href="https://wordpress.org/latest.tar.gz" target="_blank" rel="noopener">https://wordpress.org/latest.tar.gz</a><br>解压<br>tar -xvf latest.tar.gz<br>移动源码到网站的根目录<br>mv wordpress /var/www/html/</p>
+<h3 id="6-更改根目录权限"><a href="#6-更改根目录权限" class="headerlink" title="6.更改根目录权限"></a>6.更改根目录权限</h3><p>chmod -R 777 /var/www/html/wordpress/</p>
+<h3 id="7-为-wordpress-配置一个数据库"><a href="#7-为-wordpress-配置一个数据库" class="headerlink" title="7.为 wordpress 配置一个数据库"></a>7.为 wordpress 配置一个数据库</h3><p>进入 mysql，输入以下代码后，按提示输入您MySQL密码:<br>mysql -u root -p<br>输入密码<br>show databases; 查看数据库<br>create database wordpress;<br>show databases;<br>quit; 退出</p>
+<h1 id="浏览器访问wordpress配置"><a href="#浏览器访问wordpress配置" class="headerlink" title="浏览器访问wordpress配置"></a>浏览器访问wordpress配置</h1><p>http://自己网络ip/wordpress/</p>
+<p>如果密码错误就改密码</p>
+<p>修改mysql密码<br>service mysql stop<br>mkdir -p /var/run/mysqld<br>chown mysql:mysql /var/run/mysqld<br>/usr/bin/mysqld_safe –skip-grant-tables –skip-networking<br>开启新终端<br>masql -u root<br>use mayql;<br>update user set authentication_string=PASSWORD(“这里是要改的密码”) where user=’root’;<br>update user set plugin=”mysql_native_password”;<br>flush privileges;<br>exit</p>
+<p>进入http://自己网络ip/wordpress/ 修改配置</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hcncn6.github.io/2018/12/05/新的/" data-id="cjpb4mpkh0000gcvn435r39qd" class="article-share-link">Share</a>
+      <a data-url="https://hcncn6.github.io/2018/12/05/新的/" data-id="cjpe6opbi0000ksugs3kdb77x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +155,7 @@
       <ul>
         
           <li>
-            <a href="/2018/12/05/新的/">新的</a>
+            <a href="/2018/12/05/新的/">Ubuntu LAMP下搭建wordpress</a>
           </li>
         
           <li>
