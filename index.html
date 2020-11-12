@@ -1,196 +1,537 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
   
-  <title>hcncn6 | 第一个博客</title>
+  
+  <title>hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  <meta name="author" content="hcncn6">
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
   
 
   
 
   
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: false,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
 
   
-
-  <meta property="og:site_name" content="hcncn6">
-
-  
-  <meta property="og:image" content="/favicon.ico">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="hcncn6" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
 </head>
-
-
-<body>
-<div class="blog">
-  <div class="content">
-
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">hcncn6</a>
-    </h1>
-    <p class="site-description">第一个博客</p>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
   </div>
-  <nav class="site-navigation">
-    <ul>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
       
-        <li><a href="/">Home</a></li>
+        <a href="/" target="_self">首页</a>
       
-        <li><a href="/archives">Archives</a></li>
+        <a href="/archives/" target="_self">归档</a>
       
-    </ul>
-  </nav>
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
 </header>
-
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/12/05/新的/"><span>Ubuntu LAMP下搭建wordpress</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/12/05/新的/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-12-05T12:03:44.000Z">
-          2018-12-05
-        </time>
-      </a>
-    </span>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
   </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+  <div class="table-content-main">
+    <ol class="toc">
       
-        <h1 id="准备-LAMP-环境"><a href="#准备-LAMP-环境" class="headerlink" title="准备 LAMP 环境"></a>准备 LAMP 环境</h1><p>LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写</p>
-<h3 id="1-安装-Apache2"><a href="#1-安装-Apache2" class="headerlink" title="1.安装 Apache2"></a>1.安装 Apache2</h3><p>apt-get install apache2 -y</p>
-<h3 id="2-安装-PHP-组件"><a href="#2-安装-PHP-组件" class="headerlink" title="2.安装 PHP 组件"></a>2.安装 PHP 组件</h3><p>apt-get install php7.0 -y<br>安装 php 相关组件:<br>apt-get install libapache2-mod-php7.0</p>
-<h3 id="3-安装-MySQL-服务"><a href="#3-安装-MySQL-服务" class="headerlink" title="3.安装 MySQL 服务"></a>3.安装 MySQL 服务</h3><p>apt-get install mysql-client mysql-server </p>
-<h3 id="4-重启-MySQL-服务和-Apache-服务"><a href="#4-重启-MySQL-服务和-Apache-服务" class="headerlink" title="4.重启 MySQL 服务和 Apache 服务"></a>4.重启 MySQL 服务和 Apache 服务</h3><p>sudo service mysql restart</p>
-<h3 id="5-wordpress网站文件放置"><a href="#5-wordpress网站文件放置" class="headerlink" title="5.wordpress网站文件放置"></a>5.wordpress网站文件放置</h3><p>下载<br>wget <a href="https://wordpress.org/latest.tar.gz" target="_blank" rel="noopener">https://wordpress.org/latest.tar.gz</a><br>解压<br>tar -xvf latest.tar.gz<br>移动源码到网站的根目录<br>mv wordpress /var/www/html/</p>
-<h3 id="6-更改根目录权限"><a href="#6-更改根目录权限" class="headerlink" title="6.更改根目录权限"></a>6.更改根目录权限</h3><p>chmod -R 777 /var/www/html/wordpress/</p>
-<h3 id="7-为-wordpress-配置一个数据库"><a href="#7-为-wordpress-配置一个数据库" class="headerlink" title="7.为 wordpress 配置一个数据库"></a>7.为 wordpress 配置一个数据库</h3><p>进入 mysql，输入以下代码后，按提示输入您MySQL密码:<br>mysql -u root -p<br>输入密码<br>show databases; 查看数据库<br>create database wordpress;<br>show databases;<br>quit; 退出</p>
-<h1 id="浏览器访问wordpress配置"><a href="#浏览器访问wordpress配置" class="headerlink" title="浏览器访问wordpress配置"></a>浏览器访问wordpress配置</h1><p>http://自己网络ip/wordpress/</p>
-<p>如果密码错误就改密码</p>
-<p>修改mysql密码<br>service mysql stop<br>mkdir -p /var/run/mysqld<br>chown mysql:mysql /var/run/mysqld<br>/usr/bin/mysqld_safe –skip-grant-tables –skip-networking<br>开启新终端<br>masql -u root<br>use mayql;<br>update user set authentication_string=PASSWORD(“这里是要改的密码”) where user=’root’;<br>update user set plugin=”mysql_native_password”;<br>flush privileges;<br>exit</p>
-<p>进入http://自己网络ip/wordpress/ 修改配置</p>
-
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
       
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/12/04/渗透测试/"><span>centos7下源码编译方式安装httpd</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/12/04/渗透测试/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-12-04T03:14:00.000Z">
-          2018-12-04
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
       
-        <h1 id="centos7下源码编译方式安装httpd"><a href="#centos7下源码编译方式安装httpd" class="headerlink" title="centos7下源码编译方式安装httpd"></a>centos7下源码编译方式安装httpd</h1><h3 id="1-安装开发者套件"><a href="#1-安装开发者套件" class="headerlink" title="1.安装开发者套件"></a>1.安装开发者套件</h3><p>yum groupinstall “Development Tools” -y</p>
-<p>cd /usr/local/src/<br>下载源码包：<br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-1.6.5.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache//apr/apr-util-1.6.1.tar.gz</a><br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.37.tar.gz</a><br>备注：三个源码包都放在/usr/local/src/</p>
-<h3 id="2-解压安装包"><a href="#2-解压安装包" class="headerlink" title="2.解压安装包"></a>2.解压安装包</h3><p># tar -xzvf apr-1.6.5.tar.gz<br># tar -xzvf apr-util-1.6.1.tar.gz<br># tar -xzvf httpd-2.4.37.tar.gz</p>
-<h3 id="3-安装apr-1-6-5"><a href="#3-安装apr-1-6-5" class="headerlink" title="3.安装apr-1.6.5"></a>3.安装apr-1.6.5</h3><p># cd /usr/local/src/<br># cp -r apr-1.6.5  /usr/local/src/httpd-2.4.37/srclib/apr<br># cd apr-1.6.5<br># ./configure –prefix=/usr/local/apr<br># make &amp;&amp; make install</p>
-<p>返回 cd /usr/local/src/</p>
-<h3 id="4-安装apr-util-1-6-1"><a href="#4-安装apr-util-1-6-1" class="headerlink" title="4.安装apr-util-1.6.1"></a>4.安装apr-util-1.6.1</h3><p># cp -r apr-util-1.6.1  /usr/local/src/httpd-2.4.37/srclib/apr-util<br># cd /usr/local/src/apr-util-1.6.1<br># ./configure –prefix=/usr/local/apr-util –with-apr=/usr/local/apr<br># make &amp;&amp; make install</p>
-<p>返回cd /usr/local/src/</p>
-<h3 id="5-安装httpd-2-4-37"><a href="#5-安装httpd-2-4-37" class="headerlink" title="5.安装httpd-2.4.37"></a>5.安装httpd-2.4.37</h3><p># cd /usr/local/src/httpd-2.4.37<br># ./configure –with-included-apr –prefix=/usr/local/apache2.4 –with-apr=/usr/local/apr –with-apr-util=/usr/local/apr-util –enable-so –enable-mods-shared=most<br># make &amp;&amp; make install </p>
-<h3 id="6-编写启动脚本：vim-httpd"><a href="#6-编写启动脚本：vim-httpd" class="headerlink" title="6.编写启动脚本：vim httpd"></a>6.编写启动脚本：vim httpd</h3><p>#!/bin/bash<br># chkconfig: 12345 80 90<br>function start_http()<br>{<br>/usr/local/apache2.4/bin/apachectl  start<br>}<br>function stop_http()<br>{<br> /usr/local/apache2.4/bin/apachectl  stop<br>}<br>case “$1” in<br>start)<br>    start_http<br>;;<br>stop)<br>    stop_http<br>;;<br>restart)<br>    stop_http<br>    start_http<br>;;<br>*)<br>    echo “Usage : start | stop | restart”<br>;;<br>esac</p>
-<h3 id="7-加入系统服务："><a href="#7-加入系统服务：" class="headerlink" title="7.加入系统服务："></a>7.加入系统服务：</h3><p>chmod  a+x  httpd<br>cp  -arf  httpd  /etc/init.d/</p>
-<h3 id="8-启动自己编写的服务："><a href="#8-启动自己编写的服务：" class="headerlink" title="8.启动自己编写的服务："></a>8.启动自己编写的服务：</h3><p>systemctl  daemon-reload<br>systemctl  start  httpd</p>
-<h3 id="9-设置开机自启动："><a href="#9-设置开机自启动：" class="headerlink" title="9.设置开机自启动："></a>9.设置开机自启动：</h3><p>chkconfig  –add  httpd</p>
-<h3 id="10-看运行情况"><a href="#10-看运行情况" class="headerlink" title="10.看运行情况"></a>10.看运行情况</h3><p># systemctl status httpd</p>
-<p>看到<br>● httpd.service - The Apache HTTP Server<br>   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)<br>   Active: active (running) since Tue 2018-12-04 23:21:27 CST; 14s ago<br>     Docs: man:httpd(8)<br>           man:apachectl(8)<br> Main PID: 1130 (httpd)<br>   Status: “Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec”<br>   CGroup: /system.slice/httpd.service<br>           ├─1130 /usr/sbin/httpd -DFOREGROUND<br>           ├─1131 /usr/sbin/httpd -DFOREGROUND<br>           ├─1132 /usr/sbin/httpd -DFOREGROUND<br>           ├─1133 /usr/sbin/httpd -DFOREGROUND<br>           ├─1134 /usr/sbin/httpd -DFOREGROUND<br>           ├─1135 /usr/sbin/httpd -DFOREGROUND<br>           └─1136 /usr/sbin/httpd -DFOREGROUND</p>
-<p>Dec 04 23:21:27 localhost.localdomain systemd[1]: Starting Th…<br>Dec 04 23:21:27 localhost.localdomain httpd[1130]: AH00558: h…<br>Dec 04 23:21:27 localhost.localdomain systemd[1]: Started The…<br>Hint: Some lines were ellipsized, use -l to show in full.</p>
-
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
       
-    </div>
-
+    </ol>
   </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  
 </nav>
+<div id="site-process"></div>
+    <main>
+      <div class="home">
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2020-11-12
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2020/11/12/loud/">loud </a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2020/11/12/loud/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2020-04-23
+            </span>
+            
+              <span>
+                | <a href="/categories/其他/"><i class="fa fa-bookmark"></i>其他</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2020/04/23/钓鱼/">钓鱼</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2020/04/23/钓鱼/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-09-05
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/09/05/web/未授权访问/">未授权访问</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/09/05/web/未授权访问/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-23
+            </span>
+            
+              <span>
+                | <a href="/categories/Linux/"><i class="fa fa-bookmark"></i>Linux</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/23/Linux/Linux命令/">Linux命令</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/23/Linux/Linux命令/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+              <span>
+                | <a href="/categories/Mestasploit/"><i class="fa fa-bookmark"></i>Mestasploit</a>
+              </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/Meterpreter/meterpreter命令大全/">meterpreter命令大全</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/Meterpreter/meterpreter命令大全/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/wk/">wireshark</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/wk/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/Netcat/">Netcat</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/Netcat/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/中间人/">中间人</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/中间人/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/主动信息收集/">主动信息收集</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/主动信息收集/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2019-01-01
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/2019/01/01/信息收集/">信息收集</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/2019/01/01/信息收集/">
+            READ MORE >>>
+          </a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+</div>
     </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    <br>
     
-    &copy; 2018 hcncn6
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
     
-  </p>
-</footer>
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
     
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
   </div>
 </div>
-</body>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/page/2/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
 </html>

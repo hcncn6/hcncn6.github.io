@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Linux基础知识 | hcncn6 | 第一个博客</title>
+
+  
+  <meta name="author" content="hcncn6">
+  
+
+  
+  <meta name="description" content="1.修改ip的具体内容vi /etc/sysconfig/network-scripts/ifcfg-eth0最后的eth0是网卡名
+
+2.SSH远程登录配置文件vi /etc/ssh/sshd_config
+将#PasswordAuthentication 将no去掉，并且将NO修改为YES //">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Linux基础知识">
+
+  <meta property="og:site_name" content="hcncn6">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="hcncn6" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">hcncn6</a>
+    </h1>
+    <p class="site-description">第一个博客</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Linux基础知识</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/23/Linux基础知识/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-23T06:36:47.000Z">
+          2019-01-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="1-修改ip的具体内容"><a href="#1-修改ip的具体内容" class="headerlink" title="1.修改ip的具体内容"></a>1.修改ip的具体内容</h2><p>vi /etc/sysconfig/network-scripts/ifcfg-eth0<br>最后的eth0是网卡名</p>
+<p><img src="https://share.weiyun.com/5og7lx2" alt="avatar"></p>
+<h2 id="2-SSH远程登录配置文件"><a href="#2-SSH远程登录配置文件" class="headerlink" title="2.SSH远程登录配置文件"></a>2.SSH远程登录配置文件</h2><p>vi /etc/ssh/sshd_config</p>
+<p>将#PasswordAuthentication 将no去掉，并且将NO修改为YES //kali</p>
+<p>将PermitRootLogin without-password修改为<br>PermitRootLogin yes</p>
+<p>/etc/init.d/ssh start </p>
+<p>service sshd status </p>
+<h2 id="3-虚拟机网络模式"><a href="#3-虚拟机网络模式" class="headerlink" title="3.虚拟机网络模式"></a>3.虚拟机网络模式</h2><h2 id="4-Linux基础命令"><a href="#4-Linux基础命令" class="headerlink" title="4.Linux基础命令"></a>4.Linux基础命令</h2><h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><p>文件夹  mkdir<br>删除文件<br>rm   rmdir<br>rm  -fr /*<br>-f：强制删除，忽略不存在的文件，从不给出提示。<br>-i：交互模式删除文件，删除文件前给出提示。<br>-r：递归的删除目录下面文件以及子目录下文件。<br>-R：递归的删除目录下面文件以及子目录下文件。<br>-v：显示运行时详细信息 。</p>
+<h3 id="开关机"><a href="#开关机" class="headerlink" title="开关机"></a>开关机</h3><p>重启 reboot<br>关机 shutdown halt poweroff<br>登录 longin<br>退出 exit logout</p>
+<h3 id="系统模式"><a href="#系统模式" class="headerlink" title="系统模式"></a>系统模式</h3><p>–run level 0 关机<br>–run level 3 纯文本<br>–run level 6 重启</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>(1)find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。<br>(2)grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2019 hcncn6
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Ubuntu LAMP下搭建wordpress | hcncn6 | 第一个博客</title>
+
+  
+  <meta name="author" content="hcncn6">
+  
+
+  
+  <meta name="description" content="准备 LAMP 环境LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写
+1.安装 Apache2apt-get install apache2 -y
+2.安装 PHP 组件apt-get install php7.0 -y安装 php 相关组件:apt-get install l">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Ubuntu LAMP下搭建wordpress">
+
+  <meta property="og:site_name" content="hcncn6">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="hcncn6" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">hcncn6</a>
+    </h1>
+    <p class="site-description">第一个博客</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Ubuntu LAMP下搭建wordpress</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/12/05/Ubuntu LAMP下搭建wordpress/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-12-05T12:03:44.000Z">
+          2018-12-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="准备-LAMP-环境"><a href="#准备-LAMP-环境" class="headerlink" title="准备 LAMP 环境"></a>准备 LAMP 环境</h1><p>LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写</p>
+<h3 id="1-安装-Apache2"><a href="#1-安装-Apache2" class="headerlink" title="1.安装 Apache2"></a>1.安装 Apache2</h3><p>apt-get install apache2 -y</p>
+<h3 id="2-安装-PHP-组件"><a href="#2-安装-PHP-组件" class="headerlink" title="2.安装 PHP 组件"></a>2.安装 PHP 组件</h3><p>apt-get install php7.0 -y<br>安装 php 相关组件:<br>apt-get install libapache2-mod-php7.0</p>
+<h3 id="3-安装-MySQL-服务"><a href="#3-安装-MySQL-服务" class="headerlink" title="3.安装 MySQL 服务"></a>3.安装 MySQL 服务</h3><p>apt-get install mysql-client mysql-server </p>
+<h3 id="4-重启-MySQL-服务和-Apache-服务"><a href="#4-重启-MySQL-服务和-Apache-服务" class="headerlink" title="4.重启 MySQL 服务和 Apache 服务"></a>4.重启 MySQL 服务和 Apache 服务</h3><p>sudo service mysql restart</p>
+<h3 id="5-wordpress网站文件放置"><a href="#5-wordpress网站文件放置" class="headerlink" title="5.wordpress网站文件放置"></a>5.wordpress网站文件放置</h3><p>下载<br>wget <a href="https://wordpress.org/latest.tar.gz" target="_blank" rel="noopener">https://wordpress.org/latest.tar.gz</a><br>解压<br>tar -xvf latest.tar.gz<br>移动源码到网站的根目录<br>mv wordpress /var/www/html/</p>
+<h3 id="6-更改根目录权限"><a href="#6-更改根目录权限" class="headerlink" title="6.更改根目录权限"></a>6.更改根目录权限</h3><p>chmod -R 777 /var/www/html/wordpress/</p>
+<h3 id="7-为-wordpress-配置一个数据库"><a href="#7-为-wordpress-配置一个数据库" class="headerlink" title="7.为 wordpress 配置一个数据库"></a>7.为 wordpress 配置一个数据库</h3><p>进入 mysql，输入以下代码后，按提示输入您MySQL密码:<br>mysql -u root -p<br>输入密码<br>show databases; 查看数据库<br>create database wordpress;<br>show databases;<br>quit; 退出</p>
+<h1 id="浏览器访问wordpress配置"><a href="#浏览器访问wordpress配置" class="headerlink" title="浏览器访问wordpress配置"></a>浏览器访问wordpress配置</h1><p>http://自己网络ip/wordpress/</p>
+<p>如果密码错误就改密码</p>
+<p>修改mysql密码<br>service mysql stop<br>mkdir -p /var/run/mysqld<br>chown mysql:mysql /var/run/mysqld<br>/usr/bin/mysqld_safe –skip-grant-tables –skip-networking<br>开启新终端<br>masql -u root<br>use mayql;<br>update user set authentication_string=PASSWORD(“这里是要改的密码”) where user=’root’;<br>update user set plugin=”mysql_native_password”;<br>flush privileges;<br>exit</p>
+<p>进入http://自己网络ip/wordpress/ 修改配置</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    <br>
+    
+    &copy; 2019 hcncn6
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
