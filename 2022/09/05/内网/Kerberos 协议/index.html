@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Kerberos 协议 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="内网,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/内网/"><i class="fa fa-bookmark"></i>内网</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Kerberos 协议
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Kerberos </span><br><span class="line">	Kerberos词汇扩展</span><br><span class="line">		Client		</span><br><span class="line">			客户端，指用户</span><br><span class="line">		Server</span><br><span class="line">			服务端、服务器</span><br><span class="line">		DC	 </span><br><span class="line">			 Domain Controller域控制器，一台计算机，实现用户和计算机的统一管理</span><br><span class="line">		KDC	  </span><br><span class="line">			Key Distribution Center密钥分发中心，默认按照在域控里，包括AS和TGS</span><br><span class="line">		AS    </span><br><span class="line">			Authentication Service	身份验证服务，用于KDC对Client认证</span><br><span class="line">		TGS	</span><br><span class="line">			Ticket Granting Service	票据授予服务，用于KDC对Client和Server分发Session Key（临时密钥）</span><br><span class="line">		AD	</span><br><span class="line">			Active Directory	活动目录，用于存储用户、用户组、域相关的信息</span><br><span class="line">		TGT	</span><br><span class="line">			Ticket Granting Ticket	认证票据：相当于入场卷，用来获取ST的临时凭证</span><br><span class="line">		ST	</span><br><span class="line">			Service Ticket	用来访问某种服务所必须使用的票据</span><br><span class="line">		PAC</span><br><span class="line">			Privilege Attribute Certificates	特权访问证书，是微软为了访问控制而引进的一个扩展</span><br><span class="line">	过程</span><br><span class="line">步骤</span><br><span class="line">* 第一步：client和认证服务器（AS）通信完成认证过程，如果认证成功AS返回给client一个 TGT(认证票据 用来向TGS获取ticket）；</span><br><span class="line">* 第二步：client和票据生成服务器（TGS）通信验证是否要去访问目标站点的权限，如果有返回一个ticket给client；</span><br><span class="line">* 第三步：client带着这个票据访问待访问站点</span><br><span class="line">当 Client 想要访问 Server 上的某个服务时，需要先向 AS 证明自己的身份,验证通过后AS会发放的一个TGT,随后Client再次向TGS证明自己的身份,验证通过后TGS会发放一个ST,最后Client向 Server 发起认证请求，这个过程分为三块： </span><br><span class="line">※ Client 与 AS 的交互</span><br><span class="line">※ Client 与 TGS 的交互</span><br><span class="line">※ Client 与 Server 的交互</span><br><span class="line">票据</span><br><span class="line">	SilverTickets</span><br><span class="line"></span><br><span class="line">		简介</span><br><span class="line">			Silver Tickets（下面称银票）就是伪造的ST（Service Ticket），因为在TGT已经在PAC里限定了给Client授权的服务（通过SID的值），所以银票只能访问指定服务。</span><br><span class="line"></span><br><span class="line">		作银票的条件</span><br><span class="line">			1.域名称</span><br><span class="line">2.域的SID值</span><br><span class="line">			3.域的服务账户的密码HASH（不是krbtgt，是域控）</span><br><span class="line">4.伪造的用户名，可以是任意用户名，这里是silver</span><br><span class="line">		说明</span><br><span class="line">			/domain：当前域名称</span><br><span class="line"></span><br><span class="line">			/sid：SID值，和金票一样取前面一部分</span><br><span class="line"></span><br><span class="line">			/target：目标主机，这里是OWA2010SP3.0day.org</span><br><span class="line">			/service：服务名称，这里需要访问共享文件，所以是cifs</span><br><span class="line"></span><br><span class="line">			/rc4：目标主机的HASH值</span><br><span class="line">			/user：伪造的用户名</span><br><span class="line"></span><br><span class="line">			/ptt：表示的是Pass TheTicket攻击，是把生成的票据导入内存，也可以使用/ticket导出之后再使用kerberos::ptt来导入</span><br><span class="line">		kerberos::golden  /domain:0day.org /sid:S-1-5-21-1812960810-2335050734-3517558805  /target:OWA2010SP3.0day.org   /service:cifs /rc4:125445ed1d553393cce9585e64e3fa07</span><br><span class="line">/user:silver /ptt</span><br><span class="line">		这时通过klist查看当前会话的kerberos票据可以看到生成的票据</span><br><span class="line"></span><br><span class="line">	GoldenTicket</span><br><span class="line">		简介</span><br><span class="line">			Golden Ticket（下面称为金票）是通过伪造的TGT（TicketGranting Ticket），因为只要有了高权限的TGT，那么就可以发送给TGS换取任意服务的ST。可以说有了金票就有了域内的最高权限。</span><br><span class="line"></span><br><span class="line">		制作金票的条件：</span><br><span class="line"></span><br><span class="line">			1、域名称</span><br><span class="line"></span><br><span class="line">			2、域的SID值</span><br><span class="line">			3、域的KRBTGT账户密码HASH</span><br><span class="line">			4、伪造用户名，可以是任意的</span><br><span class="line">		参数说明：</span><br><span class="line"></span><br><span class="line">			/admin：伪造的用户名</span><br><span class="line"></span><br><span class="line">			/domain：域名称</span><br><span class="line"></span><br><span class="line">			/sid：SID值，注意是去掉最后一个-后面的值</span><br><span class="line"></span><br><span class="line">			/krbtgt：krbtgt的HASH值</span><br><span class="line"></span><br><span class="line">			/ticket：生成的票据名称</span><br><span class="line">		利用过程</span><br><span class="line"></span><br><span class="line">			kerberos::golden /admin:administrator /domain:0day.org /sid:S-1-5-21-1812960810-2335050734-3517558805 /krbtgt:36f9d9e6d98ecf8307baf4f46ef842a2</span><br><span class="line">/ticket:golden.kiribi</span><br><span class="line">			kerberos::purge</span><br><span class="line">			kerberos::ptt golden.kiribi</span><br><span class="line">			kerberos::list</span><br><span class="line">		使用</span><br><span class="line">			微软的MS-KILE解释：Kerberos V5不提供对TGS请求的账户撤销检查，只要TGT有效，即使该账户已被删除，TGT更新和服务票据也可以发布。KILE提供了一个可以将利用时间限制在较短的时间内（20分内）。当TGT大于20分钟时，KILE</span><br><span class="line"> KDC需要在域中检查账户。</span><br><span class="line"></span><br><span class="line">			et time /domain</span><br><span class="line">wmic get useraccount get name,sid</span><br><span class="line">net group &quot;domain admins&quot; /domain</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/内网/Kerberos 协议/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/复现/1 - 副本 (5) - 副本/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/内网/mimikatz/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

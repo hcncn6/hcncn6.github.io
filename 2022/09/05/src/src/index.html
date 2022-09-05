@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>src | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="src,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/src/"><i class="fa fa-bookmark"></i>src</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    src
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><span class="line">常用漏洞</span><br><span class="line">	信息泄漏漏洞</span><br><span class="line">		Intext:index of </span><br><span class="line">			Git 源码泄漏 Ip/.git </span><br><span class="line">			Svn泄漏</span><br><span class="line">.Svn/entries</span><br><span class="line">			Ds_ store 文件泄漏</span><br><span class="line">			.htacess</span><br><span class="line">			信息泄漏大全</span><br><span class="line">			/.bashre</span><br><span class="line">/.ssh/authorized.keyss</span><br><span class="line">./bash history</span><br><span class="line">		Druid未授权</span><br><span class="line">		Sql 查询语句泄漏</span><br><span class="line">报错</span><br><span class="line">		挖 测试环境</span><br><span class="line">		弱口令</span><br><span class="line">代理</span><br><span class="line">		网盘漏洞</span><br><span class="line">Lingfengyun.com</span><br><span class="line">		谷歌语法 信息泄漏</span><br><span class="line">		信息泄漏</span><br><span class="line">拼接js&gt;被黑</span><br><span class="line">		日志文件</span><br><span class="line"></span><br><span class="line">	刷站</span><br><span class="line">并发</span><br><span class="line">改点赞次数</span><br><span class="line">	Xxl  Job  任务调度中心</span><br><span class="line">	上传存储xss。html  Svg格式</span><br><span class="line">	Shiro ,fastjson</span><br><span class="line">	小程序 xss  多, Xssr 绕过位置</span><br><span class="line">App触发，web 写</span><br><span class="line">	测试漏洞》从上到下</span><br><span class="line">	课程收费&gt;&gt;M3u8</span><br><span class="line">	fuzz</span><br><span class="line">	招聘</span><br><span class="line">企业招聘</span><br><span class="line">注册</span><br><span class="line">注册邮箱能自己改</span><br><span class="line"></span><br><span class="line">ssrf</span><br><span class="line">	看见这类参数就dnslog</span><br><span class="line">	share</span><br><span class="line">wap</span><br><span class="line">url</span><br><span class="line">link</span><br><span class="line">src</span><br><span class="line">source</span><br><span class="line">taiget</span><br><span class="line">u</span><br><span class="line">3g</span><br><span class="line">display</span><br><span class="line">sourceURL</span><br><span class="line">imageURL</span><br><span class="line">domain</span><br><span class="line">		带url</span><br><span class="line">	或着看到http</span><br><span class="line">	带url</span><br><span class="line">	功能点--图片地址，链接</span><br><span class="line">	输入框</span><br><span class="line">	收集ssrf nday</span><br><span class="line">	绕过</span><br><span class="line">	生产图片功能--url  &quot;http......&quot; 换成 d...</span><br><span class="line">	敏感图片类 ！【】（httpp）&gt; log或 file://.... </span><br><span class="line">	 f12看生成实时</span><br><span class="line">任意用户</span><br><span class="line">	任意用户注册</span><br><span class="line">		可覆盖</span><br><span class="line">		不可覆盖</span><br><span class="line">		a验证码未绑定，修改手机号成b，b被注册</span><br><span class="line"></span><br><span class="line">		加空格注册，或者86，双写，特殊字符</span><br><span class="line">	任意用户密码重置</span><br><span class="line">		1.密码爆破</span><br><span class="line">		2.可回显</span><br><span class="line">		3.修改返回包</span><br><span class="line">		4.双写 多写一个号码，或者用&amp;mobile=11111&amp;mobile=2222</span><br><span class="line">		5.第三方登录  举例微博id 返回uid 。去试一试各种网站，看看第三</span><br><span class="line">		6.随意验证码</span><br><span class="line">		7.验证码为空 删除</span><br><span class="line">		8.邮箱等重置链接 猜测加密规律</span><br><span class="line">		9.万能密码</span><br><span class="line">		10奇葩：  1.	移动到邮箱处，会触发返回包，返回包包含、2.	url 跳转到密码修改处，直接绕过验证，3.	密码重置，数据包带id，号码，验证码，，都可以修改越权，直接修改密码 看见数据包的数据，id啥的都尝试修改一下，或者删除 4.	nday漏洞</span><br><span class="line">	越权漏洞 </span><br><span class="line">		Id 等参数越权</span><br><span class="line">		关注点</span><br><span class="line">			收货地址</span><br><span class="line">			用户</span><br><span class="line">			编辑</span><br><span class="line">			预览（草稿箱 回收站）</span><br><span class="line">			报告  采购</span><br><span class="line">			订单  抽奖付款 </span><br><span class="line">		操作</span><br><span class="line">			数据包  只留重点字段   Cookie可以先留着</span><br><span class="line">			有时候需要同时修改两个</span><br><span class="line">			一步一步放</span><br><span class="line">			有时候需要多个数据 修改先添加多个数据</span><br><span class="line">			双因子  Uuid:不能遍历就是其他地方找</span><br><span class="line">			修改url  路径  实现垂直越权</span><br><span class="line">			App?type     admin   user    添加&amp; fuzz</span><br><span class="line">			Js  findsomething-master  :id=1  或者其他 Js接口要添加参数</span><br><span class="line">		短信轰炸</span><br><span class="line">			一分钟30条</span><br><span class="line">			绕过</span><br><span class="line">				垃圾字母</span><br><span class="line">				字符</span><br><span class="line">				+86</span><br><span class="line">				空格在后面</span><br><span class="line">				双写</span><br><span class="line">				 IP 伪造</span><br><span class="line">				邮箱轰炸</span><br><span class="line">		Fuzz漏洞</span><br><span class="line">			&amp;后面添加 Usertype=1  Userrank=1 后期拓展 </span><br><span class="line">		差评</span><br><span class="line">			可以查看谁给的差评</span><br><span class="line">并发</span><br><span class="line">	x-req:%s</span><br><span class="line">	Exe/rece.py</span><br><span class="line">	报告</span><br><span class="line">		标题</span><br><span class="line">		自评</span><br><span class="line">		详细内容：抓被点赞的包</span><br><span class="line">		修复：数据库加锁</span><br><span class="line">支付漏洞</span><br><span class="line">	重复支付</span><br><span class="line">	试用商品卡</span><br><span class="line"></span><br><span class="line">	金额溢出</span><br><span class="line"></span><br><span class="line">	首单优惠，无限重购</span><br><span class="line"></span><br><span class="line">	并发数据包</span><br><span class="line">	退款、购买、充值</span><br><span class="line"></span><br><span class="line">	盲盒类抽奖</span><br><span class="line">	修改盲盒的属性</span><br><span class="line"></span><br><span class="line">	直播打赏类</span><br><span class="line"></span><br><span class="line">	签约漏洞</span><br><span class="line"></span><br><span class="line">		两个支付手段</span><br><span class="line">	会员升级</span><br><span class="line"></span><br><span class="line">	条件竞争----拓展</span><br><span class="line"></span><br><span class="line">	充值中放弃订单未失效</span><br><span class="line"></span><br><span class="line">	价格修改</span><br><span class="line"></span><br><span class="line">	订单替代支付</span><br><span class="line">	商品的编号</span><br><span class="line"></span><br><span class="line">	购买数量</span><br><span class="line"></span><br><span class="line">	支付附属值修改</span><br><span class="line">	修改优惠劵金额</span><br><span class="line">	钱包进行支付</span><br><span class="line">	修改积分金额</span><br><span class="line">	满减修改</span><br><span class="line"></span><br><span class="line">	支付接口替换</span><br><span class="line"></span><br><span class="line">	四舍五入导致支付漏洞</span><br><span class="line"></span><br><span class="line">	src</span><br><span class="line">		1.	低价充值，越权</span><br><span class="line">2.	延长年份，更少的钱获得服务</span><br><span class="line">3.	交易密码绕过</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		金额</span><br><span class="line">			金额为负。数量不为负</span><br><span class="line">			总价不为负，正负叠加</span><br><span class="line">			慢慢减少</span><br><span class="line">			小数点位移</span><br><span class="line">			修改的金额是系统内置的，套餐 类</span><br><span class="line">		参数</span><br><span class="line">			比如宽带  4变8，或者 硬盘</span><br><span class="line">		内容</span><br><span class="line">			Amount</span><br><span class="line">			Pinfo</span><br><span class="line">			修改两处</span><br><span class="line">		修改运费</span><br><span class="line">		无限重放 并发  提现</span><br><span class="line">		优惠 Coupon  Paymoney</span><br><span class="line">		T coin gift 10    修改赠送 金额</span><br><span class="line">		旅游</span><br><span class="line">成人票和儿童票，修改名称</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/src/src/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/web/xxe漏洞/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

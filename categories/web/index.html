@@ -20,6 +20,8 @@
   
 
   
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
 
   
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
@@ -34,7 +36,7 @@
   // it can be used in every script
   
   window.AD_CONFIG = {
-    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":true},
     welcome: {"enable":false,"interval":30},
     start_time: "2018-11-1",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
@@ -70,11 +72,11 @@
   <div class="site-header-brand">
     
       <span class="site-header-brand-title">
-        <a href="/">博客</a>
+        <a href="/">博客0v0</a>
       </span>
     
     
-      <span class="site-header-brand-motto"> | 持续更新中</span>
+      <span class="site-header-brand-motto"> | 博客重建中，还有其他细节文章</span>
     
   </div>
   <div class="site-header-right">
@@ -89,7 +91,7 @@
     </nav>
     <div class="site-header-btn">
       
-        <a href="https://github.com/dongyuanxin/" target="_blank" id="site-github">
+        <a href="https://github.com/hcncn6" target="_blank" id="site-github">
           <i class="fa fa-github-alt"></i>
         </a>
       
@@ -136,65 +138,65 @@
   <h2 class="timeline-title">系列: web</h2>
   
     
-      <h3 class="timeline-subtitle">2019</h3>
+      <h3 class="timeline-subtitle">2022</h3>
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/XXE/">XXE</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/注入/">注入</a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/csrf/">csrf</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/9 - 副本 - 副本/"></a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/代码执行/">代码执行</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/9 - 副本 (2) - 副本/"></a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/危险函数/">危险函数</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/9 - 副本 - 副本 (4)/"></a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/命令执行/">命令执行</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/JWT/">JWT</a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/反序列化/">反序列化</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/9 - 副本 (2)/"></a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/文件包含/">文件包含</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/文件上传/">文件上传</a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/过waf fuzz/">过waf fuzz</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/文件包含/">文件包含</a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/注入/">注入</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/带外/">带外</a>
     </div>
   
     
     <div class="timeline-item">
-      <time>2019-01-01</time>
-      <a target="_self" href="/2019/01/01/web/xss/">xss</a>
+      <time>2022-09-05</time>
+      <a target="_self" href="/2022/09/05/web/ssrf/">ssrf</a>
     </div>
   
 </div>
@@ -206,6 +208,10 @@
     <div class="site-footer-info">
       <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
     
     
     <div class="site-footer-info">
@@ -242,7 +248,7 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/categories/web/page/2/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
